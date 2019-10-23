@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/lightblue"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UserPanelActivity">
+
+
+    <ImageView
+        android:id="@+id/avatar"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:contentDescription="@string/avatar_description"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/kulfon"
+        tools:srcCompat="@drawable/kulfon" />
+
+    <TextView
+        android:id="@+id/nickname"
+        android:layout_width="120dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:text="@string/nickname"
+        app:layout_constraintBottom_toBottomOf="@+id/avatar"
+        app:layout_constraintStart_toEndOf="@+id/avatar" />
+
+    <TextView
+        android:id="@+id/rank"
+        android:layout_width="80dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/rank"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/avatar" />
+
+    <Button
+        android:id="@+id/progress_button"
+        android:layout_width="136dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="160dp"
+        android:text="@string/progress"
+        app:layout_constraintEnd_toStartOf="@+id/challenge_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/challenge_button"
+        android:layout_width="136dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="136dp"
+        android:layout_marginLeft="136dp"
+        android:layout_marginTop="160dp"
+        android:text="@string/challenge"
+        app:layout_constraintEnd_toStartOf="@+id/settings_user_panel_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/settings_user_panel_button"
+        android:layout_width="136dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="272dp"
+        android:layout_marginLeft="272dp"
+        android:layout_marginTop="160dp"
+        android:text="@string/settings_user_panel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/premium_button"
+        android:layout_width="136dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/premium"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.49"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/start_freetraining_button" />
+
+    <Button
+        android:id="@+id/start_freetraining_button"
+        android:layout_width="0dp"
+        android:layout_height="120dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginRight="50dp"
+        android:text="@string/freetraining_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/challenge_button" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
