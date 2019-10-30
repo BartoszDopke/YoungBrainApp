@@ -1,8 +1,10 @@
-package com.example.inzynierka;
+package com.pracainzynierska.inzynierka;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.pracainzynierska.inzynierka.R;
 
 public class DailyChallengeActivity extends AppCompatActivity {
 

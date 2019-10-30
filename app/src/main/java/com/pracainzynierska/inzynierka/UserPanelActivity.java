@@ -1,4 +1,4 @@
-package com.example.inzynierka;
+package com.pracainzynierska.inzynierka;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,7 +9,9 @@ import android.widget.Button;
 
 public class UserPanelActivity extends AppCompatActivity {
 
-    private Button settings_btn, progress_btn, dailychallenge_btn, premium_btn;
+    private Button settings_btn, progress_btn, dailychallenge_btn, premium_btn, logout_btn;
+    DatabaseHelper db;
+    Bundle extras = getIntent().getExtras();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +49,31 @@ public class UserPanelActivity extends AppCompatActivity {
             }
         });
 
+        logout_btn = findViewById(R.id.logout_button);
+        logout_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BackToMenu();
+                finish();
+            }
+        });
+        //String username = getIntent().getStringExtra("USERNAME");
+
+        //final TextView textViewToChange = (TextView) findViewById(R.id.nickname);
+        //textViewToChange.setText(username);
+
+
+
+
+
+
+
+
+    }
+
+    private void BackToMenu() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 
     private void Premium() {

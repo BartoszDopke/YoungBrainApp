@@ -1,4 +1,4 @@
-package com.example.inzynierka.ui.login;
+package com.pracainzynierska.inzynierka;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,15 +11,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.inzynierka.R;
-import com.facebook.CallbackManager;
+
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
-import com.facebook.FacebookSdk;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
-import static com.example.inzynierka.ui.login.LoginActivity.callbackManager;
+import static com.pracainzynierska.inzynierka.SignInActivity.callbackManager;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -77,7 +76,6 @@ public class FacebookFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        CallbackManager callbackManager = CallbackManager.Factory.create();
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_facebook, container, false);
         LoginButton loginButton = view.findViewById(R.id.login_fbbutton);
@@ -90,20 +88,21 @@ public class FacebookFragment extends Fragment {
         // Other app specific specialization
 
         // Callback registration
-        loginButton.registerCallback(LoginActivity.callbackManager, new FacebookCallback<LoginResult>() {
+        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
+                System.out.println("Success");
 
             }
 
             @Override
             public void onCancel() {
-
+                System.out.println("onCancel");
             }
 
             @Override
             public void onError(FacebookException error) {
-
+                System.out.println("ERROR");
             }
         });
         return view;

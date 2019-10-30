@@ -5,7 +5,7 @@
     android:background="@color/lightblue"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UserPanelActivity">
+    tools:context="com.pracainzynierska.inzynierka.UserPanelActivity">
 
 
     <ImageView
@@ -100,5 +100,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/challenge_button" />
+
+    <Button
+        android:id="@+id/logout_button"
+        android:layout_width="82dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:text="@string/logout_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -134,4 +134,12 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="not_registered">Not Registered?</string>
+    <string name="register">Sign Up!</string>
+    <string name="username">Username</string>
+    <string name="cnf_password">Confirm password</string>
+    <string name="already_registered">Already Registered?</string>
+    <string name="login_text">Sign In!</string>
+    <string name="logout_btn">Log Out</string>
+    <string name="exit_text">X</string>
 </resources>

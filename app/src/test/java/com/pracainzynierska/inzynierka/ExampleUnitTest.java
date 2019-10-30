@@ -1,4 +1,4 @@
-package com.example.inzynierka;
+package com.pracainzynierska.inzynierka;
 
 import org.junit.Test;
 

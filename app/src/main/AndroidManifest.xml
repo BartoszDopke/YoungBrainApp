@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.inzynierka">
+    package="com.pracainzynierska.inzynierka">
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -12,63 +13,63 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name="com.pracainzynierska.inzynierka.RegisterActivity" />
         <activity
-            android:name=".PremiumActivity"
-            android:parentActivityName=".UserPanelActivity">
-        </activity>
-        <activity android:name=".DailyChallengeActivity" />
+            android:name="com.pracainzynierska.inzynierka.PremiumActivity"
+            android:parentActivityName="com.pracainzynierska.inzynierka.UserPanelActivity" />
+        <activity android:name="com.pracainzynierska.inzynierka.DailyChallengeActivity" />
         <activity
-            android:name=".MyProgressActivity"
-            android:parentActivityName=".UserPanelActivity">
+            android:name="com.pracainzynierska.inzynierka.MyProgressActivity"
+            android:parentActivityName="com.pracainzynierska.inzynierka.UserPanelActivity">
             <meta-data
                 android:name="UserPanelActivity"
                 android:value=".UserPanelActivity" />
         </activity>
-        <activity android:name=".UserPanelActivity" />
+        <activity android:name="com.pracainzynierska.inzynierka.UserPanelActivity" />
         <activity
-            android:name=".SettingsActivity"
-            android:parentActivityName=".UserPanelActivity">
+            android:name="com.pracainzynierska.inzynierka.SettingsActivity"
+            android:parentActivityName="com.pracainzynierska.inzynierka.UserPanelActivity">
 
             <!-- The meta-data tag is required if you support API level 15 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value="com.pracainzynierska.inzynierka.MainActivity" />
         </activity>
         <activity
-            android:name=".ui.login.LoginActivity"
-            android:label="@string/title_activity_login"
-            android:parentActivityName=".MainActivity">
+            android:name="com.pracainzynierska.inzynierka.SignInActivity"
+            android:parentActivityName="com.pracainzynierska.inzynierka.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value="com.pracainzynierska.inzynierka.MainActivity" />
         </activity>
-        <activity android:name=".MainActivity">
+        <activity android:name="com.pracainzynierska.inzynierka.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <meta-data android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/facebook_app_id"/>
 
-        <activity android:name="com.facebook.FacebookActivity"
-            android:configChanges=
-                "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
+
+        <activity
+            android:name="com.facebook.FacebookActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:label="@string/app_name" />
         <activity
             android:name="com.facebook.CustomTabActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
+
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
-
-
     </application>
-    <uses-permission android:name="android.permission.INTERNET"/>
 
 </manifest>
