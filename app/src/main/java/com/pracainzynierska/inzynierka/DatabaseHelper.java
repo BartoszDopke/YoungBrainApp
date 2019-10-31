@@ -17,6 +17,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COL_2 ="username";
     public static final String COL_3 ="mail_address";
     public static final String COL_4 ="password";
+    //public static final String COL_5 = "dailytip";
 
     public DatabaseHelper(@Nullable Context context) {
         super(context, DATABASE_NAME,null, 1);

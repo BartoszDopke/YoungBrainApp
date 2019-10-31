@@ -49,9 +49,7 @@ public class SignInActivity extends AppCompatActivity {
                 if(res == true)
                 {
                     Intent intent = new Intent(SignInActivity.this,UserPanelActivity.class);
-                    //Intent UsernamePass = new Intent(SignInActivity.this, UserPanelActivity.class);
-                    //UsernamePass.putExtra("username",user);
-                    //startActivity(UsernamePass);
+                    intent.putExtra("username",user);
                     startActivity(intent);
                     Toast.makeText(SignInActivity.this,"Welcome " + user + "!", Toast.LENGTH_SHORT).show();
                 }

@@ -6,16 +6,21 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class UserPanelActivity extends AppCompatActivity {
 
-    private Button settings_btn, progress_btn, dailychallenge_btn, premium_btn, logout_btn;
-    DatabaseHelper db;
-    Bundle extras = getIntent().getExtras();
+    private Button settings_btn, progress_btn, dailychallenge_btn, premium_btn, logout_btn, training_btn;
+    private TextView NickNameText;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_panel);
+        String username = getIntent().getStringExtra("username");
+
+        NickNameText =  findViewById(R.id.nickname);
+        NickNameText.setText(username);
 
         settings_btn = findViewById(R.id.settings_user_panel_button);
         settings_btn.setOnClickListener(new View.OnClickListener() {
@@ -57,6 +62,14 @@ public class UserPanelActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        training_btn = findViewById(R.id.start_freetraining_button);
+        training_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Training();
+            }
+        });
         //String username = getIntent().getStringExtra("USERNAME");
 
         //final TextView textViewToChange = (TextView) findViewById(R.id.nickname);
@@ -69,6 +82,11 @@ public class UserPanelActivity extends AppCompatActivity {
 
 
 
+    }
+
+    private void Training() {
+        Intent intent = new Intent(this, RememberTheSequenceActivity.class);
+        startActivity(intent);
     }
 
     private void BackToMenu() {

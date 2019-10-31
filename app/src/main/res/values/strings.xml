@@ -142,4 +142,5 @@
     <string name="login_text">Sign In!</string>
     <string name="logout_btn">Log Out</string>
     <string name="exit_text">X</string>
+    <string name="guess_text">Find out where pairs are and guess them all!</string>
 </resources>

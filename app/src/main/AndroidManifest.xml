@@ -8,27 +8,27 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name="com.pracainzynierska.inzynierka.RegisterActivity" />
+        <activity android:name=".RememberTheSequenceActivity"></activity>
+        <activity android:name=".RegisterActivity" />
         <activity
-            android:name="com.pracainzynierska.inzynierka.PremiumActivity"
-            android:parentActivityName="com.pracainzynierska.inzynierka.UserPanelActivity" />
-        <activity android:name="com.pracainzynierska.inzynierka.DailyChallengeActivity" />
+            android:name=".PremiumActivity"
+            android:parentActivityName=".UserPanelActivity" />
+        <activity android:name=".DailyChallengeActivity" />
         <activity
-            android:name="com.pracainzynierska.inzynierka.MyProgressActivity"
-            android:parentActivityName="com.pracainzynierska.inzynierka.UserPanelActivity">
+            android:name=".MyProgressActivity"
+            android:parentActivityName=".UserPanelActivity">
             <meta-data
                 android:name="UserPanelActivity"
                 android:value=".UserPanelActivity" />
         </activity>
-        <activity android:name="com.pracainzynierska.inzynierka.UserPanelActivity" />
+        <activity android:name=".UserPanelActivity" />
         <activity
-            android:name="com.pracainzynierska.inzynierka.SettingsActivity"
-            android:parentActivityName="com.pracainzynierska.inzynierka.UserPanelActivity">
+            android:name=".SettingsActivity"
+            android:parentActivityName=".UserPanelActivity">
 
             <!-- The meta-data tag is required if you support API level 15 and lower -->
             <meta-data
@@ -36,13 +36,13 @@
                 android:value="com.pracainzynierska.inzynierka.MainActivity" />
         </activity>
         <activity
-            android:name="com.pracainzynierska.inzynierka.SignInActivity"
-            android:parentActivityName="com.pracainzynierska.inzynierka.MainActivity">
+            android:name=".SignInActivity"
+            android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.pracainzynierska.inzynierka.MainActivity" />
         </activity>
-        <activity android:name="com.pracainzynierska.inzynierka.MainActivity">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
