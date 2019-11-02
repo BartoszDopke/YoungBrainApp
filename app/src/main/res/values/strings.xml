@@ -143,4 +143,7 @@
     <string name="logout_btn">Log Out</string>
     <string name="exit_text">X</string>
     <string name="guess_text">Find out where pairs are and guess them all!</string>
+    <string name="yes">YES</string>
+    <string name="no">NO</string>
+    <string name="points">Points:</string>
 </resources>

@@ -12,7 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".RememberTheSequenceActivity"></activity>
+        <activity android:name=".GeomemotryActivity"></activity>
+        <activity android:name=".RememberTheSequenceActivity" />
         <activity android:name=".RegisterActivity" />
         <activity
             android:name=".PremiumActivity"
