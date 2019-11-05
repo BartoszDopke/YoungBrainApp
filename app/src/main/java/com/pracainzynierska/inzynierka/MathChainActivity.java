@@ -38,14 +38,12 @@ public class MathChainActivity extends AppCompatActivity {
 
         firstNumberView.setText("" + resultComputer);
         showAnotherOperation();
-        Log.d("resultComputer first","resultComputer after showAnotherOperation: " + resultComputer);
 
         confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 firstNumberView.setVisibility(View.INVISIBLE);
                 resultUser =  Integer.parseInt(resultUserEdit.getText().toString());
-                //Log.d("resultUser","resultUser after click: " + resultUser);
                 checkResult();
                 resultUserEdit.setText("");
             }
@@ -53,7 +51,6 @@ public class MathChainActivity extends AppCompatActivity {
     }
 
     private void checkResult() {
-        //TODO: if resultUser == resultComputer
         if (resultUser == resultComputer)
         {
             showAnotherOperation();
@@ -81,7 +78,6 @@ public class MathChainActivity extends AppCompatActivity {
         }
         while(numberForComputing % 2 != 0);
 
-
         mathOperationView.setText(" " + operationSign + numberForComputing);
 
         if(numberForComputing == 0)
@@ -92,30 +88,18 @@ public class MathChainActivity extends AppCompatActivity {
         switch (operationSign)
             {
             case '+':
-                //TODO: resultComputer
                 resultComputer = resultComputer + numberForComputing;
                 break;
             case '-':
-                //TODO: resultComputer
                 resultComputer = resultComputer - numberForComputing;
                 break;
 
             case '*':
-                //TODO: resultComputer
                 resultComputer = resultComputer * numberForComputing;
                 break;
             case '/':
-                //TODO: resultComputer
                 resultComputer = resultComputer / numberForComputing;
                 break;
         }
     }
 }
-/*
-Random r = new Random();
-
-    String alphabet = "123xyz";
-    for (int i = 0; i < 50; i++) {
-        System.out.println(alphabet.charAt(r.nextInt(alphabet.length())));
-    } // prints 50 random characters from alphabet
- */

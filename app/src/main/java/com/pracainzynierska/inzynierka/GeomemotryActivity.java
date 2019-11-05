@@ -16,16 +16,14 @@ public class GeomemotryActivity extends AppCompatActivity {
 
     Button yes_btn, no_btn;
     ImageView shape;
-    TextView points;
+    TextView points, show_text;
 
     int[] images = {R.drawable.circle,R.drawable.square,R.drawable.star,R.drawable.star6, R.drawable.triangle};
     int[] shapesArray = {0,1,2,3,4,5};
     Random rand = new Random();
-    //int star6, circle, square, star, triangle;
     int player_points = 0;
     int imgPrev, imgActual, imgSecond;
 
-    //int firstShape, secondShape;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +34,7 @@ public class GeomemotryActivity extends AppCompatActivity {
         yes_btn = findViewById(R.id.yes_btn);
         no_btn = findViewById(R.id.no_btn);
         points = findViewById(R.id.geo_points);
+        show_text = findViewById(R.id.show_text);
 
         points.setTextColor(Color.RED);
 
@@ -54,30 +53,39 @@ public class GeomemotryActivity extends AppCompatActivity {
             }
         },2000);
 
-        Log.i("imgPrev onCreate","imgPrev onCreate " + imgPrev);
-        Log.i("imgSecond onCreate","imgSecond onCreate " + imgSecond);
-        Log.i("imgActual onCreate","imgActual onCreate " + imgActual);
 
-
-        //there's a problem
         yes_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Handler handler = new Handler();
                 if(imgPrev == imgActual)
                 {
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            show_text.setVisibility(View.INVISIBLE);
+                        }
+                    },500);
+                    show_text.setText("Correct!");
+                    show_text.setVisibility(View.VISIBLE);
+
                     player_points+=10;
                     points.setText("Points: " + player_points);
                 }
                 else
                 {
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            show_text.setVisibility(View.INVISIBLE);
+                        }
+                    },500);
+                    show_text.setText("That's not correct answer!");
+                    show_text.setVisibility(View.VISIBLE);
                     points.setText("Points: " + player_points);
                 }
-                Log.i("imgPrev in yes_btn: ", "imgPrev in yes_btn: " + imgPrev);
-                Log.i("imgActual in yes_btn: ", "imgActual in yes_btn: " + imgActual);
                 imgPrev = imgActual;
-                Log.i("imgPrev przypis yes: ", "imgPrev przypis yes: " + imgPrev);
                 imgActual = getRandomImageId();
-                Log.i("imgActual przypis yes: ", "imgActual przypis yes: " + imgActual);
                 showShape(shape, imgActual);
 
             }
@@ -86,32 +94,41 @@ public class GeomemotryActivity extends AppCompatActivity {
         no_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Handler handler = new Handler();
                 if(imgPrev != imgActual)
                 {
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            show_text.setVisibility(View.INVISIBLE);
+                        }
+                    },500);
+                    show_text.setText("Correct!");
+                    show_text.setVisibility(View.VISIBLE);
+
                     player_points+=10;
                     points.setText("Points: " + player_points);
                 }
                 else
                 {
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            show_text.setVisibility(View.INVISIBLE);
+                        }
+                    },500);
+                    show_text.setText("That's not correct answer!");
+                    show_text.setVisibility(View.VISIBLE);
                     points.setText("Points: " + player_points);
                 }
-                Log.d("imgPrev in no_btn: ", "imgPrev in no_btn: " + imgPrev);
-                Log.d("imgActual in no_btn: ", "imgActual in no_btn: " + imgActual);
                 imgPrev = imgActual;
-                Log.d("imgPrev przypis no: ", "imgPrev przypis no: " + imgPrev);
                 imgActual = getRandomImageId();
-                Log.i("imgActual przypis no: ", "imgActual przypis no: " + imgActual);
                 showShape(shape, imgActual);
 
             }
         });
-
     }
 
-
-    //there's a problem
-
-   //probably something's wrong there as well
    private void showShape(ImageView iv, int choice) {
        if (shapesArray[choice] == 0) {
            iv.setImageResource(images[0]);
@@ -123,9 +140,7 @@ public class GeomemotryActivity extends AppCompatActivity {
            iv.setImageResource(images[3]);
        } else if (shapesArray[choice] == 4) {
            iv.setImageResource(images[4]);
-       }
-       else if (shapesArray[choice]==5)
-       {
+       } else if (shapesArray[choice]==5) {
            iv.setImageResource(images[5]);
        }
    }
