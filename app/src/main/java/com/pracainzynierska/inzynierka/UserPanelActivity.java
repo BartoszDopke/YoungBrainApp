@@ -85,7 +85,7 @@ public class UserPanelActivity extends AppCompatActivity {
     }
 
     private void Training() {
-        Intent intent = new Intent(this, GeomemotryActivity.class);
+        Intent intent = new Intent(this, MathChainActivity.class);
         startActivity(intent);
     }
 

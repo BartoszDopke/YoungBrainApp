@@ -146,4 +146,6 @@
     <string name="yes">YES</string>
     <string name="no">NO</string>
     <string name="points">Points:</string>
+    <string name="confirm_btn">Confirm</string>
+    <string name="answer_text">Write your answer!</string>
 </resources>
