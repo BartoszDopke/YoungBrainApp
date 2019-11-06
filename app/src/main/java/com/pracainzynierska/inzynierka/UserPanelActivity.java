@@ -76,16 +76,10 @@ public class UserPanelActivity extends AppCompatActivity {
         //textViewToChange.setText(username);
 
 
-
-
-
-
-
-
     }
 
     private void Training() {
-        Intent intent = new Intent(this, GeomemotryActivity.class);
+        Intent intent = new Intent(this, FillTheTextActivity.class);
         startActivity(intent);
     }
 

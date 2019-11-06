@@ -16,10 +16,11 @@ public class MathChainActivity extends AppCompatActivity {
     //dwie zmiennne. jedna, do której wrzuca liczbę użytkownik. Druga, którą nadpisuje komputer
     //po każdej wykonanej operacji. Te zmienne są przy każdym działaniu porównywane
 
-    int resultUser, numberForComputing, resultComputer = 4;
+    int resultUser, numberForComputing, resultComputer = 4, prevResultComputer;
     char operationSign;
     int[] numberForOperationArray = {1,2,3,4,5};
     String operationSignString = "+-*/";
+    String cuttedOperationSign = "+-";
 
     TextView firstNumberView, mathOperationView;
     EditText resultUserEdit;
@@ -51,39 +52,62 @@ public class MathChainActivity extends AppCompatActivity {
     }
 
     private void checkResult() {
+        Handler handler = new Handler();
         if (resultUser == resultComputer)
         {
-            showAnotherOperation();
-        }
-        else
-        {
-            Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
                     firstNumberView.setVisibility(View.INVISIBLE);
                 }
-            },2000);
+            },1000);
+            firstNumberView.setText("Good answer!");
+            firstNumberView.setVisibility(View.VISIBLE);
+            showAnotherOperation();
+        }
+        else
+        {
+
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    firstNumberView.setVisibility(View.INVISIBLE);
+                }
+            },1000);
             firstNumberView.setText("Bad answer, try again!");
             firstNumberView.setVisibility(View.VISIBLE);
         }
     }
 
     private void showAnotherOperation() {
-        Random r = new Random();
-        operationSign = operationSignString.charAt(r.nextInt(operationSignString.length()));
-        do
-        {
-            numberForComputing = new Random().nextInt(numberForOperationArray.length);
-        }
-        while(numberForComputing % 2 != 0);
 
-        mathOperationView.setText(" " + operationSign + numberForComputing);
+        Random r = new Random();
+        if((resultComputer == Math.floor(resultComputer)) && !Float.isInfinite(resultComputer))
+        {
+            operationSign = operationSignString.charAt(r.nextInt(operationSignString.length()));
+        }
+        else
+        {
+            operationSign = cuttedOperationSign.charAt(r.nextInt(cuttedOperationSign.length()));
+        }
+        numberForComputing = new Random().nextInt(numberForOperationArray.length)+1;
+
+        Log.i("number for computing", "numberForComputing in sAO: " + numberForComputing);
 
         if(numberForComputing == 0)
         {
             operationSign = '+';
         }
+        if(resultComputer %2 != 0)
+        {
+            operationSign = '+';
+        }
+        if(resultComputer >= 30)
+        {
+            operationSign = '-';
+        }
+
+        mathOperationView.setText(" " + operationSign + numberForComputing);
 
         switch (operationSign)
             {
@@ -101,5 +125,6 @@ public class MathChainActivity extends AppCompatActivity {
                 resultComputer = resultComputer / numberForComputing;
                 break;
         }
+        Log.i("resultComputer", "resultComputer: " + resultComputer);
     }
 }
