@@ -13,7 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".FillTheTextActivity"></activity>
+        <activity android:name=".IntroductionActivity"></activity>
+        <activity android:name=".FillTheTextActivity" />
         <activity android:name=".MathChainActivity" />
         <activity android:name=".GeomemotryActivity" />
         <activity android:name=".RememberTheSequenceActivity" />
@@ -74,6 +75,9 @@
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".PopUpActivity"
+            android:theme="@style/AppTheme.CustomTheme"></activity>
     </application>
 
 </manifest>

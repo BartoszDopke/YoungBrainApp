@@ -11,16 +11,22 @@ import android.widget.TextView;
 public class UserPanelActivity extends AppCompatActivity {
 
     private Button settings_btn, progress_btn, dailychallenge_btn, premium_btn, logout_btn, training_btn;
-    private TextView NickNameText;
+    private TextView NickNameText, rankText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_panel);
         String username = getIntent().getStringExtra("username");
+        //String rank = getIntent().getStringExtra("rank");
 
         NickNameText =  findViewById(R.id.nickname);
         NickNameText.setText(username);
+
+        //here I'd like to display rank
+        //rankText = findViewById(R.id.rank);
+        //rankText.setText(rank);
+
 
         settings_btn = findViewById(R.id.settings_user_panel_button);
         settings_btn.setOnClickListener(new View.OnClickListener() {
@@ -70,16 +76,12 @@ public class UserPanelActivity extends AppCompatActivity {
                 Training();
             }
         });
-        //String username = getIntent().getStringExtra("USERNAME");
-
-        //final TextView textViewToChange = (TextView) findViewById(R.id.nickname);
-        //textViewToChange.setText(username);
 
 
     }
 
     private void Training() {
-        Intent intent = new Intent(this, FillTheTextActivity.class);
+        Intent intent = new Intent(this, IntroductionActivity.class);
         startActivity(intent);
     }
 

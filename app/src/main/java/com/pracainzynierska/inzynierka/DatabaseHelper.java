@@ -17,7 +17,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COL_2 ="username";
     public static final String COL_3 ="mail_address";
     public static final String COL_4 ="password";
-    //public static final String COL_5 = "dailytip";
+    public static final String COL_5 = "rank";
+    //public static final String COL_6 = "dailytip";
 
     public DatabaseHelper(@Nullable Context context) {
         super(context, DATABASE_NAME,null, 1);
@@ -25,7 +26,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE registeruser (ID INTEGER PRIMARY KEY AUTOINCREMENT,username TEXT, mail_address TEXT, password TEXT)");
+        db.execSQL("CREATE TABLE registeruser (ID INTEGER PRIMARY KEY AUTOINCREMENT,username TEXT, mail_address TEXT, password TEXT, rank TEXT DEFAULT 'Australopithecus afarensis')");
     }
 
     @Override

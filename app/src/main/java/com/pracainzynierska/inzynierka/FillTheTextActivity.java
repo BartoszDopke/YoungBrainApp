@@ -26,7 +26,9 @@ public class FillTheTextActivity extends AppCompatActivity {
             "We have never been to Asia, nor have we visited Africa.",
             "The stranger officiates the meal.",
             "He ran out of money, so he had to stop playing poker.",
-            "The mysterious diary records the voice."};
+            "The mysterious diary records the voice.",
+            "We need to rent a room for our party.",
+        "Where do random thoughts come from?"};
     String userResult, wordToFill;
     String choosenSentence, sentenceToShow;
     int randomChoice, wordToFillNumber;

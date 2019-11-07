@@ -49,8 +49,10 @@ public class SignInActivity extends AppCompatActivity {
                 if(res == true)
                 {
                     Intent intent = new Intent(SignInActivity.this,UserPanelActivity.class);
+                    Intent intentPopUp = new Intent(SignInActivity.this, PopUpActivity.class);
                     intent.putExtra("username",user);
                     startActivity(intent);
+                    startActivity(intentPopUp);
                     Toast.makeText(SignInActivity.this,"Welcome " + user + "!", Toast.LENGTH_SHORT).show();
                 }
                 else
