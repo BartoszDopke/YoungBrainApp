@@ -134,8 +134,17 @@
     <TextView
         android:id="@+id/points"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:textSize="32dp"
-        android:text="Points: 0"></TextView>
+        android:layout_height="82dp"
+        android:text="Points: 0"
+        android:textSize="32dp"></TextView>
 
-    </LinearLayout>
+    <TextView
+        android:id="@+id/username_rememberthesequence"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_weight="1"
+        android:text=""
+        android:textSize="24sp"
+        />
+
+</LinearLayout>

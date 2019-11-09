@@ -1,9 +1,15 @@
 package com.pracainzynierska.inzynierka;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
@@ -17,7 +23,7 @@ import java.util.Random;
 
 public class FillTheTextActivity extends AppCompatActivity {
 
-    TextView TextToFill, answerCheck;
+    TextView TextToFill, answerCheck, timerTextView, pointsView;
     EditText EditTextFilling;
     Button confirmButton;
     String[] exampleTextArray = {
@@ -30,10 +36,11 @@ public class FillTheTextActivity extends AppCompatActivity {
             "We need to rent a room for our party.",
         "Where do random thoughts come from?"};
     String userResult, wordToFill;
-    String choosenSentence, sentenceToShow;
-    int randomChoice, wordToFillNumber;
+    String choosenSentence;
+    int randomChoice, player_points=0;
     String[] choosenSentenceArray;
     ArrayList<String> choosenSentenceList;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +59,38 @@ public class FillTheTextActivity extends AppCompatActivity {
         wordToFill = choosenSentenceArray[new Random().nextInt(choosenSentenceArray.length)];
         wordToFill = wordToFill.toLowerCase();
 
+        pointsView = findViewById(R.id.points_fillthetext);
+        pointsView.setText("" + player_points);
+
+        timerTextView = findViewById(R.id.timerView2);
+
+        new CountDownTimer(60000,1000)
+        {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                timerTextView.setText(""+ millisUntilFinished/1000);
+            }
+
+            @Override
+            public void onFinish() {
+                saveScore();
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(FillTheTextActivity.this);
+                alertDialogBuilder
+                        .setMessage("Congratulations! You did the last exercise! Your points: " + player_points)
+                        .setCancelable(false)
+                        .setPositiveButton("BACK TO MENU", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent intent = new Intent(getApplicationContext(), UserPanelActivity.class);
+                                startActivity(intent);
+                                finish();
+                            }
+                        });
+                AlertDialog alertDialog = alertDialogBuilder.create();
+                alertDialog.show();
+            }
+        }.start();
+
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
@@ -69,17 +108,26 @@ public class FillTheTextActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 userResult = EditTextFilling.getText().toString().toLowerCase();
-                Log.i("userResult","userResult: " + userResult);
+                //Log.i("userResult","userResult: " + userResult);
                 checkResult();
                 EditTextFilling.setText("");
             }
         });
     }
 
+    private void saveScore() {
+        SharedPreferences preferences = this.getSharedPreferences("myScore", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putInt("ftt_score",player_points);
+        editor.commit();
+    }
+
     private void checkResult() {
         Handler handler = new Handler();
         if(userResult.equals(wordToFill))
         {
+            player_points +=10;
+            pointsView.setText("" + player_points);
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
@@ -87,17 +135,21 @@ public class FillTheTextActivity extends AppCompatActivity {
 
                 }
             },1000);
+
             answerCheck.setText("Correct answer!");
             answerCheck.setVisibility(View.VISIBLE);
 
         }
         else {
+            player_points -=10;
+            pointsView.setText("" + player_points);
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
                     answerCheck.setVisibility(View.INVISIBLE);
                 }
             },1000);
+
             answerCheck.setText("That's not correct answer!");
             answerCheck.setVisibility(View.VISIBLE);
         }
@@ -129,4 +181,6 @@ public class FillTheTextActivity extends AppCompatActivity {
 
         //Log.i("brakujace slowo showat","brakujące słowo showAnotherText: " + wordToFill);
     }
+
+
 }

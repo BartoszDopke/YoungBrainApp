@@ -3,9 +3,12 @@ package com.pracainzynierska.inzynierka;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Dialog;
+
+import android.content.ContentValues;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -17,7 +20,7 @@ import java.util.Arrays;
 import java.util.Collections;
 
 public class RememberTheSequenceActivity extends AppCompatActivity {
-    TextView points;
+    TextView points, usernameView;
 
     ImageView iv_11,iv_12,iv_13,iv_14,iv_15,iv_16,iv_17,iv_18,iv_19,iv_20,iv_21,iv_22;
 
@@ -31,11 +34,22 @@ public class RememberTheSequenceActivity extends AppCompatActivity {
     int cardNumber = 1;
     int player_points = 0;
 
+    DatabaseHelper db;
+
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_remember_the_sequence);
+        String username = getIntent().getStringExtra("username");
         points = findViewById(R.id.points);
+        usernameView = findViewById(R.id.username_rememberthesequence);
+        usernameView.setVisibility(View.INVISIBLE);
+        usernameView.setText("" + username);
+
 
         iv_11 = findViewById(R.id.iv_11);
         iv_12 = findViewById(R.id.iv_12);
@@ -368,7 +382,7 @@ public class RememberTheSequenceActivity extends AppCompatActivity {
                 iv_22.setVisibility(View.INVISIBLE);
             }
 
-            player_points++;
+            player_points+=10;
             points.setText("Points: " + player_points);
         } else
         {
@@ -417,14 +431,17 @@ public class RememberTheSequenceActivity extends AppCompatActivity {
                 iv_21.getVisibility()== View.INVISIBLE &&
                 iv_22.getVisibility()== View.INVISIBLE)
         {
+            saveScore();
+
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(RememberTheSequenceActivity.this);
             alertDialogBuilder
                     .setMessage("Congratulations! You did the first exercise! Your points: " + player_points)
                     .setCancelable(false)
-                    .setPositiveButton("NEW", new DialogInterface.OnClickListener() {
+                    .setPositiveButton("NEXT EXERCISE", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            Intent intent = new Intent(getApplicationContext(), RememberTheSequenceActivity.class);
+                            Intent intent = new Intent(getApplicationContext(), MathChainActivity.class);
+                            intent.putExtra("username",usernameView.getText().toString());
                             startActivity(intent);
                             finish();
                         }
@@ -438,6 +455,13 @@ public class RememberTheSequenceActivity extends AppCompatActivity {
                 AlertDialog alertDialog = alertDialogBuilder.create();
                 alertDialog.show();
         }
+    }
+
+    private void saveScore() {
+        SharedPreferences preferences = this.getSharedPreferences(usernameView.getText().toString(), Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putInt("rts_score",player_points);
+        editor.commit();
     }
 
     private void frontofCardsResources() {

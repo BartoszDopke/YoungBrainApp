@@ -1,13 +1,20 @@
 package com.pracainzynierska.inzynierka;
 
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import java.util.Random;
 
@@ -16,7 +23,7 @@ public class GeomemotryActivity extends AppCompatActivity {
 
     Button yes_btn, no_btn;
     ImageView shape;
-    TextView points, show_text;
+    TextView points, show_text, timerTextView;
 
     int[] images = {R.drawable.circle,R.drawable.square,R.drawable.star,R.drawable.star6, R.drawable.triangle};
     int[] shapesArray = {0,1,2,3,4,5};
@@ -33,14 +40,54 @@ public class GeomemotryActivity extends AppCompatActivity {
 
         yes_btn = findViewById(R.id.yes_btn);
         no_btn = findViewById(R.id.no_btn);
-        points = findViewById(R.id.geo_points);
         show_text = findViewById(R.id.show_text);
+        points = findViewById(R.id.geo_points);
+
+        points.setText("" + player_points);
+
 
         points.setTextColor(Color.RED);
 
         //this line sets random image in the beginning
         imgPrev = new Random().nextInt(images.length);
         shape.setImageResource(images[imgPrev]);
+
+        timerTextView = findViewById(R.id.timerView3);
+
+        new CountDownTimer(60000,1000)
+        {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                timerTextView.setText(""+ millisUntilFinished/1000);
+            }
+
+            @Override
+            public void onFinish() {
+                saveScore();
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(GeomemotryActivity.this);
+                alertDialogBuilder
+                        .setMessage("Congratulations! You did the third exercise! Your points: " + player_points)
+                        .setCancelable(false)
+                        .setPositiveButton("NEXT EXERCISE", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent intent = new Intent(getApplicationContext(), FillTheTextActivity.class);
+                                startActivity(intent);
+                                finish();
+                            }
+                        })
+                        .setNegativeButton("EXIT", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent intentBack = new Intent(getApplicationContext(), UserPanelActivity.class);
+                                startActivity(intentBack);
+                                finish();
+                            }
+                        });
+                AlertDialog alertDialog = alertDialogBuilder.create();
+                alertDialog.show();
+            }
+            }.start();
 
 
         Handler handler = new Handler();
@@ -70,7 +117,7 @@ public class GeomemotryActivity extends AppCompatActivity {
                     show_text.setVisibility(View.VISIBLE);
 
                     player_points+=10;
-                    points.setText("Points: " + player_points);
+                    points.setText("" + player_points);
                 }
                 else
                 {
@@ -82,7 +129,8 @@ public class GeomemotryActivity extends AppCompatActivity {
                     },500);
                     show_text.setText("That's not correct answer!");
                     show_text.setVisibility(View.VISIBLE);
-                    points.setText("Points: " + player_points);
+                    player_points-=10;
+                    points.setText("" + player_points);
                 }
                 imgPrev = imgActual;
                 imgActual = getRandomImageId();
@@ -107,7 +155,7 @@ public class GeomemotryActivity extends AppCompatActivity {
                     show_text.setVisibility(View.VISIBLE);
 
                     player_points+=10;
-                    points.setText("Points: " + player_points);
+                    points.setText("" + player_points);
                 }
                 else
                 {
@@ -119,7 +167,8 @@ public class GeomemotryActivity extends AppCompatActivity {
                     },500);
                     show_text.setText("That's not correct answer!");
                     show_text.setVisibility(View.VISIBLE);
-                    points.setText("Points: " + player_points);
+                    player_points-=10;
+                    points.setText("" + player_points);
                 }
                 imgPrev = imgActual;
                 imgActual = getRandomImageId();
@@ -147,5 +196,12 @@ public class GeomemotryActivity extends AppCompatActivity {
 
     private Integer getRandomImageId() {
         return rand.nextInt(images.length);
+    }
+
+    private void saveScore() {
+        SharedPreferences preferences = this.getSharedPreferences("myScore", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putInt("g_score",player_points);
+        editor.commit();
     }
 }

@@ -82,6 +82,8 @@ public class UserPanelActivity extends AppCompatActivity {
 
     private void Training() {
         Intent intent = new Intent(this, IntroductionActivity.class);
+        String user = NickNameText.getText().toString();
+        intent.putExtra("username",user);
         startActivity(intent);
     }
 
@@ -102,11 +104,14 @@ public class UserPanelActivity extends AppCompatActivity {
 
     private void MyProgress() {
         Intent intent = new Intent(this,MyProgressActivity.class);
+        String user = NickNameText.getText().toString();
+        intent.putExtra("username",user);
         startActivity(intent);
     }
 
     private void Settings() {
         Intent intent = new Intent(this, SettingsActivity.class);
+
         startActivity(intent);
     }
 

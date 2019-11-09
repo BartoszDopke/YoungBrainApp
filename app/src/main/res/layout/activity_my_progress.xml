@@ -4,6 +4,171 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/lightblue"
     tools:context="com.pracainzynierska.inzynierka.MyProgressActivity">
 
+    <TableLayout
+        android:id="@+id/myprogressTable"
+        android:layout_width="416dp"
+        android:layout_height="534dp"
+        android:layout_marginTop="195dp"
+        android:layout_weight="0"
+        android:padding="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TableRow android:layout_height="60dp">
+
+            <TextView
+                android:id="@+id/date"
+                android:layout_width="30dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:text="Date"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/hitLabel"
+                android:layout_width="49dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:text="Remember The Sequence"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/errorLabel"
+                android:layout_width="44dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:text="MathChain"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/geomemotry_table"
+                android:layout_width="50dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:text="Geomemotry"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/fillthetext_table"
+                android:layout_width="50dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:text="Fill The Text"
+                android:textStyle="bold" />
+
+
+        </TableRow>
+
+        <TableRow android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/date1"
+                android:layout_width="44dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:text="0" />
+
+            <TextView
+                android:id="@+id/rts_score_1"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:text="0" />
+
+            <TextView
+                android:id="@+id/mc_score_1"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:text="0" />
+
+            <TextView
+                android:id="@+id/g_score_1"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:text="0" />
+
+            <TextView
+                android:id="@+id/ftt_score_1"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:text="0" />
+
+        </TableRow>
+
+        <TableRow android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/date2"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:text="0" />
+
+            <TextView
+                android:id="@+id/rts_score_2"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:text="0" />
+
+            <TextView
+                android:id="@+id/mc_score_2"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:text="0" />
+
+            <TextView
+                android:id="@+id/g_score_2"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:text="0" />
+
+            <TextView
+                android:id="@+id/ftt_score_2"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:text="0" />
+        </TableRow>
+    </TableLayout>
+
+    <TextView
+        android:id="@+id/stats"
+        android:layout_width="250dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="80dp"
+        android:text="@string/stats_txt"
+        android:textStyle="bold"
+        android:textSize="40sp"
+        android:gravity="center_horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/username_myprogress"
+        android:layout_width="79dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:text=""
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

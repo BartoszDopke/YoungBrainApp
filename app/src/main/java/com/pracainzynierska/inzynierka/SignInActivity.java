@@ -3,6 +3,7 @@ package com.pracainzynierska.inzynierka;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -48,6 +49,7 @@ public class SignInActivity extends AppCompatActivity {
                 Boolean res = db.checkUser(user,pwd);
                 if(res == true)
                 {
+                    SharedPreferences preferences = getSharedPreferences(user,MODE_PRIVATE);
                     Intent intent = new Intent(SignInActivity.this,UserPanelActivity.class);
                     Intent intentPopUp = new Intent(SignInActivity.this, PopUpActivity.class);
                     intent.putExtra("username",user);
