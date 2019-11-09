@@ -73,6 +73,7 @@ public class MathChainActivity extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 Intent intent = new Intent(getApplicationContext(), GeomemotryActivity.class);
+                                intent.putExtra("username",usernameView.getText().toString());
                                 startActivity(intent);
                                 finish();
                             }

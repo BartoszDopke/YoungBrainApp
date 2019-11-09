@@ -3,8 +3,6 @@ package com.pracainzynierska.inzynierka;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -33,12 +31,6 @@ public class RememberTheSequenceActivity extends AppCompatActivity {
     int clickedFirst, clickedSecond;
     int cardNumber = 1;
     int player_points = 0;
-
-    DatabaseHelper db;
-
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

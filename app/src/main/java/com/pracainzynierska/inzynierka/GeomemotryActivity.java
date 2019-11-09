@@ -23,7 +23,7 @@ public class GeomemotryActivity extends AppCompatActivity {
 
     Button yes_btn, no_btn;
     ImageView shape;
-    TextView points, show_text, timerTextView;
+    TextView points, show_text, timerTextView, usernameView;
 
     int[] images = {R.drawable.circle,R.drawable.square,R.drawable.star,R.drawable.star6, R.drawable.triangle};
     int[] shapesArray = {0,1,2,3,4,5};
@@ -41,6 +41,11 @@ public class GeomemotryActivity extends AppCompatActivity {
         yes_btn = findViewById(R.id.yes_btn);
         no_btn = findViewById(R.id.no_btn);
         show_text = findViewById(R.id.show_text);
+        usernameView = findViewById(R.id.username_geomemotry);
+        String user = getIntent().getStringExtra("username");
+        usernameView.setVisibility(View.INVISIBLE);
+        usernameView.setText(""+ user);
+
         points = findViewById(R.id.geo_points);
 
         points.setText("" + player_points);
@@ -72,6 +77,7 @@ public class GeomemotryActivity extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 Intent intent = new Intent(getApplicationContext(), FillTheTextActivity.class);
+                                intent.putExtra("username",usernameView.getText().toString());
                                 startActivity(intent);
                                 finish();
                             }
@@ -199,7 +205,7 @@ public class GeomemotryActivity extends AppCompatActivity {
     }
 
     private void saveScore() {
-        SharedPreferences preferences = this.getSharedPreferences("myScore", Context.MODE_PRIVATE);
+        SharedPreferences preferences = this.getSharedPreferences(usernameView.getText().toString(), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putInt("g_score",player_points);
         editor.commit();

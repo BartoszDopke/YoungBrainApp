@@ -23,7 +23,7 @@ import java.util.Random;
 
 public class FillTheTextActivity extends AppCompatActivity {
 
-    TextView TextToFill, answerCheck, timerTextView, pointsView;
+    TextView TextToFill, answerCheck, timerTextView, pointsView, usernameView;
     EditText EditTextFilling;
     Button confirmButton;
     String[] exampleTextArray = {
@@ -49,6 +49,11 @@ public class FillTheTextActivity extends AppCompatActivity {
 
         TextToFill = findViewById(R.id.TextToFill);
         EditTextFilling = findViewById(R.id.EditTextFilling);
+        usernameView = findViewById(R.id.username_fillthetext);
+        String user = getIntent().getStringExtra("username");
+        usernameView.setVisibility(View.INVISIBLE);
+        usernameView.setText(""+ user);
+
         answerCheck = findViewById(R.id.answer_check);
         answerCheck.setTextColor(Color.RED);
 
@@ -82,6 +87,7 @@ public class FillTheTextActivity extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 Intent intent = new Intent(getApplicationContext(), UserPanelActivity.class);
+                                intent.putExtra("username",usernameView.getText().toString());
                                 startActivity(intent);
                                 finish();
                             }
@@ -116,7 +122,7 @@ public class FillTheTextActivity extends AppCompatActivity {
     }
 
     private void saveScore() {
-        SharedPreferences preferences = this.getSharedPreferences("myScore", Context.MODE_PRIVATE);
+        SharedPreferences preferences = this.getSharedPreferences(usernameView.getText().toString(), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putInt("ftt_score",player_points);
         editor.commit();
