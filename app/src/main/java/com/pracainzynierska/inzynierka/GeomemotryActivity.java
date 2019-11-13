@@ -8,7 +8,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -16,6 +15,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
 import java.util.Random;
 
 
@@ -25,8 +25,13 @@ public class GeomemotryActivity extends AppCompatActivity {
     ImageView shape;
     TextView points, show_text, timerTextView, usernameView;
 
-    int[] images = {R.drawable.circle,R.drawable.square,R.drawable.star,R.drawable.star6, R.drawable.triangle};
-    int[] shapesArray = {0,1,2,3,4,5};
+    int[] imagesEasy = {R.drawable.circle,R.drawable.square,R.drawable.star, R.drawable.triangle};
+    int[] imagesMedium = {R.drawable.circle,R.drawable.square,R.drawable.star,R.drawable.star6, R.drawable.triangle, R.drawable.square2 };
+    int[] imagesHard = {R.drawable.circle,R.drawable.square,R.drawable.star,R.drawable.star6, R.drawable.triangle, R.drawable.square2, R.drawable.triangle2,R.drawable.circle2};
+
+    int[] shapesArrayEasy = {0,1,2,3};
+    int[] shapesArrayMedium = {0,1,2,3,4,5};
+    int[] shapesArrayHard = {0,1,2,3,4,5,6,7};
     Random rand = new Random();
     int player_points = 0;
     int imgPrev, imgActual, imgSecond;
@@ -49,13 +54,39 @@ public class GeomemotryActivity extends AppCompatActivity {
         points = findViewById(R.id.geo_points);
 
         points.setText("" + player_points);
-
-
         points.setTextColor(Color.RED);
 
+        SharedPreferences preferences = this.getSharedPreferences(usernameView.getText().toString(),Context.MODE_PRIVATE);
+        final String isDoneString =  preferences.getString("done","-");
+        final int introScore = preferences.getInt("g_introscore",0);
+
+        if(introScore > 0 && introScore < 800)
+        {
+            //TODO: easy
+            imgPrev = new Random().nextInt(imagesEasy.length);
+            shape.setImageResource(imagesEasy[imgPrev]);
+        }
+        else if(introScore>800 && introScore<=1200)
+        {
+            //TODO: medium
+            imgPrev = new Random().nextInt(imagesMedium.length);
+            shape.setImageResource(imagesMedium[imgPrev]);
+        }
+        else if(introScore>1200)
+        {
+            //TODO:hard
+            imgPrev = new Random().nextInt(imagesHard.length);
+            shape.setImageResource(imagesHard[imgPrev]);
+        }
+        else
+        {
+            imgPrev = new Random().nextInt(imagesMedium.length);
+            shape.setImageResource(imagesMedium[imgPrev]);
+        }
+
+
         //this line sets random image in the beginning
-        imgPrev = new Random().nextInt(images.length);
-        shape.setImageResource(images[imgPrev]);
+
 
         timerTextView = findViewById(R.id.timerView3);
 
@@ -68,7 +99,15 @@ public class GeomemotryActivity extends AppCompatActivity {
 
             @Override
             public void onFinish() {
-                saveScore();
+                if(isDoneString == "done")
+                {
+                    saveScore();
+                }
+                else
+                {
+                    saveIntroScore();
+                }
+
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(GeomemotryActivity.this);
                 alertDialogBuilder
                         .setMessage("Congratulations! You did the third exercise! Your points: " + player_points)
@@ -100,8 +139,29 @@ public class GeomemotryActivity extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                imgSecond = new Random().nextInt(images.length);
-                shape.setImageResource(images[imgSecond]);
+                if(introScore > 0 && introScore < 800)
+                {
+                    //TODO: easy
+                    imgSecond = new Random().nextInt(imagesEasy.length);
+                    shape.setImageResource(imagesEasy[imgSecond]);
+                }
+                else if(introScore>800 && introScore<=1200)
+                {
+                    //TODO: medium
+                    imgSecond = new Random().nextInt(imagesMedium.length);
+                    shape.setImageResource(imagesMedium[imgSecond]);
+                }
+                else if(introScore>1200)
+                {
+                    //TODO:hard
+                    imgSecond = new Random().nextInt(imagesHard.length);
+                    shape.setImageResource(imagesHard[imgSecond]);
+                }
+                else
+                {
+                    imgSecond = new Random().nextInt(imagesMedium.length);
+                    shape.setImageResource(imagesMedium[imgSecond]);
+                }
                 imgActual = imgSecond;
             }
         },2000);
@@ -139,8 +199,47 @@ public class GeomemotryActivity extends AppCompatActivity {
                     points.setText("" + player_points);
                 }
                 imgPrev = imgActual;
-                imgActual = getRandomImageId();
-                showShape(shape, imgActual);
+                if(introScore > 0 && introScore < 800)
+                {
+                    //TODO: easy
+                    imgActual = getRandomImageId(shapesArrayEasy);
+                }
+                else if(introScore>800 && introScore<=1200)
+                {
+                    //TODO: medium
+                    imgActual = getRandomImageId(shapesArrayMedium);
+                }
+                else if(introScore>1200)
+                {
+                    //TODO:hard
+                    imgActual = getRandomImageId(shapesArrayHard);
+                }
+                else
+                {
+                    imgActual = getRandomImageId(shapesArrayMedium);
+                }
+
+
+                if(introScore > 0 && introScore < 800)
+                {
+                    //TODO: easy
+                    showShapeEasy(shape, imgActual);
+                }
+                else if(introScore>800 && introScore<=1200)
+                {
+                    //TODO: medium
+                    showShapeMedium(shape, imgActual);
+                }
+                else if(introScore>1200)
+                {
+                    //TODO:hard
+                    showShapeHard(shape, imgActual);
+                }
+                else
+                {
+                    showShapeMedium(shape, imgActual);
+                }
+
 
             }
         });
@@ -177,37 +276,127 @@ public class GeomemotryActivity extends AppCompatActivity {
                     points.setText("" + player_points);
                 }
                 imgPrev = imgActual;
-                imgActual = getRandomImageId();
-                showShape(shape, imgActual);
+                if(introScore > 0 && introScore < 800)
+                {
+                    //TODO: easy
+                    imgActual = getRandomImageId(shapesArrayEasy);
+                }
+                else if(introScore>800 && introScore<=1200)
+                {
+                    //TODO: medium
+                    imgActual = getRandomImageId(shapesArrayMedium);
+                }
+                else if(introScore>1200)
+                {
+                    //TODO:hard
+                    imgActual = getRandomImageId(shapesArrayHard);
+                }
+                else
+                {
+                    imgActual = getRandomImageId(shapesArrayMedium);
+                }
+
+                if(introScore > 0 && introScore < 800)
+                {
+                    //TODO: easy
+                    showShapeEasy(shape, imgActual);
+                }
+                else if(introScore>800 && introScore<=1200)
+                {
+                    //TODO: medium
+                    showShapeMedium(shape, imgActual);
+                }
+                else if(introScore>1200)
+                {
+                    //TODO:hard
+                    showShapeHard(shape, imgActual);
+                }
+                else
+                {
+                    showShapeMedium(shape, imgActual);
+                }
 
             }
         });
     }
 
-   private void showShape(ImageView iv, int choice) {
-       if (shapesArray[choice] == 0) {
-           iv.setImageResource(images[0]);
-       } else if (shapesArray[choice] == 1) {
-           iv.setImageResource(images[1]);
-       } else if (shapesArray[choice] == 2) {
-           iv.setImageResource(images[2]);
-       } else if (shapesArray[choice] == 3) {
-           iv.setImageResource(images[3]);
-       } else if (shapesArray[choice] == 4) {
-           iv.setImageResource(images[4]);
-       } else if (shapesArray[choice]==5) {
-           iv.setImageResource(images[5]);
+
+
+    private void showShapeEasy(ImageView iv, int choice) {
+       if (shapesArrayEasy[choice] == 0) {
+           iv.setImageResource(imagesEasy[0]);
+       } else if (shapesArrayEasy[choice] == 1) {
+           iv.setImageResource(imagesEasy[1]);
+       } else if (shapesArrayEasy[choice] == 2) {
+           iv.setImageResource(imagesEasy[2]);
+       } else if (shapesArrayEasy[choice] == 3) {
+           iv.setImageResource(imagesEasy[3]);
+       } else if (shapesArrayEasy[choice] == 4) {
+           iv.setImageResource(imagesEasy[4]);
+       } else if (shapesArrayEasy[choice]==5) {
+           iv.setImageResource(imagesEasy[5]);
        }
    }
 
-    private Integer getRandomImageId() {
-        return rand.nextInt(images.length);
+    private void showShapeMedium(ImageView iv, int choice) {
+        if (shapesArrayMedium[choice] == 0) {
+            iv.setImageResource(imagesMedium[0]);
+        } else if (shapesArrayMedium[choice] == 1) {
+            iv.setImageResource(imagesMedium[1]);
+        } else if (shapesArrayMedium[choice] == 2) {
+            iv.setImageResource(imagesMedium[2]);
+        } else if (shapesArrayMedium[choice] == 3) {
+            iv.setImageResource(imagesMedium[3]);
+        } else if (shapesArrayMedium[choice] == 4) {
+            iv.setImageResource(imagesMedium[4]);
+        } else if (shapesArrayMedium[choice]==5) {
+            iv.setImageResource(imagesMedium[5]);
+        } else if (shapesArrayMedium[choice]==6) {
+            iv.setImageResource(imagesMedium[6]);
+        } else if (shapesArrayMedium[choice]==7) {
+            iv.setImageResource(imagesMedium[7]);
+        }
+    }
+
+    private void showShapeHard(ImageView iv, int choice) {
+        if (shapesArrayHard[choice] == 0) {
+            iv.setImageResource(imagesHard[0]);
+        } else if (shapesArrayHard[choice] == 1) {
+            iv.setImageResource(imagesHard[1]);
+        } else if (shapesArrayHard[choice] == 2) {
+            iv.setImageResource(imagesHard[2]);
+        } else if (shapesArrayHard[choice] == 3) {
+            iv.setImageResource(imagesHard[3]);
+        } else if (shapesArrayHard[choice] == 4) {
+            iv.setImageResource(imagesHard[4]);
+        } else if (shapesArrayHard[choice]==5) {
+            iv.setImageResource(imagesHard[5]);
+        }
+    }
+
+
+
+    private Integer getRandomImageId(int[] array) {
+        return rand.nextInt(array.length);
     }
 
     private void saveScore() {
         SharedPreferences preferences = this.getSharedPreferences(usernameView.getText().toString(), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
+        int totalScore = preferences.getInt("totalScore",0);
+        totalScore = totalScore + player_points;
         editor.putInt("g_score",player_points);
+        editor.putInt("total_score", totalScore);
+        editor.commit();
+    }
+
+    private void saveIntroScore() {
+        SharedPreferences preferences = this.getSharedPreferences(usernameView.getText().toString(), Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        int totalScore = preferences.getInt("totalScore",0);
+        totalScore = totalScore + player_points;
+        editor.putInt("g_introscore", player_points);
+        editor.putInt("total_score",totalScore);
         editor.commit();
     }
 }

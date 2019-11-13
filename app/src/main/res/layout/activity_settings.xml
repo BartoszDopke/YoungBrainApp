@@ -4,6 +4,37 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/lightblue"
     tools:context=".SettingsActivity">
+
+    <Switch
+        android:id="@+id/NotificationSwitch"
+        android:layout_width="139dp"
+        android:layout_height="60dp"
+        android:text="Switch"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.757"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/SoundSwitch" />
+
+    <Switch
+        android:id="@+id/SoundSwitch"
+        android:layout_width="139dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="128dp"
+        android:text="Sound"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.757"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/nicknameChangeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Change password"
+        app:layout_constraintEnd_toEndOf="@+id/NotificationSwitch"
+        app:layout_constraintTop_toBottomOf="@+id/NotificationSwitch" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

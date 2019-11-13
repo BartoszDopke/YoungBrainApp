@@ -17,8 +17,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.Random;
 
 public class FillTheTextActivity extends AppCompatActivity {
@@ -26,20 +28,51 @@ public class FillTheTextActivity extends AppCompatActivity {
     TextView TextToFill, answerCheck, timerTextView, pointsView, usernameView;
     EditText EditTextFilling;
     Button confirmButton;
-    String[] exampleTextArray = {
-            "The lake is a long way from here.",
+    String[] introTextArray = {
+            "The lake is a long way from here",
             "This is the last random sentence I will be writing and I am going to stop mid-sent",
-            "We have never been to Asia, nor have we visited Africa.",
-            "The stranger officiates the meal.",
-            "He ran out of money, so he had to stop playing poker.",
-            "The mysterious diary records the voice.",
-            "We need to rent a room for our party.",
-        "Where do random thoughts come from?"};
+            "We have never been to Asia nor have we visited Africa",
+            "The stranger officiates the meal",
+            "He ran out of money so he had to stop playing poker",
+            "The mysterious diary records the voice",
+            "We need to rent a room for our party",
+            "Random thoughts come from nowhere"};
+
+    String[] textArrayEasy = {
+            "Please wait outside of the house",
+            "We have never been to Asia nor have we visited Africa",
+            "Rock music approaches at high velocity",
+            "I hear that Nancy is very pretty",
+            "He told us a very exciting adventure story",
+            "The mysterious diary records the voice"
+    };
+
+    String[] textArrayMedium = {
+            "I would have gotten the promotion, but my attendance was not good enough",
+            "This is the last random sentence I will be writing and I am going to stop mid-sent",
+            "He turned in the research paper on Friday; otherwise he would have not passed the class",
+            "The body may perhaps compensates for the loss of a true metaphysics",
+            "She did not cheat on the test, for it was not the right thing to do",
+            "I think I will buy the red car or I will lease the blue one"
+
+    };
+
+    String[] textArrayHard = {
+            "I was very proud of my nickname throughout high school but today I could not be any different to what my nickname was",
+            "Sometimes all you need to do is completely make an ass of yourself and laugh it off to realise that life isn’t so bad after all",
+            "If the Easter Bunny and the Tooth Fairy had babies would they take your teeth and leave chocolate for you?",
+            "Last Friday in three weeks time I saw a spotted striped blue worm shake hands with a legless lizard",
+            "Sometimes it is better to just walk away from things and go back to them later when you’re in a better frame of mind",
+            "A purple pig and a green donkey flew a kite in the middle of the night and ended up sunburnt"
+    };
+
     String userResult, wordToFill;
     String choosenSentence;
     int randomChoice, player_points=0;
     String[] choosenSentenceArray;
     ArrayList<String> choosenSentenceList;
+
+    String isDoneString = "not done";
 
 
     @Override
@@ -54,11 +87,35 @@ public class FillTheTextActivity extends AppCompatActivity {
         usernameView.setVisibility(View.INVISIBLE);
         usernameView.setText(""+ user);
 
+        SharedPreferences preferences = this.getSharedPreferences(usernameView.getText().toString(),Context.MODE_PRIVATE);
+        int ftt_introscore = preferences.getInt("ftt_introscore",0);
+
+
+
         answerCheck = findViewById(R.id.answer_check);
         answerCheck.setTextColor(Color.RED);
 
-        randomChoice = new Random().nextInt(exampleTextArray.length);
-        choosenSentence = exampleTextArray[randomChoice];
+        if(ftt_introscore > 0 && ftt_introscore <=50)
+        {
+            randomChoice = new Random().nextInt(textArrayEasy.length);
+            choosenSentence = textArrayEasy[randomChoice];
+        }
+        else if(ftt_introscore > 50 && ftt_introscore < 100)
+        {
+            randomChoice = new Random().nextInt(textArrayMedium.length);
+            choosenSentence = textArrayMedium[randomChoice];
+        }
+        else if (ftt_introscore > 100)
+        {
+            randomChoice = new Random().nextInt(textArrayHard.length);
+            choosenSentence = textArrayHard[randomChoice];
+        }
+        else
+        {
+            randomChoice = new Random().nextInt(introTextArray.length);
+            choosenSentence = introTextArray[randomChoice];
+        }
+
         choosenSentenceArray = choosenSentence.split(" ");
         choosenSentenceList = new ArrayList<>(Arrays.asList(choosenSentenceArray));
         wordToFill = choosenSentenceArray[new Random().nextInt(choosenSentenceArray.length)];
@@ -78,7 +135,9 @@ public class FillTheTextActivity extends AppCompatActivity {
 
             @Override
             public void onFinish() {
+                isDoneString = "done";
                 saveScore();
+                checkIfIntroDone();
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(FillTheTextActivity.this);
                 alertDialogBuilder
                         .setMessage("Congratulations! You did the last exercise! Your points: " + player_points)
@@ -122,9 +181,24 @@ public class FillTheTextActivity extends AppCompatActivity {
     }
 
     private void saveScore() {
+        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+        Date date = new Date();
+        String dateString = format.format(date);
         SharedPreferences preferences = this.getSharedPreferences(usernameView.getText().toString(), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
+        int totalScore = preferences.getInt("totalScore",0);
+        totalScore = totalScore + player_points;
         editor.putInt("ftt_score",player_points);
+        editor.putInt("total_score",totalScore);
+        editor.putString("date",dateString);
+        editor.commit();
+    }
+
+    private void checkIfIntroDone()
+    {
+        SharedPreferences preferences = this.getSharedPreferences(usernameView.getText().toString(), Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("done",isDoneString);
         editor.commit();
     }
 
@@ -163,11 +237,39 @@ public class FillTheTextActivity extends AppCompatActivity {
     }
 
     private void showAnotherText() {
+        SharedPreferences preferences = this.getSharedPreferences(usernameView.getText().toString(),Context.MODE_PRIVATE);
+        int ftt_introscore = preferences.getInt("ftt_introscore",0);
 
-        randomChoice = new Random().nextInt(exampleTextArray.length);
-        TextToFill.setText(exampleTextArray[randomChoice]);
+        if(ftt_introscore > 0 && ftt_introscore <=50)
+        {
+            randomChoice = new Random().nextInt(textArrayEasy.length);
+            TextToFill.setText(textArrayEasy[randomChoice]);
 
-        choosenSentence = exampleTextArray[randomChoice];
+            choosenSentence = textArrayEasy[randomChoice];
+        }
+        else if(ftt_introscore > 50 && ftt_introscore < 100)
+        {
+            randomChoice = new Random().nextInt(textArrayMedium.length);
+            TextToFill.setText(textArrayMedium[randomChoice]);
+
+            choosenSentence = textArrayMedium[randomChoice];
+        }
+        else if (ftt_introscore > 100)
+        {
+            randomChoice = new Random().nextInt(textArrayHard.length);
+            TextToFill.setText(textArrayHard[randomChoice]);
+
+            choosenSentence = textArrayHard[randomChoice];
+        }
+        else
+        {
+            randomChoice = new Random().nextInt(introTextArray.length);
+            TextToFill.setText(introTextArray[randomChoice]);
+
+            choosenSentence = introTextArray[randomChoice];
+        }
+
+
         choosenSentenceArray = choosenSentence.split(" ");
 
         choosenSentenceList = new ArrayList<>(Arrays.asList(choosenSentenceArray));
@@ -185,7 +287,7 @@ public class FillTheTextActivity extends AppCompatActivity {
         },3000);
         TextToFill.setText("" + choosenSentenceList.toString().replace("[","").replace("]","").replace(",", ""));
 
-        //Log.i("brakujace slowo showat","brakujące słowo showAnotherText: " + wordToFill);
+        Log.i("brakujace slowo showat","brakujące słowo showAnotherText: " + wordToFill);
     }
 
 

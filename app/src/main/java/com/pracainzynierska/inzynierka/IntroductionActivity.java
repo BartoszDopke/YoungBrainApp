@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -68,7 +67,7 @@ public class IntroductionActivity extends AppCompatActivity {
                         introductionView.setText(introTextArray[textIndex]);
                         break;
                     case 6:
-                        Intent intent = new Intent(IntroductionActivity.this, RememberTheSequenceActivity.class);
+                        Intent intent = new Intent(IntroductionActivity.this, RememberTheSequenceMediumActivity.class);
                         String user = usernameView.getText().toString();
                         intent.putExtra("username",user);
                         startActivity(intent);

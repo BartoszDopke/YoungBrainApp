@@ -27,7 +27,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE registeruser (ID INTEGER PRIMARY KEY AUTOINCREMENT,username TEXT, mail_address TEXT, password TEXT, rank TEXT DEFAULT 'Australopithecus afarensis')");
+        db.execSQL("CREATE TABLE registeruser (ID INTEGER PRIMARY KEY AUTOINCREMENT,username TEXT, mail_address TEXT, password TEXT, rank TEXT DEFAULT 'Sahelanthropus')");
         db.execSQL("CREATE TABLE scoreuser (ID INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT, score INTEGER)");
     }
 
@@ -38,13 +38,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public long addUser(String user, String password, String mail_address, String rank) {
+    public long addUser(String user, String password, String mail_address) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("username", user);
         contentValues.put("password", password);
         contentValues.put("mail_address", mail_address);
-        contentValues.put("rank", rank);
         long res = db.insert("registeruser", null, contentValues);
         db.close();
         return res;
@@ -73,11 +72,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             cursor.close();
             db.close();
 
-            if(count>0)
-                return true;
-            else
-                return false;
+            return count > 0;
         }
+
+        public long updateUser(String password)
+        {
+            SQLiteDatabase db = this.getWritableDatabase();
+            ContentValues contentValues = new ContentValues();
+            contentValues.put("password", password);
+            long res = db.update("registeruser",contentValues,"_id="+COL_1,null);
+            db.close();
+            return res;
+        }
+
 
     }
 

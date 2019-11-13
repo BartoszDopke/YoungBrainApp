@@ -7,14 +7,12 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import com.facebook.share.widget.ShareDialog;
 import com.pracainzynierska.inzynierka.R;
-
 
 
 public class MyProgressActivity extends AppCompatActivity {
 
-    TextView usernameView, rtsPointsView1, mcPointsView1, gPointsView1, fttPointsView1;
+    TextView usernameView, rtsPointsView1, mcPointsView1, gPointsView1, fttPointsView1, dateView1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +26,7 @@ public class MyProgressActivity extends AppCompatActivity {
         mcPointsView1 = findViewById(R.id.mc_score_1);
         gPointsView1 = findViewById(R.id.g_score_1);
         fttPointsView1 = findViewById(R.id.ftt_score_1);
+        dateView1 = findViewById(R.id.date1);
 
 
         SharedPreferences preferences =  this.getSharedPreferences(usernameView.getText().toString(), Context.MODE_PRIVATE);
@@ -35,12 +34,14 @@ public class MyProgressActivity extends AppCompatActivity {
         int mc_score1 = preferences.getInt("mc_score",0);
         int g_score1 = preferences.getInt("g_score",0);
         int ftt_score1 = preferences.getInt("ftt_score",0);
+        String rts_date1 = preferences.getString("date","-");
 
 
         rtsPointsView1.setText("" + rts_score1);
         mcPointsView1.setText("" + mc_score1);
         gPointsView1.setText("" + g_score1);
         fttPointsView1.setText("" + ftt_score1);
+        dateView1.setText("" + rts_date1);
 
 
 

@@ -15,6 +15,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Random;
 
 public class MathChainActivity extends AppCompatActivity {
@@ -24,15 +27,14 @@ public class MathChainActivity extends AppCompatActivity {
 
     int resultUser, numberForComputing, resultComputer = 4, player_points=0;
     char operationSign;
-    int[] numberForOperationArray = {1,2,3,4,5};
     String operationSignString = "+-*/";
-    String cuttedOperationSign = "+-";
+    String cuttedOperationSignString = "+-";
 
     TextView firstNumberView, mathOperationView, timerTextView, pointsView, usernameView;
     EditText resultUserEdit;
     public Button confirmButton;
 
-
+    //String isDoneString = "not done";
 
 
 
@@ -50,6 +52,10 @@ public class MathChainActivity extends AppCompatActivity {
         usernameView.setVisibility(View.INVISIBLE);
         usernameView.setText(""+ user);
 
+        SharedPreferences preferences = this.getSharedPreferences(usernameView.getText().toString(),Context.MODE_PRIVATE);
+        final String isDoneString =  preferences.getString("done","-");
+
+
         pointsView = findViewById(R.id.points_mathchain);
         pointsView.setText("" + player_points);
 
@@ -64,7 +70,15 @@ public class MathChainActivity extends AppCompatActivity {
 
             @Override
             public void onFinish() {
-                saveScore();
+                if(isDoneString == "done")
+                {
+                    saveScore();
+                }
+                else
+                {
+                    saveIntroScore();
+                }
+
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(MathChainActivity.this);
                 alertDialogBuilder
                         .setMessage("Congratulations! You did the second exercise! Your points: " + player_points)
@@ -108,8 +122,22 @@ public class MathChainActivity extends AppCompatActivity {
     private void saveScore() {
         SharedPreferences preferences = this.getSharedPreferences(usernameView.getText().toString(), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
+        int totalScore = preferences.getInt("totalScore",0);
+        totalScore = totalScore + player_points;
         editor.putInt("mc_score",player_points);
+        editor.putInt("total_score", totalScore);
         editor.commit();
+    }
+
+    private void saveIntroScore()
+    {
+            SharedPreferences preferences = this.getSharedPreferences(usernameView.getText().toString(), Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = preferences.edit();
+            int totalScore = preferences.getInt("totalScore",0);
+            totalScore = totalScore + player_points;
+            editor.putInt("mc_introscore", player_points);
+            editor.putInt("total_score",totalScore);
+            editor.commit();
     }
 
     private void checkResult() {
@@ -145,7 +173,40 @@ public class MathChainActivity extends AppCompatActivity {
     }
 
     private void showAnotherOperation() {
+        SharedPreferences preferences = this.getSharedPreferences(usernameView.getText().toString(),Context.MODE_PRIVATE);
+        int introScore = preferences.getInt("mc_introscore",0);
+        if(introScore > 0 && introScore <= 130)
+        {
+            //TODO: easy
+            Log.i("diff mathchain","poziom trudności MathChain Easy");
+            operationSignString = "+-";
+            int[] numberForOperationArrayEasy = {1,2,3,4,5};
+            numberForComputing = new Random().nextInt(numberForOperationArrayEasy.length)+1;
+        }
+        else if(introScore>130 && introScore<=220)
+        {
+            //TODO:
+            Log.i("diff mathchain","poziom trudności MathChain Medium");
+            operationSignString = "+-*/";
+            int[] numberForOperationArrayMedium = {-1,1,2,3,4,5,6};
+            numberForComputing = new Random().nextInt(numberForOperationArrayMedium.length)+1;
 
+        }
+        else if(introScore > 230)
+        {
+            //TODO:hard
+            Log.i("diff mathchain","poziom trudności MathChain Hard");
+            operationSignString = "+-*/%";
+            int[] numberForOperationArrayHard = {-2,-1,1,2,3,4,5,6,7};
+            numberForComputing = new Random().nextInt(numberForOperationArrayHard.length)+1;
+        }
+        else
+        {
+            Log.i("diff mathchain","poziom trudności MathChain Intro");
+            operationSignString = "+-*/";
+            int[] numberForOperationArrayMedium = {-1,1,2,3,4,5,6};
+            numberForComputing = new Random().nextInt(numberForOperationArrayMedium.length)+1;
+        }
         Random r = new Random();
         if((resultComputer == Math.floor(resultComputer)) && !Float.isInfinite(resultComputer))
         {
@@ -153,13 +214,12 @@ public class MathChainActivity extends AppCompatActivity {
         }
         else
         {
-            operationSign = cuttedOperationSign.charAt(r.nextInt(cuttedOperationSign.length()));
+            operationSign = cuttedOperationSignString.charAt(r.nextInt(cuttedOperationSignString.length()));
         }
-        numberForComputing = new Random().nextInt(numberForOperationArray.length)+1;
 
         Log.i("number for computing", "numberForComputing in sAO: " + numberForComputing);
 
-        if(numberForComputing == 0)
+        if(numberForComputing <= 0)
         {
             operationSign = '+';
         }
@@ -182,13 +242,16 @@ public class MathChainActivity extends AppCompatActivity {
             case '-':
                 resultComputer = resultComputer - numberForComputing;
                 break;
-
             case '*':
                 resultComputer = resultComputer * numberForComputing;
                 break;
             case '/':
                 resultComputer = resultComputer / numberForComputing;
                 break;
+             case '%':
+                 resultComputer = resultComputer % numberForComputing;
+                 break;
+
         }
         Log.i("resultComputer", "resultComputer: " + resultComputer);
     }

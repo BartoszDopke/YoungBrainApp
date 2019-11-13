@@ -18,15 +18,14 @@ import android.widget.TextView;
 import java.util.Arrays;
 import java.util.Collections;
 
-public class RememberTheSequenceActivity extends AppCompatActivity {
+public class RememberTheSequenceEasyActivity extends AppCompatActivity {
     TextView points, usernameView, timerView;
 
-    ImageView iv_11,iv_12,iv_13,iv_14,iv_15,iv_16,iv_17,iv_18,iv_19,iv_20,iv_21,iv_22;
+    ImageView iv_11,iv_12,iv_13,iv_14,iv_15,iv_16,iv_17,iv_18;
 
     //array for the images
-    Integer[] cardArray = {101,102,103,104,105,106,107,108,109,110,111,112};
-    int image101, image102,image103,image104,image105,image106,image107,image108,image109,image110,
-            image111,image112;
+    Integer[] cardArray = {101,102,103,104,201,202,203,204};
+    int image101, image102,image103,image104,image105,image106,image107,image108;
 
     int firstCard,secondCard;
     int clickedFirst, clickedSecond;
@@ -78,10 +77,6 @@ public class RememberTheSequenceActivity extends AppCompatActivity {
         iv_16 = findViewById(R.id.iv_16);
         iv_17 = findViewById(R.id.iv_17);
         iv_18 = findViewById(R.id.iv_18);
-        iv_19 = findViewById(R.id.iv_19);
-        iv_20 = findViewById(R.id.iv_20);
-        iv_21 = findViewById(R.id.iv_21);
-        iv_22 = findViewById(R.id.iv_22);
 
         iv_11.setTag("0");
         iv_12.setTag("1");
@@ -91,10 +86,6 @@ public class RememberTheSequenceActivity extends AppCompatActivity {
         iv_16.setTag("5");
         iv_17.setTag("6");
         iv_18.setTag("7");
-        iv_19.setTag("8");
-        iv_20.setTag("9");
-        iv_21.setTag("10");
-        iv_22.setTag("11");
 
         //load the card images
         frontofCardsResources();
@@ -166,38 +157,15 @@ public class RememberTheSequenceActivity extends AppCompatActivity {
                 doStuff(iv_18,theCard);
             }
         });
-        iv_19.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int theCard = Integer.parseInt((String) v.getTag());
-                doStuff(iv_19,theCard);
-            }
-        });
-        iv_20.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int theCard = Integer.parseInt((String) v.getTag());
-                doStuff(iv_20,theCard);
-            }
-        });
-        iv_21.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int theCard = Integer.parseInt((String) v.getTag());
-                doStuff(iv_21,theCard);
-            }
-        });
 
-        iv_22.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int theCard = Integer.parseInt((String) v.getTag());
-                doStuff(iv_22,theCard);
-            }
-        });
-
-
-
+        Log.i("card","card 101 image: "+ iv_11);
+        Log.i("card","card 101 image: "+ iv_12);
+        Log.i("card","card 101 image: "+ iv_13);
+        Log.i("card","card 101 image: "+ iv_14);
+        Log.i("card","card 101 image: "+ iv_15);
+        Log.i("card","card 101 image: "+ iv_16);
+        Log.i("card","card 101 image: "+ iv_17);
+        Log.i("card","card 101 image: "+ iv_18);
 
     }
 
@@ -220,45 +188,29 @@ public class RememberTheSequenceActivity extends AppCompatActivity {
         {
             iv.setImageResource(image104);
         }
-        else if(cardArray[card]==105)
+        else if(cardArray[card]==201)
         {
             iv.setImageResource(image105);
         }
-        else if(cardArray[card]==106)
+        else if(cardArray[card]==202)
         {
             iv.setImageResource(image106);
         }
-        else if(cardArray[card]==107)
+        else if(cardArray[card]==203)
         {
             iv.setImageResource(image107);
         }
-        else if(cardArray[card]==108)
+        else if(cardArray[card]==204)
         {
             iv.setImageResource(image108);
-        }
-        else if(cardArray[card]==109)
-        {
-            iv.setImageResource(image109);
-        }
-        else if(cardArray[card]==110)
-        {
-            iv.setImageResource(image110);
-        }
-        else if(cardArray[card]==111)
-        {
-            iv.setImageResource(image111);
-        }
-        else if(cardArray[card]==112)
-        {
-            iv.setImageResource(image112);
         }
 
         //check which image is selected and save it to temp variable
         if(cardNumber==1)
         {
             firstCard = cardArray[card];
-            if(firstCard > 106) {
-                firstCard = firstCard - 6;
+            if(firstCard > 200) {
+                firstCard = firstCard - 100;
             }
             cardNumber = 2;
             clickedFirst = card;
@@ -267,9 +219,9 @@ public class RememberTheSequenceActivity extends AppCompatActivity {
         } else if(cardNumber==2)
         {
             secondCard = cardArray[card];
-            if(secondCard > 106)
+            if(secondCard > 200)
             {
-                secondCard = secondCard - 6;
+                secondCard = secondCard - 100;
             }
             cardNumber = 1;
             clickedSecond = card;
@@ -282,10 +234,6 @@ public class RememberTheSequenceActivity extends AppCompatActivity {
             iv_16.setEnabled(false);
             iv_17.setEnabled(false);
             iv_18.setEnabled(false);
-            iv_19.setEnabled(false);
-            iv_20.setEnabled(false);
-            iv_21.setEnabled(false);
-            iv_22.setEnabled(false);
 
             Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
@@ -335,22 +283,6 @@ public class RememberTheSequenceActivity extends AppCompatActivity {
             {
                 iv_18.setVisibility(View.INVISIBLE);
             }
-            else if(clickedFirst==8)
-            {
-                iv_19.setVisibility(View.INVISIBLE);
-            }
-            else if(clickedFirst==9)
-            {
-                iv_20.setVisibility(View.INVISIBLE);
-            }
-            else if(clickedFirst==10)
-            {
-                iv_21.setVisibility(View.INVISIBLE);
-            }
-            else if(clickedFirst==11)
-            {
-                iv_22.setVisibility(View.INVISIBLE);
-            }
 
             if(clickedSecond==0)
             {
@@ -384,23 +316,6 @@ public class RememberTheSequenceActivity extends AppCompatActivity {
             {
                 iv_18.setVisibility(View.INVISIBLE);
             }
-            else if(clickedSecond==8)
-            {
-                iv_19.setVisibility(View.INVISIBLE);
-            }
-            else if(clickedSecond==9)
-            {
-                iv_20.setVisibility(View.INVISIBLE);
-            }
-            else if(clickedSecond==10)
-            {
-                iv_21.setVisibility(View.INVISIBLE);
-            }
-            else if(clickedSecond==11)
-            {
-                iv_22.setVisibility(View.INVISIBLE);
-            }
-
             player_points+=10;
             points.setText("Points: " + player_points);
         } else
@@ -413,10 +328,7 @@ public class RememberTheSequenceActivity extends AppCompatActivity {
             iv_16.setImageResource(R.drawable.question);
             iv_17.setImageResource(R.drawable.question);
             iv_18.setImageResource(R.drawable.question);
-            iv_19.setImageResource(R.drawable.question);
-            iv_20.setImageResource(R.drawable.question);
-            iv_21.setImageResource(R.drawable.question);
-            iv_22.setImageResource(R.drawable.question);
+
         }
         iv_11.setEnabled(true);
         iv_12.setEnabled(true);
@@ -426,11 +338,6 @@ public class RememberTheSequenceActivity extends AppCompatActivity {
         iv_16.setEnabled(true);
         iv_17.setEnabled(true);
         iv_18.setEnabled(true);
-        iv_19.setEnabled(true);
-        iv_20.setEnabled(true);
-        iv_21.setEnabled(true);
-        iv_22.setEnabled(true);
-
         //check if game's over
         checkEnd();
     }
@@ -444,17 +351,14 @@ public class RememberTheSequenceActivity extends AppCompatActivity {
                 iv_15.getVisibility()== View.INVISIBLE &&
                 iv_16.getVisibility()== View.INVISIBLE &&
                 iv_17.getVisibility()== View.INVISIBLE &&
-                iv_18.getVisibility()== View.INVISIBLE &&
-                iv_19.getVisibility()== View.INVISIBLE &&
-                iv_20.getVisibility()== View.INVISIBLE &&
-                iv_21.getVisibility()== View.INVISIBLE &&
-                iv_22.getVisibility()== View.INVISIBLE)
+                iv_18.getVisibility()== View.INVISIBLE)
+
         {
             timerHandler.removeCallbacks(timerRunnable);
                 saveScore();
                 //saveIntroScore();
 
-            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(RememberTheSequenceActivity.this);
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(RememberTheSequenceEasyActivity.this);
             alertDialogBuilder
                     .setMessage("Congratulations! You did the first exercise! Your points: " + player_points)
                     .setCancelable(false)
@@ -497,17 +401,13 @@ public class RememberTheSequenceActivity extends AppCompatActivity {
 
     private void frontofCardsResources() {
 
-        image101 = R.drawable.bear;
+        image101 = R.drawable.horse;
         image102 = R.drawable.panda;
         image103 = R.drawable.rabbit;
         image104 = R.drawable.tiger;
-        image105 = R.drawable.pig;
-        image106 = R.drawable.dog;
-        image107 = R.drawable.bear;
-        image108 = R.drawable.panda;
-        image109 = R.drawable.rabbit;
-        image110 = R.drawable.tiger;
-        image111 = R.drawable.pig;
-        image112 = R.drawable.dog;
+        image105 = R.drawable.horse;
+        image106 = R.drawable.panda;
+        image107 = R.drawable.rabbit;
+        image108 = R.drawable.tiger;
     }
 }

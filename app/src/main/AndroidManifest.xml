@@ -13,11 +13,20 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".IntroductionActivity"></activity>
+        <activity android:name=".SettingsActivity"></activity>
+        <activity
+            android:name=".ProfileEditActivity"
+            android:parentActivityName=".SettingsActivity" />
+        <activity android:name=".RememberTheSequenceHardActivity" />
+        <activity android:name=".RememberTheSequenceMediumActivity" />
+        <activity
+            android:name=".DailyChallengePopUpActivity"
+            android:theme="@style/AppTheme.CustomTheme" />
+        <activity android:name=".IntroductionActivity" />
         <activity android:name=".FillTheTextActivity" />
         <activity android:name=".MathChainActivity" />
         <activity android:name=".GeomemotryActivity" />
-        <activity android:name=".RememberTheSequenceActivity" />
+        <activity android:name=".RememberTheSequenceEasyActivity" />
         <activity android:name=".RegisterActivity" />
         <activity
             android:name=".PremiumActivity"
@@ -31,15 +40,6 @@
                 android:value=".UserPanelActivity" />
         </activity>
         <activity android:name=".UserPanelActivity" />
-        <activity
-            android:name=".SettingsActivity"
-            android:parentActivityName=".UserPanelActivity">
-
-            <!-- The meta-data tag is required if you support API level 15 and lower -->
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.pracainzynierska.inzynierka.MainActivity" />
-        </activity>
         <activity
             android:name=".SignInActivity"
             android:parentActivityName=".MainActivity">
@@ -77,7 +77,7 @@
         </activity>
         <activity
             android:name=".PopUpActivity"
-            android:theme="@style/AppTheme.CustomTheme"></activity>
+            android:theme="@style/AppTheme.CustomTheme" />
     </application>
 
 </manifest>

@@ -23,14 +23,6 @@ public class MainActivity extends AppCompatActivity {
                 Login();
             }
         });
-
-        button_signup = findViewById(R.id.button2);
-        button_signup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Settings();
-            }
-        });
     }
 
     public void Login()
@@ -39,9 +31,4 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void Settings()
-    {
-        Intent intent = new Intent(this,SettingsActivity.class);
-        startActivity(intent);
-    }
 }

@@ -151,4 +151,10 @@
     <string name="text_to_fill">Kurs programowania Java stworzony został z myślą o osobach, które rozpoczynają swoją przygodę z programowaniem lub mają niewielkie doświadczenie z innym językiem programowania. W ramach kursu po wykupieniu dodatkowego pakietu oferujemy wsparcie merytoryczne - w razie problemów możesz nam zadawać nieograniczoną liczbę pytań. Kurs został zaktualizowany w kwietniu 2019r. i jest dostosowany do najnowszej wersji Javy.</string>
     <string name="fill_the_text">Fill the text!</string>
     <string name="stats_txt">My Progress</string>
+    <string name="dailychallenge_text">Take a Part in Daily Challenge to Earn More Points!</string>
+    <string name="areyouin">Are You In?</string>
+    <string name="showdailychallengebutton">Show Me!</string>
+    <string name="usernamechange">New nickname</string>
+    <string name="passwordchange">New password</string>
+    <string name="cnf_newpassword">Confirm new password</string>
 </resources>

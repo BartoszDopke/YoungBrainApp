@@ -48,16 +48,15 @@ public class RegisterActivity extends AppCompatActivity {
                 String pwd = password.getText().toString().trim();
                 String cnf_pwd = cnf_password.getText().toString().trim();
                 String mail = mail_address.getText().toString().trim();
-                String rank = "Australopithecus afarensis";
 
 
                 if(pwd.equals(cnf_pwd))
                 {
-                   long val = db.addUser(user, pwd, mail, rank);
+                   long val = db.addUser(user, pwd, mail);
                    if(val > 0)
                    {
                        Toast.makeText(RegisterActivity.this,"Registration complete!",Toast.LENGTH_SHORT).show();
-                       Intent intent = new Intent(RegisterActivity.this, UserPanelActivity.class);
+                       Intent intent = new Intent(RegisterActivity.this, SignInActivity.class);
                        startActivity(intent);
                    }
                    else
