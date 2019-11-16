@@ -115,11 +115,19 @@ public class FillTheTextActivity extends AppCompatActivity {
             randomChoice = new Random().nextInt(introTextArray.length);
             choosenSentence = introTextArray[randomChoice];
         }
+        try {
+            choosenSentenceArray = choosenSentence.split(" ");
+            choosenSentenceList = new ArrayList<>(Arrays.asList(choosenSentenceArray));
+            wordToFill = choosenSentenceArray[new Random().nextInt(choosenSentenceArray.length)];
+            wordToFill = wordToFill.toLowerCase();
+        }
+        finally {
+            choosenSentenceArray = choosenSentence.split(" ");
+            choosenSentenceList = new ArrayList<>(Arrays.asList(choosenSentenceArray));
+            wordToFill = choosenSentenceArray[new Random().nextInt(choosenSentenceArray.length)];
+            wordToFill = wordToFill.toLowerCase();
+        }
 
-        choosenSentenceArray = choosenSentence.split(" ");
-        choosenSentenceList = new ArrayList<>(Arrays.asList(choosenSentenceArray));
-        wordToFill = choosenSentenceArray[new Random().nextInt(choosenSentenceArray.length)];
-        wordToFill = wordToFill.toLowerCase();
 
         pointsView = findViewById(R.id.points_fillthetext);
         pointsView.setText("" + player_points);
@@ -180,19 +188,7 @@ public class FillTheTextActivity extends AppCompatActivity {
         });
     }
 
-    private void saveScore() {
-        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
-        Date date = new Date();
-        String dateString = format.format(date);
-        SharedPreferences preferences = this.getSharedPreferences(usernameView.getText().toString(), Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferences.edit();
-        int totalScore = preferences.getInt("totalScore",0);
-        totalScore = totalScore + player_points;
-        editor.putInt("ftt_score",player_points);
-        editor.putInt("total_score",totalScore);
-        editor.putString("date",dateString);
-        editor.commit();
-    }
+
 
     private void checkIfIntroDone()
     {
@@ -288,6 +284,20 @@ public class FillTheTextActivity extends AppCompatActivity {
         TextToFill.setText("" + choosenSentenceList.toString().replace("[","").replace("]","").replace(",", ""));
 
         Log.i("brakujace slowo showat","brakujące słowo showAnotherText: " + wordToFill);
+    }
+
+    private void saveScore() {
+        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+        Date date = new Date();
+        String dateString = format.format(date);
+        SharedPreferences preferences = this.getSharedPreferences(usernameView.getText().toString(), Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        int totalScore = preferences.getInt("totalScore",0);
+        totalScore = totalScore + player_points;
+        editor.putInt("ftt_score",player_points);
+        editor.putInt("total_score",totalScore);
+        editor.putString("date",dateString);
+        editor.commit();
     }
 
 

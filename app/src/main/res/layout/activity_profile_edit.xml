@@ -4,8 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/lightblue"
+    android:background="#FFFF00"
     tools:context=".ProfileEditActivity">
+
+    <EditText
+        android:id="@+id/oldPasswordTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="28dp"
+        android:ems="10"
+        android:hint="@string/oldpassword"
+        android:inputType="textPassword"
+        android:textColor="#C2F1FF"
+        app:layout_constraintBottom_toTopOf="@+id/editProfilePassword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/editProfileNewPassword"
@@ -26,6 +40,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
         android:text="Confirm changes"
+        android:background="@drawable/button_shape"
+        android:textColor="#C2F1FF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
@@ -39,6 +55,7 @@
         android:ems="10"
         android:hint="@string/passwordchange"
         android:inputType="textPassword"
+        android:textColor="#C2F1FF"
         app:layout_constraintBottom_toTopOf="@+id/editProfileNewPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"

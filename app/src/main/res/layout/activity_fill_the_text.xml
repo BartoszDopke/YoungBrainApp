@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFF9E"
     tools:context=".FillTheTextActivity">
 
     <TextView
@@ -23,11 +24,12 @@
         android:id="@+id/timerView2"
         android:layout_width="90dp"
         android:layout_height="43dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
         android:gravity="center"
         android:text="TextView"
+        android:textColor="#C2F1FF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.95"
         app:layout_constraintStart_toStartOf="parent"
@@ -40,6 +42,7 @@
         android:gravity="center"
         android:text=""
         android:textSize="24sp"
+        android:textColor="#C2F1FF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -55,6 +58,7 @@
         android:hint="@string/fill_the_text"
         android:inputType="textPersonName"
         android:text=""
+        android:textColor="#C2F1FF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/TextToFill" />
@@ -65,6 +69,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="@string/confirm_btn"
+        android:background="@drawable/button_shape"
+        android:textColor="#C2F1FF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/EditTextFilling" />
@@ -77,6 +83,7 @@
         android:gravity="center"
         android:text=""
         android:textSize="24sp"
+        android:textColor="#6AA3CC"
         app:layout_constraintBottom_toTopOf="@+id/TextToFill"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"

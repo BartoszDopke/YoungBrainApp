@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:weightSum="4"
+    android:background="#FFFF9E"
     tools:context=".RememberTheSequenceHardActivity">
 
 
@@ -178,6 +179,7 @@
         android:layout_width="match_parent"
         android:layout_height="63dp"
         android:text="Points: 0"
+        android:textColor="#C2F1FF"
         android:textSize="32dp"></TextView>
 
     <TextView
@@ -194,6 +196,7 @@
         android:layout_height="50dp"
         android:layout_weight="1"
         android:gravity="right"
+        android:textColor="#C2F1FF"
         android:textSize="24sp"
         android:text="" />
 

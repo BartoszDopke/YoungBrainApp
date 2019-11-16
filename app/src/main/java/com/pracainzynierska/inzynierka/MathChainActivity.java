@@ -119,26 +119,7 @@ public class MathChainActivity extends AppCompatActivity {
         });
     }
 
-    private void saveScore() {
-        SharedPreferences preferences = this.getSharedPreferences(usernameView.getText().toString(), Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferences.edit();
-        int totalScore = preferences.getInt("totalScore",0);
-        totalScore = totalScore + player_points;
-        editor.putInt("mc_score",player_points);
-        editor.putInt("total_score", totalScore);
-        editor.commit();
-    }
 
-    private void saveIntroScore()
-    {
-            SharedPreferences preferences = this.getSharedPreferences(usernameView.getText().toString(), Context.MODE_PRIVATE);
-            SharedPreferences.Editor editor = preferences.edit();
-            int totalScore = preferences.getInt("totalScore",0);
-            totalScore = totalScore + player_points;
-            editor.putInt("mc_introscore", player_points);
-            editor.putInt("total_score",totalScore);
-            editor.commit();
-    }
 
     private void checkResult() {
         Handler handler = new Handler();
@@ -254,5 +235,26 @@ public class MathChainActivity extends AppCompatActivity {
 
         }
         Log.i("resultComputer", "resultComputer: " + resultComputer);
+    }
+
+    private void saveScore() {
+        SharedPreferences preferences = this.getSharedPreferences(usernameView.getText().toString(), Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        int totalScore = preferences.getInt("totalScore",0);
+        totalScore = totalScore + player_points;
+        editor.putInt("mc_score",player_points);
+        editor.putInt("total_score", totalScore);
+        editor.commit();
+    }
+
+    private void saveIntroScore()
+    {
+        SharedPreferences preferences = this.getSharedPreferences(usernameView.getText().toString(), Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        int totalScore = preferences.getInt("totalScore",0);
+        totalScore = totalScore + player_points;
+        editor.putInt("mc_introscore", player_points);
+        editor.putInt("total_score",totalScore);
+        editor.commit();
     }
 }

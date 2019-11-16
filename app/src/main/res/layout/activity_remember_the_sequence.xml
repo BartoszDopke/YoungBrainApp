@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:weightSum="2"
+    android:background="#FFFF9E"
     tools:context=".RememberTheSequenceEasyActivity">
 
 
@@ -96,6 +97,7 @@
         android:layout_width="match_parent"
         android:layout_height="63dp"
         android:text="Points: 0"
+        android:textColor="#6692B3"
         android:textSize="32dp"></TextView>
 
     <TextView
@@ -113,6 +115,7 @@
         android:layout_weight="1"
         android:gravity="right"
         android:textSize="24sp"
+        android:textColor="#6692B3"
         android:text="" />
 
 </LinearLayout>

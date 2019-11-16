@@ -157,4 +157,6 @@
     <string name="usernamechange">New nickname</string>
     <string name="passwordchange">New password</string>
     <string name="cnf_newpassword">Confirm new password</string>
+    <string name="oldpassword">Old password</string>
+    <string name="im_in">I\'m In!</string>
 </resources>

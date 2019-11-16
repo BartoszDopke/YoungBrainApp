@@ -4,27 +4,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/lightblue"
+    android:background="#FFFF00"
     tools:context=".SettingsActivity">
 
     <Switch
         android:id="@+id/NotificationSwitch"
-        android:layout_width="139dp"
+        android:layout_width="160dp"
         android:layout_height="60dp"
-        android:text="Switch"
+        android:text="Notifications"
+        android:textSize="20sp"
+        android:textColor="#807A26"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.757"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/SoundSwitch" />
 
     <Switch
         android:id="@+id/SoundSwitch"
-        android:layout_width="139dp"
-        android:layout_height="60dp"
+        android:layout_width="160dp"
+        android:layout_height="59dp"
         android:layout_marginTop="128dp"
         android:text="Sound"
+        android:textSize="20sp"
+        android:textColor="#807A26"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.757"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -33,8 +35,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
+        android:background="@drawable/button_shape"
+        android:textColor="#C2F1FF"
         android:text="Change password"
-        app:layout_constraintEnd_toEndOf="@+id/NotificationSwitch"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/NotificationSwitch" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

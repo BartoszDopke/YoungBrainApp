@@ -75,12 +75,26 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             return count > 0;
         }
 
-        public long updateUser(String password)
+        public boolean checkPassword(String password)
+        {
+            String[] columns = {COL_1};
+            SQLiteDatabase db = getReadableDatabase();
+            String selection = COL_4 + "=?";
+            String[] selectionArgs = {password};
+            Cursor cursor = db.query(TABLE_NAME, columns,selection,selectionArgs,null,null,null);
+            int count = cursor.getCount();
+            cursor.close();
+            db.close();
+
+            return count > 0;
+        }
+
+        public long updatePassword(String password)
         {
             SQLiteDatabase db = this.getWritableDatabase();
             ContentValues contentValues = new ContentValues();
             contentValues.put("password", password);
-            long res = db.update("registeruser",contentValues,"_id="+COL_1,null);
+            long res = db.update("registeruser",contentValues,"username="+COL_2,null);
             db.close();
             return res;
         }

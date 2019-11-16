@@ -4,14 +4,63 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/lightblue"
+    android:background="#FFFF00"
     tools:context="com.pracainzynierska.inzynierka.DailyChallengeActivity">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/text_view_countdown"
+        android:layout_width="149dp"
+        android:layout_height="97dp"
+        android:layout_marginTop="60dp"
+        android:gravity="center"
+        android:text=""
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/showdailychallengebutton" />
+
+    <Button
+        android:id="@+id/imInButton"
+        android:layout_width="209dp"
+        android:layout_height="78dp"
+        android:layout_marginTop="164dp"
+        android:background="@drawable/button_shape"
+        android:text="I'm In!"
+        android:textColor="#C2F1FF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/showdailychallengebutton" />
+
+    <Button
+        android:id="@+id/resetButton"
+        android:layout_width="141dp"
+        android:layout_height="69dp"
+        android:layout_marginTop="264dp"
+        android:background="@drawable/button_shape"
+        android:text="Click if you're done!"
+        android:textColor="#C2F1FF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/showdailychallengebutton"
+        android:visibility="invisible"
+        tools:visibility="visible" />
+
+    <TextView
+        android:id="@+id/usernameTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="TextView"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/dailyChallengeTextView"
         android:layout_width="300dp"
         android:layout_height="150dp"
         android:layout_marginTop="80dp"
+        android:fontFamily="@font"
         android:gravity="center"
         android:text="@string/dailychallenge_text"
         android:textSize="32sp"
@@ -24,10 +73,21 @@
         android:id="@+id/showdailychallengebutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="320dp"
+        android:background="@drawable/button_shape"
+        android:textColor="#C2F1FF"
         android:text="@string/showdailychallengebutton"
+        app:layout_constraintBottom_toBottomOf="@+id/dailyChallengeTextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/nicknameTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

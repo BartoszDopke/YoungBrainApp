@@ -5,10 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.AssetManager;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import java.util.Locale;
 
 
 public class UserPanelActivity extends AppCompatActivity {
@@ -32,10 +36,16 @@ public class UserPanelActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_panel);
+        AssetManager am = getApplicationContext().getAssets();
+
+        Typeface standardFont = Typeface.createFromAsset(am, String.format(Locale.ENGLISH, "fonts/%s","Montserrat-Regular.ttf"));
+
         rankText = findViewById(R.id.rank);
+        rankText.setTypeface(standardFont);
 
         String username = getIntent().getStringExtra("username");
         NickNameText =  findViewById(R.id.nickname);
+        NickNameText.setTypeface(standardFont);
         NickNameText.setText(username);
 
         SharedPreferences preferences =  this.getSharedPreferences(NickNameText.getText().toString(), Context.MODE_PRIVATE);
@@ -89,6 +99,7 @@ public class UserPanelActivity extends AppCompatActivity {
 
 
         settings_btn = findViewById(R.id.settings_user_panel_button);
+        settings_btn.setTypeface(standardFont);
         settings_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -97,6 +108,7 @@ public class UserPanelActivity extends AppCompatActivity {
         });
 
         progress_btn = findViewById(R.id.progress_button);
+        progress_btn.setTypeface(standardFont);
         progress_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -105,6 +117,7 @@ public class UserPanelActivity extends AppCompatActivity {
         });
 
         dailychallenge_btn = findViewById(R.id.challenge_button);
+        dailychallenge_btn.setTypeface(standardFont);
         dailychallenge_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -113,6 +126,7 @@ public class UserPanelActivity extends AppCompatActivity {
         });
 
         premium_btn = findViewById(R.id.premium_button);
+        premium_btn.setTypeface(standardFont);
         premium_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -121,15 +135,16 @@ public class UserPanelActivity extends AppCompatActivity {
         });
 
         logout_btn = findViewById(R.id.logout_button);
+        logout_btn.setTypeface(standardFont);
         logout_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 BackToMenu();
-                finish();
             }
         });
 
         training_btn = findViewById(R.id.start_freetraining_button);
+        training_btn.setTypeface(standardFont);
         training_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -180,6 +195,7 @@ public class UserPanelActivity extends AppCompatActivity {
     private void BackToMenu() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
+
     }
 
     private void Premium() {
@@ -189,6 +205,8 @@ public class UserPanelActivity extends AppCompatActivity {
 
     private void DailyChallenge() {
         Intent intent = new Intent(this,DailyChallengeActivity.class);
+        String user = NickNameText.getText().toString();
+        intent.putExtra("username",user);
         startActivity(intent);
     }
 
@@ -201,7 +219,6 @@ public class UserPanelActivity extends AppCompatActivity {
 
     private void Settings() {
         Intent intent = new Intent(this, SettingsActivity.class);
-
         startActivity(intent);
     }
 

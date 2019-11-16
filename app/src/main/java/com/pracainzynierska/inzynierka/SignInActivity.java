@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.AssetManager;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -22,6 +24,7 @@ import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 
 import java.util.Arrays;
+import java.util.Locale;
 
 public class SignInActivity extends AppCompatActivity {
     private TextView register_text;
@@ -38,9 +41,14 @@ public class SignInActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
 
+        AssetManager am = getApplicationContext().getAssets();
+
+        Typeface standardFont = Typeface.createFromAsset(am, String.format(Locale.ENGLISH, "fonts/%s","Montserrat-Regular.ttf"));
+
         final EditText usernameEditText = findViewById(R.id.username);
         final EditText passwordEditText = findViewById(R.id.password);
         final Button loginButton = findViewById(R.id.login);
+        loginButton.setTypeface(standardFont);
         //Button facebookLoginButton = findViewById(R.id.login_fbbutton);
 
         //AccessToken accessToken = AccessToken.getCurrentAccessToken();
@@ -49,6 +57,7 @@ public class SignInActivity extends AppCompatActivity {
         final ProgressBar loadingProgressBar = findViewById(R.id.loading);
         usernameEditText.requestFocus();
         register_text = findViewById(R.id.register_text);
+        register_text.setTypeface(standardFont);
 
         register_text.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,7 +84,6 @@ public class SignInActivity extends AppCompatActivity {
                 Boolean res = db.checkUser(user,pwd);
                 if(res == true)
                 {
-                    SharedPreferences preferences = getSharedPreferences(user,MODE_PRIVATE);
                     Intent intent = new Intent(SignInActivity.this,UserPanelActivity.class);
                     Intent intentPopUp = new Intent(SignInActivity.this, PopUpActivity.class);
                     intent.putExtra("username",user);
@@ -86,7 +94,6 @@ public class SignInActivity extends AppCompatActivity {
                 else
                 {
                     Toast.makeText(SignInActivity.this,"There is a problem with singing in!", Toast.LENGTH_SHORT).show();
-                    usernameEditText.setText("");
                     passwordEditText.setText("");
                     usernameEditText.requestFocus();
                 }

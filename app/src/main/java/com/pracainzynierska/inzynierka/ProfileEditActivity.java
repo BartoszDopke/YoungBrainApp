@@ -11,7 +11,7 @@ import android.widget.Toast;
 
 public class ProfileEditActivity extends AppCompatActivity {
 
-    EditText passwordTextView, newPasswordTextView;
+    EditText passwordTextView, newPasswordTextView, oldPasswordTextView;
     Button confirmButton;
 
     DatabaseHelper db;
@@ -20,36 +20,47 @@ public class ProfileEditActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_edit);
+        db = new DatabaseHelper(this);
 
         passwordTextView = findViewById(R.id.editProfilePassword);
         newPasswordTextView = findViewById(R.id.editProfileNewPassword);
+        oldPasswordTextView = findViewById(R.id.oldPasswordTextView);
 
         confirmButton = findViewById(R.id.editProfileConfirmButton);
         confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String oldPassword = oldPasswordTextView.getText().toString().trim();
+
                 String password = passwordTextView.getText().toString().trim();
                 String cnfPassword = newPasswordTextView.getText().toString().trim();
 
-                if(cnfPassword.equals(password))
-                {
-                    long val = db.updateUser(password);
-                    if(val > 0)
-                    {
-                        Toast.makeText(ProfileEditActivity.this,"Editing complete!",Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(ProfileEditActivity.this, SignInActivity.class);
-                        startActivity(intent);
-                        finish();
-                    }
-                    else
-                    {
-                        Toast.makeText(ProfileEditActivity.this,"Something went wrong, try again!",Toast.LENGTH_SHORT).show();
-                    }
-                }
-                    Toast.makeText(ProfileEditActivity.this,"Passwords are not matching!",Toast.LENGTH_SHORT).show();
+                Boolean res = db.checkPassword(oldPassword);
+                if (res == true) {
 
+                    if (cnfPassword.equals(password)) {
+                        long val = db.updatePassword(password);
+                        if (val > 0) {
+                            Toast.makeText(ProfileEditActivity.this, "Password has been changed!", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(ProfileEditActivity.this, SignInActivity.class);
+                            startActivity(intent);
+                            finish();
+                        } else {
+                            Toast.makeText(ProfileEditActivity.this, "Something went wrong, try again!", Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        Toast.makeText(ProfileEditActivity.this, "Passwords are not matching!", Toast.LENGTH_SHORT).show();
+                        passwordTextView.setText("");
+                        newPasswordTextView.setText("");
+                    }
+                } else
+                {
+                    Toast.makeText(ProfileEditActivity.this, "Wrong old password!", Toast.LENGTH_SHORT).show();
+                    oldPasswordTextView.setText("");
+                    passwordTextView.setText("");
+                    newPasswordTextView.setText("");
+                }
             }
         });
-
     }
 }
