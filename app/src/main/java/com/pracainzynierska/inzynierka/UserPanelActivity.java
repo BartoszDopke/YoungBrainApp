@@ -1,15 +1,20 @@
 package com.pracainzynierska.inzynierka;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.drawable.RoundedBitmapDrawable;
+import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.AssetManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.Locale;
@@ -56,41 +61,78 @@ public class UserPanelActivity extends AppCompatActivity {
         isDoneText.setText("" + isDoneString);
 
         int totalScore = preferences.getInt("total_score",0);
-
+        ImageView imageView = findViewById(R.id.avatar);
         if(totalScore <= 2000)
         {
+            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.rank1);
+            RoundedBitmapDrawable roundedBitmapDrawable = RoundedBitmapDrawableFactory.create(getResources(), bitmap);
+            roundedBitmapDrawable.setCircular(true);
+            imageView.setImageDrawable(roundedBitmapDrawable);
             rankText.setText(rankArray[0]);
+
         }
         else if (totalScore > 2000 && totalScore <= 5000)
         {
+            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.rank2);
+            RoundedBitmapDrawable roundedBitmapDrawable = RoundedBitmapDrawableFactory.create(getResources(), bitmap);
+            roundedBitmapDrawable.setCircular(true);
+            imageView.setImageDrawable(roundedBitmapDrawable);
             rankText.setText(rankArray[1]);
         }
         else if (totalScore > 5000 && totalScore <= 10000)
         {
+            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.rank2);
+            RoundedBitmapDrawable roundedBitmapDrawable = RoundedBitmapDrawableFactory.create(getResources(), bitmap);
+            roundedBitmapDrawable.setCircular(true);
+            imageView.setImageDrawable(roundedBitmapDrawable);
             rankText.setText(rankArray[2]);
         }
         else if (totalScore > 10000 && totalScore <= 20000)
         {
+            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.rank3);
+            RoundedBitmapDrawable roundedBitmapDrawable = RoundedBitmapDrawableFactory.create(getResources(), bitmap);
+            roundedBitmapDrawable.setCircular(true);
+            imageView.setImageDrawable(roundedBitmapDrawable);
             rankText.setText(rankArray[3]);
         }
         else if (totalScore > 20000 && totalScore <= 40000)
         {
+            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.rank3);
+            RoundedBitmapDrawable roundedBitmapDrawable = RoundedBitmapDrawableFactory.create(getResources(), bitmap);
+            roundedBitmapDrawable.setCircular(true);
+            imageView.setImageDrawable(roundedBitmapDrawable);
             rankText.setText(rankArray[4]);
         }
         else if (totalScore > 40000 && totalScore <= 60000)
         {
+            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.rank4);
+            RoundedBitmapDrawable roundedBitmapDrawable = RoundedBitmapDrawableFactory.create(getResources(), bitmap);
+            roundedBitmapDrawable.setCircular(true);
+            imageView.setImageDrawable(roundedBitmapDrawable);
             rankText.setText(rankArray[5]);
         }
         else if (totalScore > 60000 && totalScore <= 80000)
         {
+            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.rank5);
+            RoundedBitmapDrawable roundedBitmapDrawable = RoundedBitmapDrawableFactory.create(getResources(), bitmap);
+            roundedBitmapDrawable.setCircular(true);
+            imageView.setImageDrawable(roundedBitmapDrawable);
             rankText.setText(rankArray[6]);
         }
         else if (totalScore > 80000 && totalScore <= 100000)
         {
+            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.rank5);
+            RoundedBitmapDrawable roundedBitmapDrawable = RoundedBitmapDrawableFactory.create(getResources(), bitmap);
+            roundedBitmapDrawable.setCircular(true);
+            imageView.setImageDrawable(roundedBitmapDrawable);
             rankText.setText(rankArray[7]);
         }
         else if (totalScore > 100000)
         {
+            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.rank6);
+            RoundedBitmapDrawable roundedBitmapDrawable = RoundedBitmapDrawableFactory.create(getResources(), bitmap);
+            roundedBitmapDrawable.setCircular(true);
+            imageView.setImageDrawable(roundedBitmapDrawable);
             rankText.setText(rankArray[8]);
         }
 

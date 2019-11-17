@@ -7,19 +7,16 @@
     android:layout_height="match_parent"
     tools:context="com.pracainzynierska.inzynierka.UserPanelActivity">
 
-
     <ImageView
         android:id="@+id/avatar"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
         android:contentDescription="@string/avatar_description"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/kulfon"
-        tools:srcCompat="@drawable/kulfon" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/nickname"
@@ -28,10 +25,12 @@
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:text="@string/nickname"
-        android:textSize="20sp"
         android:textColor="#807A26"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/avatar"
-        app:layout_constraintStart_toEndOf="@+id/avatar" />
+        app:layout_constraintStart_toEndOf="@+id/avatar"
+        app:layout_constraintTop_toTopOf="@+id/avatar"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/rank"
@@ -41,7 +40,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginTop="8dp"
         android:text="Rank"
-        android:textSize="20sp"
+        android:textSize="16sp"
         android:textColor="#807A26"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/avatar" />

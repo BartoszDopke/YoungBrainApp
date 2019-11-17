@@ -13,50 +13,50 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".SettingsActivity"></activity>
+        <activity android:name=".SettingsActivity" />
         <activity
             android:name=".ProfileEditActivity"
             android:parentActivityName=".SettingsActivity" />
         <activity
             android:name=".RememberTheSequenceHardActivity"
-            android:parentActivityName=".UserPanelActivity"/>
+            android:parentActivityName=".UserPanelActivity" />
         <activity
             android:name=".RememberTheSequenceMediumActivity"
-            android:parentActivityName=".UserPanelActivity"/>
+            android:parentActivityName=".UserPanelActivity" />
         <activity
             android:name=".DailyChallengePopUpActivity"
             android:parentActivityName=".DailyChallengeActivity"
             android:theme="@style/AppTheme.CustomTheme" />
         <activity
             android:name=".IntroductionActivity"
-            android:parentActivityName=".UserPanelActivity"/>
+            android:parentActivityName=".UserPanelActivity" />
         <activity
             android:name=".FillTheTextActivity"
-            android:parentActivityName=".UserPanelActivity"/>
+            android:parentActivityName=".UserPanelActivity" />
         <activity
             android:name=".MathChainActivity"
-            android:parentActivityName=".UserPanelActivity"/>
+            android:parentActivityName=".UserPanelActivity" />
         <activity
             android:name=".GeomemotryActivity"
-            android:parentActivityName=".UserPanelActivity"/>
+            android:parentActivityName=".UserPanelActivity" />
         <activity
             android:name=".RememberTheSequenceEasyActivity"
             android:parentActivityName=".UserPanelActivity" />
         <activity
             android:name=".RegisterActivity"
-            android:parentActivityName=".MainActivity"/>
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".PremiumActivity"
             android:parentActivityName=".UserPanelActivity" />
         <activity
             android:name=".DailyChallengeActivity"
-            android:parentActivityName=".UserPanelActivity"/>
+            android:parentActivityName=".UserPanelActivity" />
         <activity
             android:name=".MyProgressActivity"
-            android:parentActivityName=".UserPanelActivity"/>
+            android:parentActivityName=".UserPanelActivity" />
         <activity
             android:name=".UserPanelActivity"
-            android:parentActivityName=".UserPanelActivity"/>
+            android:parentActivityName=".UserPanelActivity" />
         <activity
             android:name=".SignInActivity"
             android:parentActivityName=".MainActivity">

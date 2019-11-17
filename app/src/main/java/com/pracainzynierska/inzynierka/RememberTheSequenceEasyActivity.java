@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 
@@ -26,6 +27,8 @@ public class RememberTheSequenceEasyActivity extends AppCompatActivity {
     //array for the images
     Integer[] cardArray = {101,102,103,104,201,202,203,204};
     int image101, image102,image103,image104,image105,image106,image107,image108;
+
+
 
     int firstCard,secondCard;
     int clickedFirst, clickedSecond;
@@ -382,20 +385,45 @@ public class RememberTheSequenceEasyActivity extends AppCompatActivity {
         }
     }
 
-    private void saveIntroScore() {
-        SharedPreferences preferences = this.getSharedPreferences(usernameView.getText().toString(), Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferences.edit();
-        int totalScore = preferences.getInt("totalScore",0);
-        totalScore = totalScore + player_points;
-        editor.putInt("rts_introscore", player_points);
-        editor.putInt("total_score",totalScore);
-        editor.commit();
-    }
-
     private void saveScore() {
         SharedPreferences preferences = this.getSharedPreferences(usernameView.getText().toString(), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
-        editor.putInt("rts_score",player_points);
+        int rts_score1 = preferences.getInt("rts_score",0);
+        int rts_score2 = preferences.getInt("rts_score",0);
+        int rts_score3 = preferences.getInt("rts_score",0);
+        int rts_score4 = preferences.getInt("rts_score",0);
+        int rts_score5 = preferences.getInt("rts_score",0);
+        int rts_score6 = preferences.getInt("rts_score",0);
+        int rts_score7 = preferences.getInt("rts_score",0);
+
+        if(rts_score1 <0)
+        {
+            editor.putInt("rts_score",player_points);
+        }
+        else if(rts_score2 == 0 && rts_score1 > 0)
+        {
+            editor.putInt("rts_score",player_points);
+        }
+        else if(rts_score3 == 0 && rts_score2 > 0)
+        {
+            editor.putInt("rts_score",player_points);
+        }
+        else if(rts_score4 == 0 && rts_score3 > 0)
+        {
+            editor.putInt("rts_score",player_points);
+        }
+        else if(rts_score5 == 0 && rts_score4 > 0)
+        {
+            editor.putInt("rts_score",player_points);
+        }
+        else if(rts_score6 == 0 && rts_score5 > 0)
+        {
+            editor.putInt("rts_score",player_points);
+        }
+        else if(rts_score7 == 0 && rts_score6 > 0)
+        {
+            editor.putInt("rts_score",player_points);
+        }
         editor.commit();
     }
 

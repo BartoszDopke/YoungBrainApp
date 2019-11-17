@@ -13,6 +13,8 @@
     <string name="login_failed">"Login failed"</string>
     <string name="title_activity_settings">Settings</string>
     <string name="or">or</string>
+    <string name="channel_name">Notification Channel</string>
+    <string name="channel_description">Time to make your brain healthier!</string>
 
     <!-- Facebook ID -->
     <string name="facebook_app_id">399700197643671</string>
