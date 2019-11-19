@@ -27,8 +27,6 @@ public class DailyChallengePopUpActivity extends AppCompatActivity {
 
     public static String PACKAGE_NAME;
 
-
-
     Button exit_btn, imInButton;
     ImageButton play_btn, stop_btn;
     VideoView dailyChallengeVideoView;
@@ -65,31 +63,32 @@ public class DailyChallengePopUpActivity extends AppCompatActivity {
         int height = dm.heightPixels;
         getWindow().setLayout((int) (width * .8), (int) (height * .8));
 
-
+        DailyChallengeActivity dailyChallengeActivity = new DailyChallengeActivity();
 
 
         dailyChallengeVideoView = findViewById(R.id.dailyChallengeVideoView);
 
         final int randomVideo = new Random().nextInt(videos.length);
         String videoString = "";
-
         if (randomVideo == 0) {
-            //pushup
+            //30 push-ups in 5 minutes
             videoString = dailyChallengeTextArrray[0];
+
+
         } else if (randomVideo == 1) {
-            //running
+            //running for 40 minutes
             videoString = dailyChallengeTextArrray[1];
         } else if (randomVideo == 2) {
-            //bike
+            //bike for 60 minutes
             videoString = dailyChallengeTextArrray[2];
         } else if (randomVideo == 3) {
-            //juggling
+            //juggling for 10 minutes
             videoString = dailyChallengeTextArrray[3];
         } else if (randomVideo == 4) {
-            //stretching
+            //stretching for 30 minutes
             videoString = dailyChallengeTextArrray[4];
         } else if (randomVideo == 5) {
-            //walking
+            //walking for 30 minutes
             videoString = dailyChallengeTextArrray[5];
         }
 

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#CCBE00"
+    android:background="#C3DDE6"
     tools:context=".DailyChallengePopUpActivity">
 
     <Button
@@ -17,7 +17,7 @@
         android:padding="0dp"
         android:text="@string/exit_text"
         android:background="@drawable/button_shape"
-        android:textColor="#C2F1FF"
+        android:textColor="#D9F6FF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -39,6 +39,7 @@
         android:gravity="center"
         android:text=""
         android:textSize="18sp"
+        android:textColor="#33300D"
         app:layout_constraintBottom_toTopOf="@+id/dailyChallengeVideoView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"

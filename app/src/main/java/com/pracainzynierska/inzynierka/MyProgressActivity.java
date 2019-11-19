@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.content.res.AssetManager;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import com.pracainzynierska.inzynierka.R;
@@ -30,6 +31,7 @@ public class MyProgressActivity extends AppCompatActivity {
         setContentView(R.layout.activity_my_progress);
         String user = getIntent().getStringExtra("username");
         usernameView = findViewById(R.id.username_myprogress);
+        usernameView.setVisibility(View.INVISIBLE);
         usernameView.setText("" + user);
 
         //region findViewById region
@@ -37,7 +39,7 @@ public class MyProgressActivity extends AppCompatActivity {
         mcPointsView1 = findViewById(R.id.mc_score_1);
         gPointsView1 = findViewById(R.id.g_score_1);
         fttPointsView1 = findViewById(R.id.ftt_score_1);
-        dateView1 = findViewById(R.id.date);
+        dateView1 = findViewById(R.id.date1);
 
         rtsPointsView2 = findViewById(R.id.rts_score_2);
         mcPointsView2 = findViewById(R.id.mc_score_2);
@@ -45,11 +47,6 @@ public class MyProgressActivity extends AppCompatActivity {
         fttPointsView2 = findViewById(R.id.ftt_score_2);
         dateView2 = findViewById(R.id.date2);
 
-        rtsPointsView2 = findViewById(R.id.rts_score_2);
-        mcPointsView2 = findViewById(R.id.mc_score_2);
-        gPointsView2 = findViewById(R.id.g_score_2);
-        fttPointsView2 = findViewById(R.id.ftt_score_2);
-        dateView2 = findViewById(R.id.date2);
 
         rtsPointsView3 = findViewById(R.id.rts_score_3);
         mcPointsView3 = findViewById(R.id.mc_score_3);
@@ -92,9 +89,13 @@ public class MyProgressActivity extends AppCompatActivity {
         int mc_score = preferences.getInt("mc_score",0);
         int g_score = preferences.getInt("g_score",0);
         int ftt_score = preferences.getInt("ftt_score",0);
-        int dailyChallengeScore = preferences.getInt("dailychallenge_score",0);
-        int total_score = rts_score + mc_score + g_score + ftt_score + dailyChallengeScore;
         String rts_date = preferences.getString("date","-");
+
+        SharedPreferences prefs = getSharedPreferences("dailychallenge2_preferences",MODE_PRIVATE);
+        int dailyChallengeScore = prefs.getInt("dailychallenge_score",0);
+
+        int total_score = rts_score + mc_score + g_score + ftt_score + dailyChallengeScore;
+
 
         AssetManager am = getApplicationContext().getAssets();
         Typeface logoFont = Typeface.createFromAsset(am, String.format(Locale.ENGLISH, "fonts/%s","FjallaOne-Regular.ttf"));
@@ -119,6 +120,7 @@ public class MyProgressActivity extends AppCompatActivity {
         dateView1.setTypeface(myProgressFont);
         dateView1.setText("" + rts_date);
 
+        /*
         rtsPointsView2.setTypeface(myProgressFont);
         rtsPointsView2.setText("" + rts_score);
 
@@ -208,7 +210,7 @@ public class MyProgressActivity extends AppCompatActivity {
 
         dateView7.setTypeface(myProgressFont);
         dateView7.setText("" + rts_date);
-
+        */
         totalScoreView.setTypeface(logoFont);
         totalScoreView.setText("Total score: " + total_score);
 

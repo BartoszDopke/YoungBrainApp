@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -36,7 +38,6 @@ public class GeomemotryActivity extends AppCompatActivity {
     int player_points = 0;
     int imgPrev, imgActual, imgSecond;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +56,8 @@ public class GeomemotryActivity extends AppCompatActivity {
 
         points.setText("" + player_points);
         points.setTextColor(Color.RED);
+
+        final Animation animSlide = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide);
 
         SharedPreferences preferences = this.getSharedPreferences(usernameView.getText().toString(),Context.MODE_PRIVATE);
         final String isDoneString =  preferences.getString("done","-");
@@ -144,23 +147,27 @@ public class GeomemotryActivity extends AppCompatActivity {
                     //TODO: easy
                     imgSecond = new Random().nextInt(imagesEasy.length);
                     shape.setImageResource(imagesEasy[imgSecond]);
+                    shape.startAnimation(animSlide);
                 }
                 else if(introScore>800 && introScore<=1200)
                 {
                     //TODO: medium
                     imgSecond = new Random().nextInt(imagesMedium.length);
                     shape.setImageResource(imagesMedium[imgSecond]);
+                    shape.startAnimation(animSlide);
                 }
                 else if(introScore>1200)
                 {
                     //TODO:hard
                     imgSecond = new Random().nextInt(imagesHard.length);
                     shape.setImageResource(imagesHard[imgSecond]);
+                    shape.startAnimation(animSlide);
                 }
                 else
                 {
                     imgSecond = new Random().nextInt(imagesMedium.length);
                     shape.setImageResource(imagesMedium[imgSecond]);
+                    shape.startAnimation(animSlide);
                 }
                 imgActual = imgSecond;
             }
@@ -199,10 +206,12 @@ public class GeomemotryActivity extends AppCompatActivity {
                     points.setText("" + player_points);
                 }
                 imgPrev = imgActual;
+                shape.startAnimation(animSlide);
                 if(introScore > 0 && introScore < 800)
                 {
                     //TODO: easy
                     imgActual = getRandomImageId(shapesArrayEasy);
+
                 }
                 else if(introScore>800 && introScore<=1200)
                 {
@@ -217,6 +226,7 @@ public class GeomemotryActivity extends AppCompatActivity {
                 else
                 {
                     imgActual = getRandomImageId(shapesArrayMedium);
+
                 }
 
 
@@ -276,6 +286,7 @@ public class GeomemotryActivity extends AppCompatActivity {
                     points.setText("" + player_points);
                 }
                 imgPrev = imgActual;
+                shape.startAnimation(animSlide);
                 if(introScore > 0 && introScore < 800)
                 {
                     //TODO: easy
@@ -336,6 +347,7 @@ public class GeomemotryActivity extends AppCompatActivity {
        } else if (shapesArrayEasy[choice]==5) {
            iv.setImageResource(imagesEasy[5]);
        }
+
    }
 
     private void showShapeMedium(ImageView iv, int choice) {

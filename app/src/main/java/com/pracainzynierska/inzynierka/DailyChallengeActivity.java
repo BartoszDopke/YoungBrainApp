@@ -24,17 +24,17 @@ import java.util.concurrent.TimeUnit;
 
 public class DailyChallengeActivity extends AppCompatActivity {
 
-    private static final long START_TIME_IN_MILLIS = 86400000;
-    private TextView mTextViewCountDown, NickNameText, frontText;
-    private Button mButtonStartPause;
-    private Button mButtonReset, showDailyChallengeButton;
+    public static final long START_TIME_IN_MILLIS=86400000;
+    public TextView mTextViewCountDown, NickNameText, frontText;
+    public Button mButtonStartPause;
+    public Button mButtonReset, showDailyChallengeButton;
 
-    private CountDownTimer mCountDownTimer;
+    public CountDownTimer mCountDownTimer;
 
-    private boolean mTimerRunning;
+    public boolean mTimerRunning;
 
-    private long mTimeLeftInMillis;
-    private long mEndTime;
+    public long mTimeLeftInMillis;
+    public long mEndTime;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +44,8 @@ public class DailyChallengeActivity extends AppCompatActivity {
         NickNameText =  findViewById(R.id.usernameTextView);
         NickNameText.setVisibility(View.INVISIBLE);
         NickNameText.setText(username);
+
+
 
         AssetManager am = getApplicationContext().getAssets();
         Typeface logoFont = Typeface.createFromAsset(am, String.format(Locale.ENGLISH, "fonts/%s","FjallaOne-Regular.ttf"));
@@ -158,7 +160,9 @@ public class DailyChallengeActivity extends AppCompatActivity {
 
         SharedPreferences prefs = getSharedPreferences("dailychallenge2_preferences", MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
-
+        int dailyChallengeScore = prefs.getInt("dailychallenge_score",0);
+        dailyChallengeScore = dailyChallengeScore + 100;
+        editor.putInt("dailychallenge_score",dailyChallengeScore);
         editor.putLong("millisLeft", mTimeLeftInMillis);
         editor.putBoolean("timerRunning", mTimerRunning);
         editor.putLong("endTime", mEndTime);
@@ -196,4 +200,5 @@ public class DailyChallengeActivity extends AppCompatActivity {
             }
         }
     }
+
 }

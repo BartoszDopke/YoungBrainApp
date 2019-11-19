@@ -112,7 +112,7 @@ public class MathChainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 firstNumberView.setVisibility(View.INVISIBLE);
-                resultUser =  Integer.parseInt(resultUserEdit.getText().toString());
+                resultUser =  Integer.parseInt(resultUserEdit.getText().toString().trim());
                 checkResult();
                 resultUserEdit.setText("");
             }
@@ -161,6 +161,7 @@ public class MathChainActivity extends AppCompatActivity {
             //TODO: easy
             Log.i("diff mathchain","poziom trudności MathChain Easy");
             operationSignString = "+-";
+            cuttedOperationSignString = "+-";
             int[] numberForOperationArrayEasy = {1,2,3,4,5};
             numberForComputing = new Random().nextInt(numberForOperationArrayEasy.length)+1;
         }
@@ -169,7 +170,8 @@ public class MathChainActivity extends AppCompatActivity {
             //TODO:
             Log.i("diff mathchain","poziom trudności MathChain Medium");
             operationSignString = "+-*/";
-            int[] numberForOperationArrayMedium = {-1,1,2,3,4,5,6};
+            cuttedOperationSignString = "+-";
+            int[] numberForOperationArrayMedium = {1,2,3,4,5,6};
             numberForComputing = new Random().nextInt(numberForOperationArrayMedium.length)+1;
 
         }
@@ -178,24 +180,27 @@ public class MathChainActivity extends AppCompatActivity {
             //TODO:hard
             Log.i("diff mathchain","poziom trudności MathChain Hard");
             operationSignString = "+-*/%";
-            int[] numberForOperationArrayHard = {-2,-1,1,2,3,4,5,6,7};
+            cuttedOperationSignString = "+-";
+            int[] numberForOperationArrayHard = {1,2,3,4,5,6,7};
             numberForComputing = new Random().nextInt(numberForOperationArrayHard.length)+1;
         }
         else
         {
             Log.i("diff mathchain","poziom trudności MathChain Intro");
             operationSignString = "+-*/";
-            int[] numberForOperationArrayMedium = {-1,1,2,3,4,5,6};
+            cuttedOperationSignString = "+-";
+            int[] numberForOperationArrayMedium = {1,2,3,4,5};
             numberForComputing = new Random().nextInt(numberForOperationArrayMedium.length)+1;
         }
         Random r = new Random();
-        if((resultComputer == Math.floor(resultComputer)) && !Float.isInfinite(resultComputer))
+
+        if(resultComputer % 2 == 0)
         {
-            operationSign = operationSignString.charAt(r.nextInt(operationSignString.length()));
+            operationSign = cuttedOperationSignString.charAt(r.nextInt(cuttedOperationSignString.length()));
         }
         else
         {
-            operationSign = cuttedOperationSignString.charAt(r.nextInt(cuttedOperationSignString.length()));
+            operationSign = operationSignString.charAt(r.nextInt(operationSignString.length()));
         }
 
         Log.i("number for computing", "numberForComputing in sAO: " + numberForComputing);
@@ -203,6 +208,7 @@ public class MathChainActivity extends AppCompatActivity {
         if(numberForComputing <= 0)
         {
             operationSign = '+';
+            numberForComputing = 8;
         }
         if(resultComputer %2 != 0)
         {

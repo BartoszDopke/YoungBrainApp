@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFF00"
+    android:background="#D9F6FF"
     tools:context=".SettingsActivity">
 
     <Switch
@@ -13,7 +13,7 @@
         android:layout_height="60dp"
         android:text="Notifications"
         android:textSize="20sp"
-        android:textColor="#807A26"
+        android:textColor="#33300D"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/SoundSwitch" />
@@ -25,7 +25,7 @@
         android:layout_marginTop="128dp"
         android:text="Sound"
         android:textSize="20sp"
-        android:textColor="#807A26"
+        android:textColor="#33300D"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -36,7 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:background="@drawable/button_shape"
-        android:textColor="#C2F1FF"
+        android:textColor="#D9F6FF"
         android:text="Change password"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

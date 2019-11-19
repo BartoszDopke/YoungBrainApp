@@ -43,7 +43,6 @@ public class PopUpActivity extends AppCompatActivity {
 
         randomFactNumber = new Random().nextInt(randomHintArray.length);
         randomFact = randomHintArray[randomFactNumber];
-        randomFactView.setTextColor(Color.WHITE);
         randomFactView.setText("" + randomFact);
 
 
@@ -53,7 +52,7 @@ public class PopUpActivity extends AppCompatActivity {
         int width = dm.widthPixels;
         int height = dm.heightPixels;
 
-        getWindow().setLayout((int)(width*.7), (int)(height*.3));
+        getWindow().setLayout((int)(width*.9), (int)(height*.5));
 
         exit_btn = findViewById(R.id.exit_btn);
 

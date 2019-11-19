@@ -180,7 +180,7 @@ public class FillTheTextActivity extends AppCompatActivity {
         confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                userResult = EditTextFilling.getText().toString().toLowerCase();
+                userResult = EditTextFilling.getText().toString().toLowerCase().trim();
                 //Log.i("userResult","userResult: " + userResult);
                 checkResult();
                 EditTextFilling.setText("");

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:weightSum="3"
-    android:background="#FFFF9E"
+    android:background="#CCC899"
     tools:context=".RememberTheSequenceMediumActivity">
 
 
@@ -137,7 +137,8 @@
         android:layout_width="match_parent"
         android:layout_height="63dp"
         android:text="Points: 0"
-        android:textColor="#C2F1FF"
+        android:gravity="center"
+        android:textColor="#0088B3"
         android:textSize="32dp"></TextView>
 
     <TextView
@@ -155,7 +156,7 @@
         android:layout_weight="1"
         android:gravity="right"
         android:textSize="24sp"
-        android:textColor="#C2F1FF"
+        android:textColor="#0088B3"
         android:text="" />
 
 </LinearLayout>

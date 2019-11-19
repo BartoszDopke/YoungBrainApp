@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.view.View;
 import android.widget.ImageView;
@@ -20,7 +21,7 @@ import java.util.Collections;
 public class RememberTheSequenceHardActivity extends AppCompatActivity {
 
     TextView points, usernameView, timerView;
-
+    CountDownTimer countDown;
     ImageView iv_11,iv_12,iv_13,iv_14,iv_15,iv_16,iv_17,iv_18,iv_19,iv_20,iv_21,iv_22,iv_23,iv_24,iv_25,iv_26;
 
     //array for the images
@@ -33,25 +34,6 @@ public class RememberTheSequenceHardActivity extends AppCompatActivity {
     int cardNumber = 1;
     int player_points = 0;
 
-    long startTime = 0;
-
-    //runs without a timer by reposting this handler at the end of the runnable
-    Handler timerHandler = new Handler();
-    Runnable timerRunnable = new Runnable() {
-
-        @Override
-        public void run() {
-            long millis = System.currentTimeMillis() - startTime;
-            int seconds = (int) (millis / 1000);
-            int minutes = seconds / 60;
-            seconds = seconds % 60;
-
-            timerView.setText(String.format("%d:%02d", minutes, seconds));
-
-            timerHandler.postDelayed(this, 1000);
-        }
-    };
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,8 +45,6 @@ public class RememberTheSequenceHardActivity extends AppCompatActivity {
         usernameView.setText("" + username);
 
         timerView = findViewById(R.id.rtsTimerView);
-        startTime = System.currentTimeMillis();
-        timerHandler.postDelayed(timerRunnable, 0);
 
         SharedPreferences preferences = this.getSharedPreferences(usernameView.getText().toString(), Context.MODE_PRIVATE);
         final String isDoneString =  preferences.getString("done","-");
@@ -231,6 +211,45 @@ public class RememberTheSequenceHardActivity extends AppCompatActivity {
                 doStuff(iv_26,theCard);
             }
         });
+
+        countDown =  new CountDownTimer(60000,1000)
+        {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                timerView.setText(""+ millisUntilFinished/1000);
+            }
+
+            @Override
+            public void onFinish() {
+                if(isDoneString == "done")
+                {
+                    cancel();
+                    saveScore();
+                }
+
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(RememberTheSequenceHardActivity.this);
+                alertDialogBuilder
+                        .setMessage("Congratulations! You did the first exercise! Your points: " + player_points)
+                        .setCancelable(false)
+                        .setPositiveButton("NEXT EXERCISE", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent intent = new Intent(getApplicationContext(), MathChainActivity.class);
+                                intent.putExtra("username",usernameView.getText().toString());
+                                startActivity(intent);
+                                finish();
+                            }
+                        })
+                        .setNegativeButton("EXIT", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                finish();
+                            }
+                        });
+                AlertDialog alertDialog = alertDialogBuilder.create();
+                alertDialog.show();
+            }
+        }.start();
 
 
 
@@ -558,7 +577,7 @@ public class RememberTheSequenceHardActivity extends AppCompatActivity {
                 iv_25.getVisibility()== View.INVISIBLE &&
                 iv_26.getVisibility()== View.INVISIBLE)
         {
-            timerHandler.removeCallbacks(timerRunnable);
+            countDown.cancel();
             saveScore();
             //saveIntroScore();
 

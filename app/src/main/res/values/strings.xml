@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Inzynierka</string>
+    <string name="app_name">Lucid Brain</string>
     <string name="login_button">logged_in</string>
     <string name="signup_button">Sign Up</string>
     <string name="title_activity_login">Sign in</string>

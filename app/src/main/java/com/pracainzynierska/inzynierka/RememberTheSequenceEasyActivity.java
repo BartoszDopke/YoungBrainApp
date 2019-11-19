@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
@@ -23,7 +24,7 @@ public class RememberTheSequenceEasyActivity extends AppCompatActivity {
     TextView points, usernameView, timerView;
 
     ImageView iv_11,iv_12,iv_13,iv_14,iv_15,iv_16,iv_17,iv_18;
-
+    CountDownTimer countDown;
     //array for the images
     Integer[] cardArray = {101,102,103,104,201,202,203,204};
     int image101, image102,image103,image104,image105,image106,image107,image108;
@@ -35,24 +36,6 @@ public class RememberTheSequenceEasyActivity extends AppCompatActivity {
     int cardNumber = 1;
     int player_points = 0;
 
-    long startTime = 0;
-
-    //runs without a timer by reposting this handler at the end of the runnable
-    Handler timerHandler = new Handler();
-    Runnable timerRunnable = new Runnable() {
-
-        @Override
-        public void run() {
-            long millis = System.currentTimeMillis() - startTime;
-            int seconds = (int) (millis / 1000);
-            int minutes = seconds / 60;
-            seconds = seconds % 60;
-
-            timerView.setText(String.format("%d:%02d", minutes, seconds));
-
-            timerHandler.postDelayed(this, 1000);
-        }
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,9 +48,6 @@ public class RememberTheSequenceEasyActivity extends AppCompatActivity {
         usernameView.setText("" + username);
 
         timerView = findViewById(R.id.rtsTimerView);
-        startTime = System.currentTimeMillis();
-        timerHandler.postDelayed(timerRunnable, 0);
-
         SharedPreferences preferences = this.getSharedPreferences(usernameView.getText().toString(),Context.MODE_PRIVATE);
         final String isDoneString =  preferences.getString("done","-");
 
@@ -161,15 +141,44 @@ public class RememberTheSequenceEasyActivity extends AppCompatActivity {
             }
         });
 
-        Log.i("card","card 101 image: "+ iv_11);
-        Log.i("card","card 101 image: "+ iv_12);
-        Log.i("card","card 101 image: "+ iv_13);
-        Log.i("card","card 101 image: "+ iv_14);
-        Log.i("card","card 101 image: "+ iv_15);
-        Log.i("card","card 101 image: "+ iv_16);
-        Log.i("card","card 101 image: "+ iv_17);
-        Log.i("card","card 101 image: "+ iv_18);
+         countDown =  new CountDownTimer(60000,1000)
+        {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                timerView.setText(""+ millisUntilFinished/1000);
+            }
 
+            @Override
+            public void onFinish() {
+                if(isDoneString == "done")
+                {
+                    cancel();
+                    saveScore();
+                }
+
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(RememberTheSequenceEasyActivity.this);
+                alertDialogBuilder
+                        .setMessage("Congratulations! You did the first exercise! Your points: " + player_points)
+                        .setCancelable(false)
+                        .setPositiveButton("NEXT EXERCISE", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent intent = new Intent(getApplicationContext(), MathChainActivity.class);
+                                intent.putExtra("username",usernameView.getText().toString());
+                                startActivity(intent);
+                                finish();
+                            }
+                        })
+                        .setNegativeButton("EXIT", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                finish();
+                            }
+                        });
+                AlertDialog alertDialog = alertDialogBuilder.create();
+                alertDialog.show();
+            }
+        }.start();
     }
 
     private void doStuff(ImageView iv, int card) {
@@ -345,6 +354,8 @@ public class RememberTheSequenceEasyActivity extends AppCompatActivity {
         checkEnd();
     }
 
+
+
     private void checkEnd()
     {
         if(iv_11.getVisibility()== View.INVISIBLE &&
@@ -357,7 +368,7 @@ public class RememberTheSequenceEasyActivity extends AppCompatActivity {
                 iv_18.getVisibility()== View.INVISIBLE)
 
         {
-            timerHandler.removeCallbacks(timerRunnable);
+                countDown.cancel();
                 saveScore();
                 //saveIntroScore();
 
