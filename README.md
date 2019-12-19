@@ -1,2 +1,2 @@
-# praca_inzynierska
- Repozytorium dla mojej pracy inżynierskiej - aplikacja mobilna napisana w Android Studio za pomocą języka Java
+# Lucid Brain (demo name of the app)
+ BSc Thesis' repositorium - mobile app created in Android Studio, written in Java language
