@@ -29,41 +29,41 @@ public class FillTheTextActivity extends AppCompatActivity {
     EditText EditTextFilling;
     Button confirmButton;
     String[] introTextArray = {
-            "The lake is a long way from here",
-            "This is the last random sentence I will be writing and I am going to stop mid-sent",
-            "We have never been to Asia nor have we visited Africa",
-            "The stranger officiates the meal",
-            "He ran out of money so he had to stop playing poker",
-            "The mysterious diary records the voice",
-            "We need to rent a room for our party",
-            "Random thoughts come from nowhere"};
+            "the lake is a long way from here",
+            "this is the last random sentence I will be writing and I am going to stop mid-sent",
+            "lets all be unique together until we realise we are all the same",
+            "the stranger officiates the meal",
+            "he ran out of money so he had to stop playing poker",
+            "last Friday in three weeks time I saw a spotted striped blue worm shake hands with a legless lizard",
+            "we need to rent a room for our party",
+            "the body may perhaps compensates for the loss of a true metaphysics"};
 
     String[] textArrayEasy = {
-            "Please wait outside of the house",
-            "We have never been to Asia nor have we visited Africa",
-            "Rock music approaches at high velocity",
-            "I hear that Nancy is very pretty",
-            "He told us a very exciting adventure story",
-            "The mysterious diary records the voice"
+            "please wait outside of the house",
+            "lets all be unique together until we realise we are all the same",
+            "rock music approaches at high velocity",
+            "i hear that nancy is very pretty",
+            "he told us a very exciting adventure story",
+            "the mysterious diary records the voice"
     };
 
     String[] textArrayMedium = {
-            "I would have gotten the promotion, but my attendance was not good enough",
-            "This is the last random sentence I will be writing and I am going to stop mid-sent",
-            "He turned in the research paper on Friday; otherwise he would have not passed the class",
-            "The body may perhaps compensates for the loss of a true metaphysics",
-            "She did not cheat on the test, for it was not the right thing to do",
-            "I think I will buy the red car or I will lease the blue one"
+            "i would have gotten the promotion, but my attendance was not good enough",
+            "this is the last random sentence I will be writing and I am going to stop mid-sent",
+            "he turned in the research paper on friday; otherwise he would have not passed the class",
+            "the body may perhaps compensates for the loss of a true metaphysics",
+            "she did not cheat on the test, for it was not the right thing to do",
+            "i think I will buy the red car or I will lease the blue one"
 
     };
 
     String[] textArrayHard = {
-            "I was very proud of my nickname throughout high school but today I could not be any different to what my nickname was",
-            "Sometimes all you need to do is completely make an ass of yourself and laugh it off to realise that life isn’t so bad after all",
-            "If the Easter Bunny and the Tooth Fairy had babies would they take your teeth and leave chocolate for you?",
-            "Last Friday in three weeks time I saw a spotted striped blue worm shake hands with a legless lizard",
-            "Sometimes it is better to just walk away from things and go back to them later when you’re in a better frame of mind",
-            "A purple pig and a green donkey flew a kite in the middle of the night and ended up sunburnt"
+            "i was very proud of my nickname throughout high school but today I could not be any different to what my nickname was",
+            "sometimes all you need to do is completely make an ass of yourself and laugh it off to realise that life isn’t so bad after all",
+            "if the easter bunny and the tooth fairy had babies would they take your teeth and leave chocolate for you?",
+            "last friday in three weeks time I saw a spotted striped blue worm shake hands with a legless lizard",
+            "sometimes it is better to just walk away from things and go back to them later when you’re in a better frame of mind",
+            "a purple pig and a green donkey flew a kite in the middle of the night and ended up sunburnt"
     };
 
     String userResult, wordToFill;
@@ -115,18 +115,11 @@ public class FillTheTextActivity extends AppCompatActivity {
             randomChoice = new Random().nextInt(introTextArray.length);
             choosenSentence = introTextArray[randomChoice];
         }
-        try {
             choosenSentenceArray = choosenSentence.split(" ");
             choosenSentenceList = new ArrayList<>(Arrays.asList(choosenSentenceArray));
             wordToFill = choosenSentenceArray[new Random().nextInt(choosenSentenceArray.length)];
-            wordToFill = wordToFill.toLowerCase();
-        }
-        finally {
-            choosenSentenceArray = choosenSentence.split(" ");
-            choosenSentenceList = new ArrayList<>(Arrays.asList(choosenSentenceArray));
-            wordToFill = choosenSentenceArray[new Random().nextInt(choosenSentenceArray.length)];
-            wordToFill = wordToFill.toLowerCase();
-        }
+            wordToFill = wordToFill.toLowerCase().trim();
+
 
 
         pointsView = findViewById(R.id.points_fillthetext);
@@ -174,7 +167,7 @@ public class FillTheTextActivity extends AppCompatActivity {
         },3000);
         TextToFill.setText("" + choosenSentenceList.toString().replace("[","").replace("]","").replace(",", ""));
 
-        //Log.i("brakujace slowo create","brakujące słowo onCreate: " + wordToFill);
+        Log.i("brakujace slowo create","brakujące słowo onCreate: " + wordToFill);
 
         confirmButton = findViewById(R.id.confirm_btn);
         confirmButton.setOnClickListener(new View.OnClickListener() {
@@ -211,7 +204,7 @@ public class FillTheTextActivity extends AppCompatActivity {
 
                 }
             },1000);
-
+            answerCheck.setTextColor(Color.GREEN);
             answerCheck.setText("Correct answer!");
             answerCheck.setVisibility(View.VISIBLE);
 
@@ -225,7 +218,7 @@ public class FillTheTextActivity extends AppCompatActivity {
                     answerCheck.setVisibility(View.INVISIBLE);
                 }
             },1000);
-
+            answerCheck.setTextColor(Color.RED);
             answerCheck.setText("That's not correct answer!");
             answerCheck.setVisibility(View.VISIBLE);
         }
@@ -271,14 +264,20 @@ public class FillTheTextActivity extends AppCompatActivity {
         choosenSentenceList = new ArrayList<>(Arrays.asList(choosenSentenceArray));
 
         wordToFill = choosenSentenceArray[new Random().nextInt(choosenSentenceArray.length)];
-        wordToFill = wordToFill.toLowerCase();
+        wordToFill = wordToFill.toLowerCase().trim();
 
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                choosenSentenceList.remove(wordToFill);
-                TextToFill.setText("" + choosenSentenceList.toString().replace("[","").replace("]","").replace(",", ""));
+                try{
+                    choosenSentenceList.remove(wordToFill);
+                    TextToFill.setText("" + choosenSentenceList.toString().replace("[","").replace("]","").replace(",", ""));
+                } finally {
+                    choosenSentenceList.remove(wordToFill);
+                    TextToFill.setText("" + choosenSentenceList.toString().replace("[","").replace("]","").replace(",", ""));
+                }
+
             }
         },3000);
         TextToFill.setText("" + choosenSentenceList.toString().replace("[","").replace("]","").replace(",", ""));

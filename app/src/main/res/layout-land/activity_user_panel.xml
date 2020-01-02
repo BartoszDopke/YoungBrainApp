@@ -20,14 +20,13 @@
 
     <TextView
         android:id="@+id/nickname"
-        android:layout_width="170dp"
+        android:layout_width="160dp"
         android:layout_height="25dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:text="@string/nickname"
         android:textColor="#33300D"
-        android:textSize="22sp"
-        android:textStyle="bold"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/avatar"
         app:layout_constraintStart_toEndOf="@+id/avatar"
         app:layout_constraintTop_toTopOf="@+id/avatar"
@@ -78,11 +77,12 @@
         android:layout_height="50dp"
         android:layout_marginStart="272dp"
         android:layout_marginLeft="272dp"
-        android:layout_marginTop="160dp"
+        android:layout_marginTop="164dp"
         android:background="@drawable/button_shape"
         android:text="@string/settings_user_panel"
         android:textColor="#D9F6FF"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.747"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

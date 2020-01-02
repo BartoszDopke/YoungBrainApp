@@ -2,8 +2,10 @@ package com.pracainzynierska.inzynierka;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlarmManager;
 import android.app.Notification;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.AssetManager;
@@ -15,6 +17,7 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import java.util.Calendar;
 import java.util.Locale;
 
 
@@ -29,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         AssetManager am = getApplicationContext().getAssets();
         Typeface standardFont = Typeface.createFromAsset(am, String.format(Locale.ENGLISH, "fonts/%s","Montserrat-Regular.ttf"));
 
@@ -41,14 +45,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-
-
     }
-
-
-
-
 
     public void Login()
     {

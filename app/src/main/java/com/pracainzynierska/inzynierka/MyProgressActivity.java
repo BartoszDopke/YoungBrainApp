@@ -25,6 +25,8 @@ public class MyProgressActivity extends AppCompatActivity {
                             rtsPointsView6, mcPointsView6, gPointsView6, fttPointsView6, dateView6,
                             rtsPointsView7, mcPointsView7, gPointsView7, fttPointsView7, dateView7;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,10 +93,11 @@ public class MyProgressActivity extends AppCompatActivity {
         int ftt_score = preferences.getInt("ftt_score",0);
         String rts_date = preferences.getString("date","-");
 
+
         SharedPreferences prefs = getSharedPreferences("dailychallenge2_preferences",MODE_PRIVATE);
         int dailyChallengeScore = prefs.getInt("dailychallenge_score",0);
 
-        int total_score = rts_score + mc_score + g_score + ftt_score + dailyChallengeScore;
+        int total_score = rts_score + mc_score + g_score + ftt_score;
 
 
         AssetManager am = getApplicationContext().getAssets();
@@ -102,8 +105,6 @@ public class MyProgressActivity extends AppCompatActivity {
         Typeface myProgressFont = Typeface.createFromAsset(am, String.format(Locale.ENGLISH, "fonts/%s","Montserrat-Regular.ttf"));
         myProgressView.setTypeface(logoFont);
         myProgressView.setText("My Progress");
-
-        //region setTypeface & setText
 
         rtsPointsView1.setTypeface(myProgressFont);
         rtsPointsView1.setText("" + rts_score);
@@ -119,6 +120,10 @@ public class MyProgressActivity extends AppCompatActivity {
 
         dateView1.setTypeface(myProgressFont);
         dateView1.setText("" + rts_date);
+
+        //region setTypeface & setText
+
+
 
         /*
         rtsPointsView2.setTypeface(myProgressFont);

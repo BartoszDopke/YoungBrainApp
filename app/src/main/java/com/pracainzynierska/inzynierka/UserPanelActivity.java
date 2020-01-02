@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.drawable.RoundedBitmapDrawable;
 import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -17,6 +19,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.Calendar;
 import java.util.Locale;
 
 
@@ -24,6 +27,9 @@ public class UserPanelActivity extends AppCompatActivity {
 
     private Button settings_btn, progress_btn, dailychallenge_btn, premium_btn, logout_btn, training_btn;
     private TextView NickNameText, rankText, isDoneText;
+
+    private AlarmManager alarmManager;
+    private PendingIntent alarmIntent;
 
     String[] rankArray = {
             "Sahelanthropus",
@@ -41,13 +47,26 @@ public class UserPanelActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_panel);
+
+        alarmManager = (AlarmManager) getApplicationContext().getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(getApplicationContext(), AlarmReceiver.class);
+        alarmIntent = PendingIntent.getBroadcast(getApplicationContext(),0,intent,0);
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        calendar.set(Calendar.HOUR_OF_DAY, 8);
+        calendar.set(Calendar.MINUTE, 30);
+
+        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
+                AlarmManager.INTERVAL_DAY, alarmIntent);
+
+
         AssetManager am = getApplicationContext().getAssets();
 
         Typeface standardFont = Typeface.createFromAsset(am, String.format(Locale.ENGLISH, "fonts/%s","Montserrat-Regular.ttf"));
 
         rankText = findViewById(R.id.rank);
         rankText.setTypeface(standardFont);
-
         String username = getIntent().getStringExtra("username");
         NickNameText =  findViewById(R.id.nickname);
         NickNameText.setTypeface(standardFont);
@@ -61,6 +80,8 @@ public class UserPanelActivity extends AppCompatActivity {
         isDoneText.setText("" + isDoneString);
 
         int totalScore = preferences.getInt("total_score",0);
+
+        //region rank image
         ImageView imageView = findViewById(R.id.avatar);
         if(totalScore <= 2000)
         {
@@ -135,7 +156,7 @@ public class UserPanelActivity extends AppCompatActivity {
             imageView.setImageDrawable(roundedBitmapDrawable);
             rankText.setText(rankArray[8]);
         }
-
+        //endregion rank image
 
 
 
@@ -205,21 +226,21 @@ public class UserPanelActivity extends AppCompatActivity {
         {
             if(totalScore > 0 && totalScore <= 2000)
             {
-                Intent intent = new Intent(this, RememberTheSequenceEasyActivity.class);
+                Intent intent = new Intent(this, FindAllPairsEasyActivity.class);
                 String user = NickNameText.getText().toString();
                 intent.putExtra("username",user);
                 startActivity(intent);
             }
             else if(totalScore > 2000 && totalScore <= 5000)
             {
-                Intent intent = new Intent(this, RememberTheSequenceMediumActivity.class);
+                Intent intent = new Intent(this, FindAllPairsMediumActivity.class);
                 String user = NickNameText.getText().toString();
                 intent.putExtra("username",user);
                 startActivity(intent);
             }
             else if(totalScore > 5000)
             {
-                Intent intent = new Intent(this, RememberTheSequenceHardActivity.class);
+                Intent intent = new Intent(this, FindAllPairsHardActivity.class);
                 String user = NickNameText.getText().toString();
                 intent.putExtra("username",user);
                 startActivity(intent);
@@ -253,7 +274,7 @@ public class UserPanelActivity extends AppCompatActivity {
     }
 
     private void MyProgress() {
-        Intent intent = new Intent(this,MyProgressActivity.class);
+        Intent intent = new Intent(this,ProgressActivity.class);
         String user = NickNameText.getText().toString();
         intent.putExtra("username",user);
         startActivity(intent);
@@ -261,7 +282,8 @@ public class UserPanelActivity extends AppCompatActivity {
 
     private void Settings() {
         Intent intent = new Intent(this, SettingsActivity.class);
+        String user = NickNameText.getText().toString();
+        intent.putExtra("username",user);
         startActivity(intent);
     }
-
 }

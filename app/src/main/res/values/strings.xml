@@ -161,4 +161,9 @@
     <string name="cnf_newpassword">Confirm new password</string>
     <string name="oldpassword">Old password</string>
     <string name="im_in">I\'m In!</string>
+    <string name="sNo">No.</string>
+    <string name="product">Find All Pairs</string>
+    <string name="category">MathChain</string>
+    <string name="price">Geomemotry</string>
+    <string name="date">Date</string>
 </resources>

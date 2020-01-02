@@ -82,7 +82,7 @@ public class SignInActivity extends AppCompatActivity {
                 String user = usernameEditText.getText().toString().trim();
                 String pwd = passwordEditText.getText().toString().trim();
                 Boolean res = db.checkUser(user,pwd);
-                if(res == true)
+                if(res)
                 {
                     Intent intent = new Intent(SignInActivity.this,UserPanelActivity.class);
                     Intent intentPopUp = new Intent(SignInActivity.this, PopUpActivity.class);

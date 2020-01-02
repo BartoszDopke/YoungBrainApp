@@ -49,25 +49,26 @@ public class RegisterActivity extends AppCompatActivity {
                 String cnf_pwd = cnf_password.getText().toString().trim();
                 String mail = mail_address.getText().toString().trim();
 
+                if (pwd.length() >= 7) {
+                    if (pwd.equals(cnf_pwd)) {
+                        if (mail.contains("@")) {
+                            long val = db.addUser(user, pwd, mail);
+                            if (val > 0) {
+                                Toast.makeText(RegisterActivity.this, "Registration complete!", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(RegisterActivity.this, SignInActivity.class);
+                                startActivity(intent);
+                            } else {
+                                Toast.makeText(RegisterActivity.this, "Registration error!", Toast.LENGTH_SHORT).show();
+                            }
 
-                if(pwd.equals(cnf_pwd))
-                {
-                   long val = db.addUser(user, pwd, mail);
-                   if(val > 0)
-                   {
-                       Toast.makeText(RegisterActivity.this,"Registration complete!",Toast.LENGTH_SHORT).show();
-                       Intent intent = new Intent(RegisterActivity.this, SignInActivity.class);
-                       startActivity(intent);
-                   }
-                   else
-                       {
-                           Toast.makeText(RegisterActivity.this,"Registration error!",Toast.LENGTH_SHORT).show();
-                       }
-
-                }
-                else
-                {
-                    Toast.makeText(RegisterActivity.this,"Passwords are not matching!",Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(RegisterActivity.this, "Wrong e-mail address!", Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        Toast.makeText(RegisterActivity.this, "Passwords are not matching!", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(RegisterActivity.this, "Password should contain at least 8 characters!", Toast.LENGTH_SHORT).show();
                 }
             }
         });

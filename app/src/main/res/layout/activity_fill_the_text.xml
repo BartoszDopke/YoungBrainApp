@@ -44,7 +44,7 @@
         android:gravity="center"
         android:text=""
         android:textSize="24sp"
-        android:textColor="#7DA6B3"
+        android:textColor="#0088B3"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -60,7 +60,7 @@
         android:hint="@string/fill_the_text"
         android:inputType="textPersonName"
         android:text=""
-        android:textColor="#C2F1FF"
+        android:textColor="#33300D"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/TextToFill" />

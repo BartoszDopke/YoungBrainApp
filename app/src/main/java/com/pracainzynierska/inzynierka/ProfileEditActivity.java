@@ -36,7 +36,7 @@ public class ProfileEditActivity extends AppCompatActivity {
                 String cnfPassword = newPasswordTextView.getText().toString().trim();
 
                 Boolean res = db.checkPassword(oldPassword);
-                if (res == true) {
+                if (res) {
 
                     if (cnfPassword.equals(password)) {
                         long val = db.updatePassword(password);

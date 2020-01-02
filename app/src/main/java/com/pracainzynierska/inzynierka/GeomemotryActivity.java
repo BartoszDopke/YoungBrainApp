@@ -55,7 +55,6 @@ public class GeomemotryActivity extends AppCompatActivity {
         points = findViewById(R.id.geo_points);
 
         points.setText("" + player_points);
-        points.setTextColor(Color.RED);
 
         final Animation animSlide = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide);
 
@@ -105,35 +104,60 @@ public class GeomemotryActivity extends AppCompatActivity {
                 if(isDoneString == "done")
                 {
                     saveScore();
+                    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(GeomemotryActivity.this);
+                    alertDialogBuilder
+                            .setMessage("Congratulations! You did the third exercise! Your points: " + player_points)
+                            .setCancelable(false)
+                            .setPositiveButton("NEXT EXERCISE", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    Intent intent = new Intent(getApplicationContext(), FillTheTextActivity.class);
+                                    intent.putExtra("username",usernameView.getText().toString());
+                                    startActivity(intent);
+                                    finish();
+                                }
+                            })
+                            .setNegativeButton("EXIT", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    Intent intentBack = new Intent(getApplicationContext(), UserPanelActivity.class);
+                                    startActivity(intentBack);
+                                    finish();
+                                }
+                            });
+                    AlertDialog alertDialog = alertDialogBuilder.create();
+                    alertDialog.show();
                 }
                 else
                 {
                     saveIntroScore();
+                    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(GeomemotryActivity.this);
+                    alertDialogBuilder
+                            .setMessage("Congratulations! You did the third introduction exercise! Your points: " + player_points)
+                            .setCancelable(false)
+                            .setPositiveButton("CONTINUE INTRODUCTION TEST", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    Intent intent = new Intent(getApplicationContext(), IntroductionActivity.class);
+                                    intent.putExtra("username",usernameView.getText().toString());
+                                    intent.putExtra("textIndex",4);
+                                    startActivity(intent);
+                                    finish();
+                                }
+                            })
+                            .setNegativeButton("EXIT", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    Intent intentBack = new Intent(getApplicationContext(), UserPanelActivity.class);
+                                    startActivity(intentBack);
+                                    finish();
+                                }
+                            });
+                    AlertDialog alertDialog = alertDialogBuilder.create();
+                    alertDialog.show();
                 }
 
-                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(GeomemotryActivity.this);
-                alertDialogBuilder
-                        .setMessage("Congratulations! You did the third exercise! Your points: " + player_points)
-                        .setCancelable(false)
-                        .setPositiveButton("NEXT EXERCISE", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                Intent intent = new Intent(getApplicationContext(), FillTheTextActivity.class);
-                                intent.putExtra("username",usernameView.getText().toString());
-                                startActivity(intent);
-                                finish();
-                            }
-                        })
-                        .setNegativeButton("EXIT", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                Intent intentBack = new Intent(getApplicationContext(), UserPanelActivity.class);
-                                startActivity(intentBack);
-                                finish();
-                            }
-                        });
-                AlertDialog alertDialog = alertDialogBuilder.create();
-                alertDialog.show();
+
             }
             }.start();
 
@@ -180,12 +204,14 @@ public class GeomemotryActivity extends AppCompatActivity {
                 Handler handler = new Handler();
                 if(imgPrev == imgActual)
                 {
+                    show_text.setTextColor(Color.GREEN);
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
                             show_text.setVisibility(View.INVISIBLE);
                         }
                     },500);
+
                     show_text.setText("Correct!");
                     show_text.setVisibility(View.VISIBLE);
 
@@ -194,12 +220,14 @@ public class GeomemotryActivity extends AppCompatActivity {
                 }
                 else
                 {
+                    show_text.setTextColor(Color.RED);
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
                             show_text.setVisibility(View.INVISIBLE);
                         }
                     },500);
+
                     show_text.setText("That's not correct answer!");
                     show_text.setVisibility(View.VISIBLE);
                     player_points-=10;
@@ -342,12 +370,7 @@ public class GeomemotryActivity extends AppCompatActivity {
            iv.setImageResource(imagesEasy[2]);
        } else if (shapesArrayEasy[choice] == 3) {
            iv.setImageResource(imagesEasy[3]);
-       } else if (shapesArrayEasy[choice] == 4) {
-           iv.setImageResource(imagesEasy[4]);
-       } else if (shapesArrayEasy[choice]==5) {
-           iv.setImageResource(imagesEasy[5]);
        }
-
    }
 
     private void showShapeMedium(ImageView iv, int choice) {
@@ -363,10 +386,6 @@ public class GeomemotryActivity extends AppCompatActivity {
             iv.setImageResource(imagesMedium[4]);
         } else if (shapesArrayMedium[choice]==5) {
             iv.setImageResource(imagesMedium[5]);
-        } else if (shapesArrayMedium[choice]==6) {
-            iv.setImageResource(imagesMedium[6]);
-        } else if (shapesArrayMedium[choice]==7) {
-            iv.setImageResource(imagesMedium[7]);
         }
     }
 
@@ -383,6 +402,10 @@ public class GeomemotryActivity extends AppCompatActivity {
             iv.setImageResource(imagesHard[4]);
         } else if (shapesArrayHard[choice]==5) {
             iv.setImageResource(imagesHard[5]);
+        } else if (shapesArrayHard[choice]==6) {
+            iv.setImageResource(imagesHard[6]);
+        } else if (shapesArrayHard[choice]==7) {
+            iv.setImageResource(imagesHard[7]);
         }
     }
 
@@ -407,7 +430,7 @@ public class GeomemotryActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = preferences.edit();
         int totalScore = preferences.getInt("totalScore",0);
         totalScore = totalScore + player_points;
-        editor.putInt("g_introscore", player_points);
+        editor.putInt("g_score", player_points);
         editor.putInt("total_score",totalScore);
         editor.commit();
     }
