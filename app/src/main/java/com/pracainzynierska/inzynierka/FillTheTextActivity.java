@@ -1,8 +1,5 @@
 package com.pracainzynierska.inzynierka;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -16,6 +13,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.pracainzynierska.inzynierka.utils.SaveScoreInSharedPreference;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -74,6 +76,8 @@ public class FillTheTextActivity extends AppCompatActivity {
 
     String isDoneString = "not done";
 
+    private int counter = 0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,13 +92,13 @@ public class FillTheTextActivity extends AppCompatActivity {
         usernameView.setText(""+ user);
 
         SharedPreferences preferences = this.getSharedPreferences(usernameView.getText().toString(),Context.MODE_PRIVATE);
-        int ftt_introscore = preferences.getInt("ftt_introscore",0);
+        //int ftt_introscore = preferences.getInt("ftt_introscore",0);
 
 
 
         answerCheck = findViewById(R.id.answer_check);
         answerCheck.setTextColor(Color.RED);
-
+        /*
         if(ftt_introscore > 0 && ftt_introscore <=50)
         {
             randomChoice = new Random().nextInt(textArrayEasy.length);
@@ -115,6 +119,10 @@ public class FillTheTextActivity extends AppCompatActivity {
             randomChoice = new Random().nextInt(introTextArray.length);
             choosenSentence = introTextArray[randomChoice];
         }
+
+         */
+            randomChoice = new Random().nextInt(textArrayEasy.length);
+            choosenSentence = textArrayEasy[randomChoice];
             choosenSentenceArray = choosenSentence.split(" ");
             choosenSentenceList = new ArrayList<>(Arrays.asList(choosenSentenceArray));
             wordToFill = choosenSentenceArray[new Random().nextInt(choosenSentenceArray.length)];
@@ -286,17 +294,31 @@ public class FillTheTextActivity extends AppCompatActivity {
     }
 
     private void saveScore() {
+
+        new SaveScoreInSharedPreference().saveScoreInSP(this, usernameView.getText().toString(),4,player_points);
+
         SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
         Date date = new Date();
         String dateString = format.format(date);
+        /*
         SharedPreferences preferences = this.getSharedPreferences(usernameView.getText().toString(), Context.MODE_PRIVATE);
+
+        counter=preferences.getInt("counter", 0);
+        counter++;
+
         SharedPreferences.Editor editor = preferences.edit();
         int totalScore = preferences.getInt("totalScore",0);
         totalScore = totalScore + player_points;
         editor.putInt("ftt_score",player_points);
+
+        editor.putInt("counter",counter);
+        editor.putInt("ftt_score_"+counter,player_points);
+
         editor.putInt("total_score",totalScore);
         editor.putString("date",dateString);
         editor.commit();
+
+         */
     }
 
 

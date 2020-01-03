@@ -3,10 +3,8 @@ package com.pracainzynierska.inzynierka;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
@@ -19,7 +17,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COL_3 ="mail_address";
     public static final String COL_4 ="password";
     public static final String COL_5 = "rank";
-    //public static final String COL_6 = "dailytip";
 
     public DatabaseHelper(@Nullable Context context) {
         super(context, DATABASE_NAME,null, 1);

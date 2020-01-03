@@ -18,6 +18,8 @@ import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.pracainzynierska.inzynierka.utils.SaveScoreInSharedPreference;
+
 import java.util.Random;
 
 
@@ -37,6 +39,8 @@ public class GeomemotryActivity extends AppCompatActivity {
     Random rand = new Random();
     int player_points = 0;
     int imgPrev, imgActual, imgSecond;
+
+    private int counter = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +64,7 @@ public class GeomemotryActivity extends AppCompatActivity {
 
         SharedPreferences preferences = this.getSharedPreferences(usernameView.getText().toString(),Context.MODE_PRIVATE);
         final String isDoneString =  preferences.getString("done","-");
-        final int introScore = preferences.getInt("g_introscore",0);
+        final int introScore = preferences.getInt("g_score",0);
 
         if(introScore > 0 && introScore < 800)
         {
@@ -130,7 +134,7 @@ public class GeomemotryActivity extends AppCompatActivity {
                 }
                 else
                 {
-                    saveIntroScore();
+                    saveScore();
                     AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(GeomemotryActivity.this);
                     alertDialogBuilder
                             .setMessage("Congratulations! You did the third introduction exercise! Your points: " + player_points)
@@ -156,8 +160,6 @@ public class GeomemotryActivity extends AppCompatActivity {
                     AlertDialog alertDialog = alertDialogBuilder.create();
                     alertDialog.show();
                 }
-
-
             }
             }.start();
 
@@ -204,14 +206,13 @@ public class GeomemotryActivity extends AppCompatActivity {
                 Handler handler = new Handler();
                 if(imgPrev == imgActual)
                 {
-                    show_text.setTextColor(Color.GREEN);
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
                             show_text.setVisibility(View.INVISIBLE);
                         }
                     },500);
-
+                    show_text.setTextColor(Color.GREEN);
                     show_text.setText("Correct!");
                     show_text.setVisibility(View.VISIBLE);
 
@@ -220,14 +221,14 @@ public class GeomemotryActivity extends AppCompatActivity {
                 }
                 else
                 {
-                    show_text.setTextColor(Color.RED);
+
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
                             show_text.setVisibility(View.INVISIBLE);
                         }
                     },500);
-
+                    show_text.setTextColor(Color.RED);
                     show_text.setText("That's not correct answer!");
                     show_text.setVisibility(View.VISIBLE);
                     player_points-=10;
@@ -416,16 +417,31 @@ public class GeomemotryActivity extends AppCompatActivity {
     }
 
     private void saveScore() {
+
+
+        new SaveScoreInSharedPreference().saveScoreInSP(this, usernameView.getText().toString(),2,player_points);
+        /*
         SharedPreferences preferences = this.getSharedPreferences(usernameView.getText().toString(), Context.MODE_PRIVATE);
+
+        counter=preferences.getInt("counter", 0);
+        counter++;
+
         SharedPreferences.Editor editor = preferences.edit();
         int totalScore = preferences.getInt("totalScore",0);
         totalScore = totalScore + player_points;
         editor.putInt("g_score",player_points);
+
+        editor.putInt("counter",counter);
+        editor.putInt("g_score_"+counter,player_points);
+
         editor.putInt("total_score", totalScore);
         editor.commit();
+
+         */
     }
 
     private void saveIntroScore() {
+        /*
         SharedPreferences preferences = this.getSharedPreferences(usernameView.getText().toString(), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         int totalScore = preferences.getInt("totalScore",0);
@@ -433,5 +449,7 @@ public class GeomemotryActivity extends AppCompatActivity {
         editor.putInt("g_score", player_points);
         editor.putInt("total_score",totalScore);
         editor.commit();
+
+         */
     }
 }

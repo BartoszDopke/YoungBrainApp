@@ -166,4 +166,6 @@
     <string name="category">MathChain</string>
     <string name="price">Geomemotry</string>
     <string name="date">Date</string>
+    <string name="alarm_on_toast">Daily notification at 8:30am is on!</string>
+    <string name="alarm_off_toast">Daily notification is off!</string>
 </resources>

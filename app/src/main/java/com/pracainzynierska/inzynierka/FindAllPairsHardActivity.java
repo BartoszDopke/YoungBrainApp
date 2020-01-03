@@ -1,19 +1,18 @@
 package com.pracainzynierska.inzynierka;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -33,6 +32,8 @@ public class FindAllPairsHardActivity extends AppCompatActivity {
     int clickedFirst, clickedSecond;
     int cardNumber = 1;
     int player_points = 0;
+
+    private int counter=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -604,12 +605,24 @@ public class FindAllPairsHardActivity extends AppCompatActivity {
     }
 
     private void saveScore() {
+        /*
         SharedPreferences preferences = this.getSharedPreferences(usernameView.getText().toString(), Context.MODE_PRIVATE);
+
+        //Saving counter in the SP ;)
+        counter=preferences.getInt("counter", 0);
+        counter++;
+
         SharedPreferences.Editor editor = preferences.edit();
         int totalScore = preferences.getInt("totalScore",0);
         editor.putInt("rts_score",player_points);
+
+        editor.putInt("counter",counter);
+        editor.putInt("rts_score_"+counter,player_points);
+
         editor.putInt("total_score",totalScore);
         editor.commit();
+
+         */
     }
 
     private void frontofCardsResources() {

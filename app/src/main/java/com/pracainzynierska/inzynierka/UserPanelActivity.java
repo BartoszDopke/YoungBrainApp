@@ -1,11 +1,5 @@
 package com.pracainzynierska.inzynierka;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.drawable.RoundedBitmapDrawable;
-import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
-
-import android.app.AlarmManager;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -19,7 +13,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.Calendar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.drawable.RoundedBitmapDrawable;
+import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
+
 import java.util.Locale;
 
 
@@ -27,9 +24,6 @@ public class UserPanelActivity extends AppCompatActivity {
 
     private Button settings_btn, progress_btn, dailychallenge_btn, premium_btn, logout_btn, training_btn;
     private TextView NickNameText, rankText, isDoneText;
-
-    private AlarmManager alarmManager;
-    private PendingIntent alarmIntent;
 
     String[] rankArray = {
             "Sahelanthropus",
@@ -47,7 +41,7 @@ public class UserPanelActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_panel);
-
+        /*
         alarmManager = (AlarmManager) getApplicationContext().getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(getApplicationContext(), AlarmReceiver.class);
         alarmIntent = PendingIntent.getBroadcast(getApplicationContext(),0,intent,0);
@@ -60,7 +54,7 @@ public class UserPanelActivity extends AppCompatActivity {
         alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
                 AlarmManager.INTERVAL_DAY, alarmIntent);
 
-
+        */
         AssetManager am = getApplicationContext().getAssets();
 
         Typeface standardFont = Typeface.createFromAsset(am, String.format(Locale.ENGLISH, "fonts/%s","Montserrat-Regular.ttf"));
@@ -274,7 +268,7 @@ public class UserPanelActivity extends AppCompatActivity {
     }
 
     private void MyProgress() {
-        Intent intent = new Intent(this,ProgressActivity.class);
+        Intent intent = new Intent(this, ProgressActivity.class);
         String user = NickNameText.getText().toString();
         intent.putExtra("username",user);
         startActivity(intent);

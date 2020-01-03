@@ -1,10 +1,6 @@
 package com.pracainzynierska.inzynierka;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.res.AssetManager;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -15,15 +11,10 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.facebook.AccessToken;
-import com.facebook.CallbackManager;
-import com.facebook.FacebookCallback;
-import com.facebook.FacebookException;
-import com.facebook.Profile;
-import com.facebook.login.LoginManager;
-import com.facebook.login.LoginResult;
+import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.Arrays;
+import com.facebook.CallbackManager;
+
 import java.util.Locale;
 
 public class SignInActivity extends AppCompatActivity {

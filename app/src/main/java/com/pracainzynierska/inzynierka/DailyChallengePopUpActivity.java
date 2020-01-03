@@ -1,26 +1,16 @@
 package com.pracainzynierska.inzynierka;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.media.Image;
-import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.ImageButton;
-import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.VideoView;
-import java.util.Locale;
 
-import java.net.URI;
+import androidx.appcompat.app.AppCompatActivity;
+
 import java.util.Random;
 
 public class DailyChallengePopUpActivity extends AppCompatActivity {

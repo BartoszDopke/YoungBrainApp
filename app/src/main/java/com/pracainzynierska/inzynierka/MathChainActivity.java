@@ -1,8 +1,5 @@
 package com.pracainzynierska.inzynierka;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -17,8 +14,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.pracainzynierska.inzynierka.utils.SaveScoreInSharedPreference;
+
 import java.util.Random;
 
 public class MathChainActivity extends AppCompatActivity {
@@ -41,7 +41,7 @@ public class MathChainActivity extends AppCompatActivity {
 
     //String isDoneString = "not done";
 
-
+    private int counter = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,7 +99,7 @@ public class MathChainActivity extends AppCompatActivity {
                     alertDialog.show();
                 }
                 else if(!isDoneString.equals("done")) {
-                    saveIntroScore();
+                    saveScore();
                     AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(MathChainActivity.this);
                     alertDialogBuilder
                             .setMessage("Congratulations! You did the second introduction exercise! Your points: " + player_points)
@@ -265,16 +265,29 @@ public class MathChainActivity extends AppCompatActivity {
     }
 
     private void saveScore() {
+
+        new SaveScoreInSharedPreference().saveScoreInSP(this, usernameView.getText().toString(),3,player_points);
+
+
         SharedPreferences preferences = this.getSharedPreferences(usernameView.getText().toString(), Context.MODE_PRIVATE);
+
+        counter=preferences.getInt("counter", 0);
+        counter++;
+
         SharedPreferences.Editor editor = preferences.edit();
         int totalScore = preferences.getInt("totalScore",0);
         totalScore = totalScore + player_points;
         editor.putInt("mc_score",player_points);
+
+        editor.putInt("counter",counter);
+        editor.putInt("mc_score_"+counter,player_points);
+
         editor.putInt("total_score", totalScore);
         editor.commit();
     }
 
     private void saveIntroScore() {
+        /*
         SharedPreferences preferences = this.getSharedPreferences(usernameView.getText().toString(), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         int totalScore = preferences.getInt("totalScore",0);
@@ -282,5 +295,7 @@ public class MathChainActivity extends AppCompatActivity {
         editor.putInt("mc_score", player_points);
         editor.putInt("total_score",totalScore);
         editor.commit();
+
+         */
     }
 }

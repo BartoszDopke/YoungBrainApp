@@ -1,15 +1,9 @@
 package com.pracainzynierska.inzynierka;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
@@ -17,6 +11,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -36,6 +33,8 @@ public class FindAllPairsMediumActivity extends AppCompatActivity {
     int clickedFirst, clickedSecond;
     int cardNumber = 1;
     int player_points = 0;
+
+    private int counter=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -535,6 +534,7 @@ public class FindAllPairsMediumActivity extends AppCompatActivity {
                 iv_21.getVisibility()== View.INVISIBLE &&
                 iv_22.getVisibility()== View.INVISIBLE) && !isDoneString.equals("done"))
         {
+            countDown.cancel();
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(FindAllPairsMediumActivity.this);
             alertDialogBuilder
                     .setMessage("Congratulations! You did the first introduction exercise! Your points: " + player_points)
@@ -562,14 +562,30 @@ public class FindAllPairsMediumActivity extends AppCompatActivity {
     }
 
     private void saveScore() {
+        /*
         SharedPreferences preferences = this.getSharedPreferences(usernameView.getText().toString(), Context.MODE_PRIVATE);
+
+        //Saving counter in the SP ;)
+        counter=preferences.getInt("counter", 0);
+        counter++;
+
         SharedPreferences.Editor editor = preferences.edit();
         int totalScore = preferences.getInt("totalScore",0);
         totalScore = totalScore + player_points;
-        editor.putInt("rts_score",player_points);
         editor.putInt("total_score",totalScore);
+
+
+        //what else is introduction test is there so in FindAllPairsMediumActivity, but we checked score after level easy right?
+        //easy is when there are only 4 pairs.
+
+        editor.putInt("counter",counter);
+        editor.putInt("rts_score_"+counter,player_points);
+
         editor.commit();
+
+         */
     }
+
 
     private void frontofCardsResources() {
 

@@ -1,20 +1,20 @@
 package com.pracainzynierska.inzynierka;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.pracainzynierska.inzynierka.utils.SaveScoreInSharedPreference;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -29,13 +29,16 @@ public class FindAllPairsEasyActivity extends AppCompatActivity {
     Integer[] cardArray = {101,102,103,104,201,202,203,204};
     int image101, image102,image103,image104,image105,image106,image107,image108;
 
+    ArrayList<Integer> findAllPairsList = new ArrayList<>();
 
 
     int firstCard,secondCard;
     int clickedFirst, clickedSecond;
-    int cardNumber = 1;
+    int cardNumber = 1; //What is this cardNumber?
+    //it's a part of the game. It's basic memory game where you have to find pairs of images.ok
     int player_points = 0;
 
+    private int counter=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -139,7 +142,7 @@ public class FindAllPairsEasyActivity extends AppCompatActivity {
             }
         });
 
-         countDown =  new CountDownTimer(60000,1000)
+         countDown =  new CountDownTimer(20000,1000)
         {
             @Override
             public void onTick(long millisUntilFinished) {
@@ -148,10 +151,10 @@ public class FindAllPairsEasyActivity extends AppCompatActivity {
 
             @Override
             public void onFinish() {
-                if(isDoneString == "done")
+                if(isDoneString.equals("done"))
                 {
-                    cancel();
                     saveScore();
+                    cancel();
                 }
 
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(FindAllPairsEasyActivity.this);
@@ -394,14 +397,87 @@ public class FindAllPairsEasyActivity extends AppCompatActivity {
         }
     }
 
-    private void saveScore() {
-        SharedPreferences preferences = this.getSharedPreferences(usernameView.getText().toString(), Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferences.edit();
-        int totalScore = preferences.getInt("totalScore",0);
-        totalScore = totalScore + player_points;
-        editor.putInt("rts_score",player_points);
-        editor.putInt("total_score",totalScore);
-        editor.commit();
+    public void saveScore() {
+
+        new SaveScoreInSharedPreference().saveScoreInSP(this, usernameView.getText().toString(),1,player_points);
+
+
+//        SharedPreferences preferences = this.getSharedPreferences(usernameView.getText().toString(), Context.MODE_PRIVATE);
+//        String todaysDate=DateTimeUtils.getDate();
+//
+//        String jsonScore=preferences.getString(SharedPrefUtils.PREF_JSON_SCORES,"");
+//
+//        try {
+//            JSONObject jsonObjectScores = new JSONObject();
+//
+//            if (TextUtils.isEmpty(jsonScore)) {
+//                //First Game
+//            } else {
+//                jsonObjectScores = new JSONObject(jsonScore);
+//                JSONArray jsonArrayTodaysScores = jsonObjectScores.getJSONArray(SharedPrefUtils.SCORES_KEY);
+//
+//
+//                for (int i=0;i<jsonArrayTodaysScores.length();i++){
+//                    //Iterate over each json object and get todays date
+//                    JSONObject jsonObjectInnerScore=jsonArrayTodaysScores.getJSONObject(i);
+//
+//                    //If todays date match the JSON Object, update the FindAllPairsScore
+//                    if (jsonObjectInnerScore.get(SharedPrefUtils.KEY_DATE).equals(todaysDate)){
+//                        jsonObjectInnerScore.put(SharedPrefUtils.KEY_FIND_ALL_PAIRS_SCORE,player_points);
+//                    }
+//                }
+//
+//
+//
+//
+//
+//            }
+//
+//
+//        }catch(Exception e ){
+//            e.printStackTrace();
+//        }
+//
+//
+//
+//
+//
+//
+//
+//
+////        SharedPreferences preferences = this.getSharedPreferences(usernameView.getText().toString(), Context.MODE_PRIVATE);
+//
+//
+//
+//        //Fetch the value of counter from SharedPreferences and increment it by 1
+//        counter=preferences.getInt(SharedPrefUtils.KEY_COUNTER, 0);
+//        String sharedPrefDate;
+//        if(counter==0){
+//            //First Game
+//            counter++;
+//            sharedPrefDate=todaysDate+"_"+counter;
+//        }else{
+//            sharedPrefDate=preferences.getString(todaysDate+"_"+counter,"");
+//        }
+//
+//        //Check if the sharedPrefDate is current date
+//        if (sharedPrefDate.equals(DateTimeUtils.getDate())){
+//            //Do not increment counter
+//            //Do nothing
+//        }else{
+//            counter++;
+//        }
+//
+//        SharedPreferences.Editor editor = preferences.edit();
+//        editor.putInt(SharedPrefUtils.KEY_COUNTER,counter);
+//        editor.putString(SharedPrefUtils.KEY_DATE+"_"+counter, sharedPrefDate);
+//        editor.putInt(SharedPrefUtils.KEY_FIND_ALL_PAIRS_SCORE+counter,player_points);
+//
+//        editor.apply();
+    }
+
+    public ArrayList<Integer> getList() {
+        return findAllPairsList;
     }
 
     private void frontofCardsResources() {

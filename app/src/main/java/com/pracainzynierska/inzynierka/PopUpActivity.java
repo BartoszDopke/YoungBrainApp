@@ -1,15 +1,12 @@
 package com.pracainzynierska.inzynierka;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.pracainzynierska.inzynierka.R;
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Random;
 
