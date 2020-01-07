@@ -129,7 +129,6 @@ public class FillTheTextActivity extends AppCompatActivity {
             wordToFill = wordToFill.toLowerCase().trim();
 
 
-
         pointsView = findViewById(R.id.points_fillthetext);
         pointsView.setText("" + player_points);
 
@@ -154,8 +153,9 @@ public class FillTheTextActivity extends AppCompatActivity {
                         .setPositiveButton("BACK TO MENU", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                Intent intent = new Intent(getApplicationContext(), UserPanelActivity.class);
+                                Intent intent = new Intent(getApplicationContext(), IntroductionActivity.class);
                                 intent.putExtra("username",usernameView.getText().toString());
+                                intent.putExtra("textIndex",5);
                                 startActivity(intent);
                                 finish();
                             }
@@ -172,7 +172,7 @@ public class FillTheTextActivity extends AppCompatActivity {
                 choosenSentenceList.remove(wordToFill);
                 TextToFill.setText("" + choosenSentenceList.toString().replace("[","").replace("]","").replace(",", ""));
             }
-        },3000);
+        },5000);
         TextToFill.setText("" + choosenSentenceList.toString().replace("[","").replace("]","").replace(",", ""));
 
         Log.i("brakujace slowo create","brakujące słowo onCreate: " + wordToFill);
@@ -188,7 +188,6 @@ public class FillTheTextActivity extends AppCompatActivity {
             }
         });
     }
-
 
 
     private void checkIfIntroDone()
@@ -300,6 +299,14 @@ public class FillTheTextActivity extends AppCompatActivity {
         SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
         Date date = new Date();
         String dateString = format.format(date);
+
+        SharedPreferences preferences = this.getSharedPreferences(usernameView.getText().toString(), Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        int totalScore = preferences.getInt("totalScore",0);
+        totalScore = totalScore + player_points;
+        editor.putInt("total_score", totalScore);
+        editor.apply();
+
         /*
         SharedPreferences preferences = this.getSharedPreferences(usernameView.getText().toString(), Context.MODE_PRIVATE);
 

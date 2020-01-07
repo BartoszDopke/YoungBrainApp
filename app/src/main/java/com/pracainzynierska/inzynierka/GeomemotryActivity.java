@@ -420,6 +420,14 @@ public class GeomemotryActivity extends AppCompatActivity {
 
 
         new SaveScoreInSharedPreference().saveScoreInSP(this, usernameView.getText().toString(),2,player_points);
+
+        SharedPreferences preferences = this.getSharedPreferences(usernameView.getText().toString(), Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        int totalScore = preferences.getInt("totalScore",0);
+        totalScore = totalScore + player_points;
+        editor.putInt("total_score", totalScore);
+        editor.apply();
+
         /*
         SharedPreferences preferences = this.getSharedPreferences(usernameView.getText().toString(), Context.MODE_PRIVATE);
 
@@ -438,6 +446,8 @@ public class GeomemotryActivity extends AppCompatActivity {
         editor.commit();
 
          */
+
+
     }
 
     private void saveIntroScore() {

@@ -7,6 +7,8 @@
         android:id="@+id/txtListScoresRowDate"
         android:layout_width="match_parent"
         android:text="Date"
+        android:textSize="18sp"
+        android:textStyle="bold"
         android:layout_height="wrap_content"/>
 
 
@@ -14,24 +16,28 @@
         android:id="@+id/txtListScoresRowFindAllPairs"
         android:layout_width="match_parent"
         android:text="Find All Pairs"
+        android:textSize="16sp"
         android:layout_height="wrap_content"/>
 
     <TextView
         android:id="@+id/txtListScoresRowMathChain"
         android:layout_width="match_parent"
         android:text="Match Chain"
+        android:textSize="16sp"
         android:layout_height="wrap_content"/>
 
     <TextView
         android:id="@+id/txtListScoresRowGeomemotry"
         android:layout_width="match_parent"
         android:text="Geo Memory"
+        android:textSize="16sp"
         android:layout_height="wrap_content"/>
 
     <TextView
         android:id="@+id/txtListScoresRowFillTheText"
         android:layout_width="match_parent"
         android:text="Fill the Text"
+        android:textSize="16sp"
         android:layout_height="wrap_content"/>
 
 </LinearLayout>

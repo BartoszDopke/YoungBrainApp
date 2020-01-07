@@ -51,10 +51,7 @@ public class DailyChallengePopUpActivity extends AppCompatActivity {
         getWindowManager().getDefaultDisplay().getMetrics(dm);
         int width = dm.widthPixels;
         int height = dm.heightPixels;
-        getWindow().setLayout((int) (width * .8), (int) (height * .8));
-
-        DailyChallengeActivity dailyChallengeActivity = new DailyChallengeActivity();
-
+        getWindow().setLayout((int) (width * .84), (int) (height * .8));
 
         dailyChallengeVideoView = findViewById(R.id.dailyChallengeVideoView);
 
@@ -63,8 +60,6 @@ public class DailyChallengePopUpActivity extends AppCompatActivity {
         if (randomVideo == 0) {
             //30 push-ups in 5 minutes
             videoString = dailyChallengeTextArrray[0];
-
-
         } else if (randomVideo == 1) {
             //running for 40 minutes
             videoString = dailyChallengeTextArrray[1];
@@ -82,7 +77,9 @@ public class DailyChallengePopUpActivity extends AppCompatActivity {
             videoString = dailyChallengeTextArrray[5];
         }
 
-
+        Uri uri = Uri.parse("android.resource://" + getPackageName() + "/" + videos[randomVideo]);
+        dailyChallengeVideoView.setVideoURI(uri);
+        dailyChallengeVideoView.start();
         dailyChallengeTextView = findViewById(R.id.dailyChallengeTextView);
         dailyChallengeTextView.setText("" + videoString);
 
@@ -99,8 +96,6 @@ public class DailyChallengePopUpActivity extends AppCompatActivity {
         play_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Uri uri = Uri.parse("android.resource://" + getPackageName() + "/" + videos[randomVideo]);
-                dailyChallengeVideoView.setVideoURI(uri);
                 dailyChallengeVideoView.start();
             }
         });

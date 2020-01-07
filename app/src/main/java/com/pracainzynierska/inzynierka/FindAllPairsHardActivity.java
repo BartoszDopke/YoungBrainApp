@@ -14,6 +14,8 @@ import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.pracainzynierska.inzynierka.utils.SaveScoreInSharedPreference;
+
 import java.util.Arrays;
 import java.util.Collections;
 
@@ -605,6 +607,15 @@ public class FindAllPairsHardActivity extends AppCompatActivity {
     }
 
     private void saveScore() {
+
+        new SaveScoreInSharedPreference().saveScoreInSP(this, usernameView.getText().toString(),1,player_points);
+
+        SharedPreferences preferences = this.getSharedPreferences(usernameView.getText().toString(), Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        int totalScore = preferences.getInt("totalScore",0);
+        totalScore = totalScore + player_points;
+        editor.putInt("total_score", totalScore);
+        editor.apply();
         /*
         SharedPreferences preferences = this.getSharedPreferences(usernameView.getText().toString(), Context.MODE_PRIVATE);
 

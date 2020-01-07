@@ -41,20 +41,7 @@ public class UserPanelActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_panel);
-        /*
-        alarmManager = (AlarmManager) getApplicationContext().getSystemService(Context.ALARM_SERVICE);
-        Intent intent = new Intent(getApplicationContext(), AlarmReceiver.class);
-        alarmIntent = PendingIntent.getBroadcast(getApplicationContext(),0,intent,0);
 
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(System.currentTimeMillis());
-        calendar.set(Calendar.HOUR_OF_DAY, 8);
-        calendar.set(Calendar.MINUTE, 30);
-
-        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
-                AlarmManager.INTERVAL_DAY, alarmIntent);
-
-        */
         AssetManager am = getApplicationContext().getAssets();
 
         Typeface standardFont = Typeface.createFromAsset(am, String.format(Locale.ENGLISH, "fonts/%s","Montserrat-Regular.ttf"));
@@ -65,6 +52,9 @@ public class UserPanelActivity extends AppCompatActivity {
         NickNameText =  findViewById(R.id.nickname);
         NickNameText.setTypeface(standardFont);
         NickNameText.setText(username);
+
+        Intent intentPopUp = new Intent(UserPanelActivity.this, PopUpActivity.class);
+        startActivity(intentPopUp);
 
         SharedPreferences preferences =  this.getSharedPreferences(NickNameText.getText().toString(), Context.MODE_PRIVATE);
 
@@ -220,7 +210,7 @@ public class UserPanelActivity extends AppCompatActivity {
         {
             if(totalScore > 0 && totalScore <= 2000)
             {
-                Intent intent = new Intent(this, FindAllPairsEasyActivity.class);
+                Intent intent = new Intent(this, MathChainActivity.class);
                 String user = NickNameText.getText().toString();
                 intent.putExtra("username",user);
                 startActivity(intent);

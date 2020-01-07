@@ -16,7 +16,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COL_2 ="username";
     public static final String COL_3 ="mail_address";
     public static final String COL_4 ="password";
-    public static final String COL_5 = "rank";
 
     public DatabaseHelper(@Nullable Context context) {
         super(context, DATABASE_NAME,null, 1);
@@ -42,17 +41,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put("password", password);
         contentValues.put("mail_address", mail_address);
         long res = db.insert("registeruser", null, contentValues);
-        db.close();
-        return res;
-    }
-
-    public long saveScore(String user, int score)
-    {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put("username",user);
-        contentValues.put("score", score);
-        long res = db.insert("scoreuser",null, contentValues);
         db.close();
         return res;
     }

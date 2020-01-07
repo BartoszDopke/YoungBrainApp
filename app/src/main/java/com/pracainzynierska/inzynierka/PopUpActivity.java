@@ -42,7 +42,6 @@ public class PopUpActivity extends AppCompatActivity {
         randomFact = randomHintArray[randomFactNumber];
         randomFactView.setText("" + randomFact);
 
-
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
 

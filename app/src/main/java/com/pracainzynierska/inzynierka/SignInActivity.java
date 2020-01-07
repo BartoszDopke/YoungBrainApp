@@ -57,15 +57,6 @@ public class SignInActivity extends AppCompatActivity {
                 startActivity(registerIntent);
             }
         });
-        /*
-        facebookLoginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                LoginManager.getInstance().logInWithReadPermissions(SignInActivity.this,Arrays.asList("email", "public_profile"));
-            }
-        });
-        */
-
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,10 +67,8 @@ public class SignInActivity extends AppCompatActivity {
                 if(res)
                 {
                     Intent intent = new Intent(SignInActivity.this,UserPanelActivity.class);
-                    Intent intentPopUp = new Intent(SignInActivity.this, PopUpActivity.class);
                     intent.putExtra("username",user);
                     startActivity(intent);
-                    startActivity(intentPopUp);
                     Toast.makeText(SignInActivity.this,"Welcome " + user + "!", Toast.LENGTH_SHORT).show();
                 }
                 else

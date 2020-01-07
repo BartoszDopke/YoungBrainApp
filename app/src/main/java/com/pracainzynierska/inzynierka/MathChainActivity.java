@@ -270,20 +270,12 @@ public class MathChainActivity extends AppCompatActivity {
 
 
         SharedPreferences preferences = this.getSharedPreferences(usernameView.getText().toString(), Context.MODE_PRIVATE);
-
-        counter=preferences.getInt("counter", 0);
-        counter++;
-
         SharedPreferences.Editor editor = preferences.edit();
         int totalScore = preferences.getInt("totalScore",0);
         totalScore = totalScore + player_points;
-        editor.putInt("mc_score",player_points);
-
-        editor.putInt("counter",counter);
-        editor.putInt("mc_score_"+counter,player_points);
-
         editor.putInt("total_score", totalScore);
-        editor.commit();
+        editor.apply();
+
     }
 
     private void saveIntroScore() {

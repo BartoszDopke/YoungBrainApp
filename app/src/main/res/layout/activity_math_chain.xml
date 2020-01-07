@@ -60,7 +60,7 @@
         android:layout_marginTop="52dp"
         android:ems="10"
         android:hint="@string/answer_text"
-        android:inputType="textNoSuggestions"
+        android:inputType="phone"
         android:selectAllOnFocus="true"
         android:text=""
         android:textColor="#33300D"

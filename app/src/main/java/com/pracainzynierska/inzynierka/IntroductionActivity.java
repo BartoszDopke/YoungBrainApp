@@ -1,13 +1,13 @@
 package com.pracainzynierska.inzynierka;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class IntroductionActivity extends AppCompatActivity {
 
@@ -87,6 +87,14 @@ public class IntroductionActivity extends AppCompatActivity {
                         user = usernameView.getText().toString();
                         fillTheTextIntent.putExtra("username",user);
                         startActivity(fillTheTextIntent);
+                        finish();
+                        break;
+                    case 6:
+                        //last picture
+                        Intent intent = new Intent(IntroductionActivity.this, UserPanelActivity.class);
+                        user = usernameView.getText().toString();
+                        intent.putExtra("username",user);
+                        startActivity(intent);
                         finish();
                         break;
                     default: textIndex = 0; break;
