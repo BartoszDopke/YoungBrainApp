@@ -13,16 +13,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.pracainzynierska.inzynierka.utils.SaveScoreInSharedPreference;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.Random;
 
 public class FillTheTextActivity extends AppCompatActivity {
@@ -134,7 +133,7 @@ public class FillTheTextActivity extends AppCompatActivity {
 
         timerTextView = findViewById(R.id.timerView2);
 
-        new CountDownTimer(60000,1000)
+        new CountDownTimer(20000,1000)
         {
             @Override
             public void onTick(long millisUntilFinished) {
@@ -182,7 +181,9 @@ public class FillTheTextActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 userResult = EditTextFilling.getText().toString().toLowerCase().trim();
-                //Log.i("userResult","userResult: " + userResult);
+                if(userResult.isEmpty()) {
+                    Toast.makeText(FillTheTextActivity.this, "No word typed!", Toast.LENGTH_SHORT).show();
+                }
                 checkResult();
                 EditTextFilling.setText("");
             }
@@ -195,7 +196,7 @@ public class FillTheTextActivity extends AppCompatActivity {
         SharedPreferences preferences = this.getSharedPreferences(usernameView.getText().toString(), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString("done",isDoneString);
-        editor.commit();
+        editor.apply();
     }
 
     private void checkResult() {
@@ -217,7 +218,11 @@ public class FillTheTextActivity extends AppCompatActivity {
 
         }
         else {
-            player_points -=10;
+            if(player_points==0) {
+                player_points = 0;
+            } else {
+                player_points -=10;
+            }
             pointsView.setText("" + player_points);
             handler.postDelayed(new Runnable() {
                 @Override
@@ -286,7 +291,7 @@ public class FillTheTextActivity extends AppCompatActivity {
                 }
 
             }
-        },3000);
+        },5000);
         TextToFill.setText("" + choosenSentenceList.toString().replace("[","").replace("]","").replace(",", ""));
 
         Log.i("brakujace slowo showat","brakujące słowo showAnotherText: " + wordToFill);
@@ -296,36 +301,12 @@ public class FillTheTextActivity extends AppCompatActivity {
 
         new SaveScoreInSharedPreference().saveScoreInSP(this, usernameView.getText().toString(),4,player_points);
 
-        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
-        Date date = new Date();
-        String dateString = format.format(date);
-
         SharedPreferences preferences = this.getSharedPreferences(usernameView.getText().toString(), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         int totalScore = preferences.getInt("totalScore",0);
         totalScore = totalScore + player_points;
         editor.putInt("total_score", totalScore);
         editor.apply();
-
-        /*
-        SharedPreferences preferences = this.getSharedPreferences(usernameView.getText().toString(), Context.MODE_PRIVATE);
-
-        counter=preferences.getInt("counter", 0);
-        counter++;
-
-        SharedPreferences.Editor editor = preferences.edit();
-        int totalScore = preferences.getInt("totalScore",0);
-        totalScore = totalScore + player_points;
-        editor.putInt("ftt_score",player_points);
-
-        editor.putInt("counter",counter);
-        editor.putInt("ftt_score_"+counter,player_points);
-
-        editor.putInt("total_score",totalScore);
-        editor.putString("date",dateString);
-        editor.commit();
-
-         */
     }
 
 

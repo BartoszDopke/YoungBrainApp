@@ -96,7 +96,7 @@ public class GeomemotryActivity extends AppCompatActivity {
 
         timerTextView = findViewById(R.id.timerView3);
 
-        new CountDownTimer(60000,1000)
+        new CountDownTimer(20000,1000)
         {
             @Override
             public void onTick(long millisUntilFinished) {
@@ -212,12 +212,12 @@ public class GeomemotryActivity extends AppCompatActivity {
                             show_text.setVisibility(View.INVISIBLE);
                         }
                     },500);
+                    player_points+=10;
+                    points.setText("" + player_points);
                     show_text.setTextColor(Color.GREEN);
                     show_text.setText("Correct!");
                     show_text.setVisibility(View.VISIBLE);
 
-                    player_points+=10;
-                    points.setText("" + player_points);
                 }
                 else
                 {
@@ -228,11 +228,12 @@ public class GeomemotryActivity extends AppCompatActivity {
                             show_text.setVisibility(View.INVISIBLE);
                         }
                     },500);
+                    player_points-=10;
+                    points.setText("" + player_points);
                     show_text.setTextColor(Color.RED);
                     show_text.setText("That's not correct answer!");
                     show_text.setVisibility(View.VISIBLE);
-                    player_points-=10;
-                    points.setText("" + player_points);
+
                 }
                 imgPrev = imgActual;
                 shape.startAnimation(animSlide);

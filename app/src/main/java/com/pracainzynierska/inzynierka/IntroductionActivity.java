@@ -18,7 +18,7 @@ public class IntroductionActivity extends AppCompatActivity {
                     " and number for computing. Write your result below that and check if it's correct! You have 1 minute for this exercise!",
             "Third exercise is Geomemotry. Remember the previous shape. If it matches current, click 'YES'. If not, click 'NO'." +
                     "You have 1 minute for this exercise!",
-            "Fourth exercise is Fill The Text. A sentence will appear for 3 seconds on the screen, then one of the words will disappear." +
+            "Fourth exercise is Fill The Text. A sentence will appear for 5 seconds on the screen, then one of the words will disappear." +
                     "Type a missing word and check if you're right. You have 1 minute for this exercise!",
             "This program is made to improve your overall memory. Hope you'll get everything best from it. " +
                     "Wish you good luck and never stop learning and being better everyday!"
@@ -37,7 +37,7 @@ public class IntroductionActivity extends AppCompatActivity {
         usernameView = findViewById(R.id.userintroduction);
 
         textIndex = getIntent().getIntExtra("textIndex",textIndex);
-        Log.i("text","textIndex wartość po find all pairs intent: " + textIndex);
+        Log.i("text","textIndex wartość : " + textIndex);
 
         String username  = getIntent().getStringExtra("username");
         usernameView.setVisibility(View.INVISIBLE);
@@ -87,15 +87,14 @@ public class IntroductionActivity extends AppCompatActivity {
                         user = usernameView.getText().toString();
                         fillTheTextIntent.putExtra("username",user);
                         startActivity(fillTheTextIntent);
-                        finish();
                         break;
                     case 6:
                         //last picture
                         Intent intent = new Intent(IntroductionActivity.this, UserPanelActivity.class);
                         user = usernameView.getText().toString();
                         intent.putExtra("username",user);
+                        intent.putExtra("done","done");
                         startActivity(intent);
-                        finish();
                         break;
                     default: textIndex = 0; break;
                 }
@@ -120,10 +119,7 @@ public class IntroductionActivity extends AppCompatActivity {
                         introductionView.setText(introTextArray[textIndex]);
                         break;
                     case 2:
-                        Intent findAllPairsIntent = new Intent(IntroductionActivity.this, FindAllPairsMediumActivity.class);
-                        String user = usernameView.getText().toString();
-                        findAllPairsIntent.putExtra("username",user);
-                        startActivity(findAllPairsIntent);
+                        introductionView.setText(introTextArray[textIndex]);
                         break;
                     case 3:
                         introductionView.setText(introTextArray[textIndex]);

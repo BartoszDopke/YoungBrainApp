@@ -210,7 +210,7 @@ public class UserPanelActivity extends AppCompatActivity {
         {
             if(totalScore > 0 && totalScore <= 2000)
             {
-                Intent intent = new Intent(this, MathChainActivity.class);
+                Intent intent = new Intent(this, FindAllPairsEasyActivity.class);
                 String user = NickNameText.getText().toString();
                 intent.putExtra("username",user);
                 startActivity(intent);

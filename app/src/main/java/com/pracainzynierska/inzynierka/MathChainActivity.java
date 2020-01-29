@@ -66,7 +66,7 @@ public class MathChainActivity extends AppCompatActivity {
 
         timerTextView = findViewById(R.id.timerView);
 
-        new CountDownTimer(60000,1000) {
+        new CountDownTimer(20000,1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 timerTextView.setText(""+ millisUntilFinished/1000);
@@ -136,7 +136,7 @@ public class MathChainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 firstNumberView.setVisibility(View.INVISIBLE);
-                resultUser =  Integer.parseInt(resultUserEdit.getText().toString().trim());
+                resultUser =  Integer.parseInt(resultUserEdit.getText().toString().trim()); // TODO: problematic parsing
                 checkResult();
                 resultUserEdit.setText("");
             }
@@ -152,7 +152,7 @@ public class MathChainActivity extends AppCompatActivity {
                 public void run() {
                     firstNumberView.setVisibility(View.INVISIBLE);
                 }
-            },1000);
+            },800);
             player_points+=10;
             pointsView.setText("" + player_points);
             firstNumberView.setTextColor(Color.GREEN);
@@ -166,7 +166,7 @@ public class MathChainActivity extends AppCompatActivity {
                 public void run() {
                     firstNumberView.setVisibility(View.INVISIBLE);
                 }
-            },1000);
+            },800);
             player_points-=10;
             pointsView.setText("" + player_points);
             firstNumberView.setTextColor(Color.RED);

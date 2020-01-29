@@ -26,7 +26,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Locale;
 
 public class ProgressActivity extends AppCompatActivity {
@@ -57,10 +56,6 @@ public class ProgressActivity extends AppCompatActivity {
         usernameView = findViewById(R.id.username_progress);
         usernameView.setVisibility(View.INVISIBLE);
         usernameView.setText("" + user);
-
-        String cars[] = {"Mercedes", "Fiat", "Ferrari", "Aston Martin", "Lamborghini", "Skoda", "Volkswagen", "Audi", "Citroen"};
-        ArrayList<String> carL = new ArrayList<>();
-        carL.addAll(Arrays.asList(cars));
 
     }
 

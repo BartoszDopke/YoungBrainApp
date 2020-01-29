@@ -61,6 +61,7 @@
         android:ems="10"
         android:hint="@string/answer_text"
         android:inputType="phone"
+        android:imeOptions="actionDone"
         android:selectAllOnFocus="true"
         android:text=""
         android:textColor="#33300D"

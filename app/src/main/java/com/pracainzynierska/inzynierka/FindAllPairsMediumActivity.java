@@ -180,7 +180,7 @@ public class FindAllPairsMediumActivity extends AppCompatActivity {
             }
         });
 
-        countDown =  new CountDownTimer(60000,1000)
+        countDown =  new CountDownTimer(20000,1000)
         {
             @Override
             public void onTick(long millisUntilFinished) {
@@ -227,7 +227,8 @@ public class FindAllPairsMediumActivity extends AppCompatActivity {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     Intent intent = new Intent(getApplicationContext(), IntroductionActivity.class);
-                                    intent.putExtra("textIndex",3);
+                                    intent.putExtra("username",usernameView.getText().toString());
+                                    intent.putExtra("textIndex",2);
                                     startActivity(intent);
                                     finish();
                                 }
@@ -568,15 +569,17 @@ public class FindAllPairsMediumActivity extends AppCompatActivity {
 
     private void saveScore() {
 
-        new SaveScoreInSharedPreference().saveScoreInSP(this, usernameView.getText().toString(),1,player_points);
+        new SaveScoreInSharedPreference().saveScoreInSP
+        (this, usernameView.getText().toString(),1,player_points);
 
-
-        SharedPreferences preferences = this.getSharedPreferences(usernameView.getText().toString(), Context.MODE_PRIVATE);
+        SharedPreferences preferences = this.getSharedPreferences
+                (usernameView.getText().toString(), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         int totalScore = preferences.getInt("totalScore",0);
         totalScore = totalScore + player_points;
         editor.putInt("total_score", totalScore);
         editor.apply();
+
         /*
         SharedPreferences preferences = this.getSharedPreferences(usernameView.getText().toString(), Context.MODE_PRIVATE);
 
